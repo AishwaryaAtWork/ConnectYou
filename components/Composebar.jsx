@@ -24,7 +24,7 @@ import { v4 as uuid } from "uuid";
 
 let typingTimeout = null;
 
-const Composebar = () => {
+const Composebar = ({ selectedFileType }) => {
   const { currentUser } = useAuth();
   const {
     inputText,
@@ -47,7 +47,8 @@ const Composebar = () => {
    */
   const handleSend = async () => {
     if (attachment) {
-      const storageRef = ref(storage, uuid());
+      const storageRef = ref(storage, `${uuid()}/${selectedFileType}`);
+      // { console.log(selectedFile); }
       const uploadTask = uploadBytesResumable(storageRef, attachment);
 
       uploadTask.on(
@@ -61,7 +62,6 @@ const Composebar = () => {
         },
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-            console.log(downloadURL);
             await updateDoc(doc(db, "chats", data.chatId), {
               messages: arrayUnion({
                 id: uuid(),
@@ -137,7 +137,6 @@ const Composebar = () => {
           () => {
             getDownloadURL(uploadTask.snapshot.ref).then(
               async (downloadURL) => {
-                console.log(downloadURL);
                 let updatedMessages = chatDoc.data().messages.map((message) => {
                   if (message.id === messageID) {
                     message.text = inputText;

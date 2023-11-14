@@ -14,7 +14,6 @@ import { HiOutlineEmojiHappy } from "react-icons/hi";
 import { IoClose } from "react-icons/io5";
 import { MdDeleteForever, MdGif } from "react-icons/md";
 import { FixedSizeGrid as Grid } from "react-window";
-import { FaCreditCard } from "react-icons/fa";
 import Composebar from "./Composebar";
 import Icon from "./Icon";
 
@@ -232,37 +231,6 @@ const ChatFooter = () => {
           </ClickAwayListener>
         )}
       </div>
-      <div className="shrink-0 relative">
-        <FaCreditCard
-          size={24}
-          className={`${showImojiPicker ? "bg-c1" : ""}`}
-          onClick={() => setShowImojiPicker(true)}
-        />
-        {showImojiPicker && (
-          <ClickAwayListener onClickAway={() => setShowImojiPicker(false)}>
-            <Grid
-              columnCount={3}
-              columnWidth={100}
-              height={300}
-              rowCount={Math.ceil(gifs.length / 3)}
-              rowHeight={100}
-              width={300}
-            >
-              {({ columnIndex, rowIndex, style }) => {
-                const gif = gifs[rowIndex * 3 + columnIndex];
-                return gif ? (
-                  <img
-                    src={gif.images.fixed_height_small.url}
-                    style={style}
-                    onClick={() => onGifSelected(gif)}
-                    alt={gif.title}
-                  />
-                ) : null;
-              }}
-            </Grid>
-          </ClickAwayListener>
-        )}
-      </div>
 
       {/* Conditionally renders a typing indicator
             if another user is typing in the chat.
@@ -293,7 +261,7 @@ const ChatFooter = () => {
         </div>
       )}
 
-      <Composebar />
+      <Composebar selectedFileType={selectedFileType} />
     </div>
   );
 };

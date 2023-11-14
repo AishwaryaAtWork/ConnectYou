@@ -20,7 +20,7 @@ import Icon from "./Icon";
 import Menu from "./Menu";
 import DeleteMsgPopup from "./popup/DeleteMsgPopup";
 
-const Message = ({ message ,theme}) => {
+const Message = ({ message, theme }) => {
   const [showDeletePopup, setShowDeletePopup] = useState(false);
   const { users, data, setEditMsg, imageViewer, setImageViewer } =
     useChatContext();
@@ -114,34 +114,38 @@ const Message = ({ message ,theme}) => {
 
           {/* Renders an image attachment in a message if one exists.
                     On click, opens ImageViewer modal to view full size image. */}
-          {message.img && (
-            <>
-              <Image
-                src={message.img}
-                alt={`Image sent by ${message.senderName}`}
-                width={250}
-                height={250}
-                className="rounded-3xl max-w-[250px]"
-                onClick={() =>
-                  setImageViewer({
-                    msgId: message.id,
-                    url: message.fileUrl,
-                  })
-                }
-              />
-              {imageViewer && imageViewer?.msgId === message?.id && (
-                <ImageViewer
-                  src={[imageViewer.url]}
-                  currentIndex={0}
-                  disableScroll={false}
-                  closeOnClickOutside={true}
-                  onClose={() => setImageViewer(null)}
-                />
-              )}
-              <img src={[imageViewer.url]} />
-            </>
+          {message?.fileUrl?.includes("image") && (
+            <img
+              src={message.fileUrl}
+              alt={`Image sent by ${message.senderName}`}
+              width={250}
+              height={250}
+              className="rounded-3xl max-w-[250px]"
+              onClick={() =>
+                setImageViewer({
+                  msgId: message.id,
+                  url: message.fileUrl,
+                })
+              }
+            />
           )}
-
+          {message?.fileUrl?.includes("video") && (
+            <video
+              src={message.fileUrl}
+              controls
+              className="w-full h-full object-contain object-center"
+            />
+          )}
+          {message?.fileUrl?.includes("audio") && (
+            <audio
+              controls
+              className="w-full h-full object-contain object-center"
+              onLoadedMetadata={() => {}}
+            >
+              <source src={message.fileUrl} type="audio/mpeg" />
+              Your browser does not support the audio element.
+            </audio>
+          )}
           <div
             className={`${
               showMenu ? "" : "hidden"
