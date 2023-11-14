@@ -24,7 +24,7 @@ import { v4 as uuid } from "uuid";
 
 let typingTimeout = null;
 
-const Composebar = ({ selectedFileType }) => {
+const Composebar = ({ selectedFileType, setSelectedFile }) => {
   const { currentUser } = useAuth();
   const {
     inputText,
@@ -202,6 +202,11 @@ const Composebar = ({ selectedFileType }) => {
     }, 500);
   };
 
+  const closepreview = () => {
+    setAttachment(null);
+    setSelectedFile(null);
+  };
+
   return (
     <div className="flex items-center gap-2 grow">
       <input
@@ -218,7 +223,7 @@ const Composebar = ({ selectedFileType }) => {
           inputText.trim().length > 0 ? "bg-c4" : ""
         }`}
       >
-        <TbSend size={20} className="text-white" />
+        <TbSend size={20} className="text-white" onClick={closepreview} />
       </button>
     </div>
   );

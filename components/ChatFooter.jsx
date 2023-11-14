@@ -261,7 +261,7 @@ const ChatFooter = () => {
         </div>
       )}
 
-      <Composebar selectedFileType={selectedFileType} />
+      <Composebar selectedFileType={selectedFileType} setSelectedFile={setSelectedFile}/>
     </div>
   );
 };

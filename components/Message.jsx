@@ -133,7 +133,9 @@ const Message = ({ message, theme }) => {
             <video
               src={message.fileUrl}
               controls
-              className="w-full h-full object-contain object-center"
+              width={250}
+              height={250}
+              className="object-contain object-center"
             />
           )}
           {message?.fileUrl?.includes("audio") && (
