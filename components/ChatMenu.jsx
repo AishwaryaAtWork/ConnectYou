@@ -65,21 +65,28 @@ const ChatMenu = ({ setShowMenu, showMenu }) => {
           console.error(error);
         },
         () => {
-          getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-
-            toast.promise(async ()=>{
-              await updateDoc(doc(db, "chats", data.chatId), {
-                theme: downloadURL,
-              });
-            },   {
-              pending: "Updating theme.",
-              success: "Theme updated successfully.",
-              error: "Theme udpate failed.",
-          },
-          {
-              autoClose: 2000,
-          })
-          });
+          try {
+            // Display a pending toast while waiting for getDownloadURL
+            const toastId = toast.promise(
+              getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+                await updateDoc(doc(db, "chats", data.chatId), {
+                  theme: downloadURL,
+                });
+                // Close the toast after successful update
+                toast.dismiss(toastId);
+              }),
+              {
+                pending: "Updating theme...",
+                success: "Theme updated successfully.",
+                error: "Theme update failed.",
+              },
+              {
+                autoClose: 2000,
+              }
+            );
+          } catch (error) {
+            console.error("Error updating theme:", error);
+          }
         }
       );
     }
@@ -152,7 +159,6 @@ const ChatMenu = ({ setShowMenu, showMenu }) => {
       <div
         className={`w-[200px] absolute top-[70px] right-5 bg-c0 z-10 rounded-md overflow-hidden`}
       >
-      <ToastMessage />
 
         {openPopup && (
           <AddMoneyPopup setOpenPopup={setOpenPopup}/>
