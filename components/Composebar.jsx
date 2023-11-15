@@ -24,7 +24,7 @@ import { v4 as uuid } from "uuid";
 
 let typingTimeout = null;
 
-const Composebar = ({ selectedFileType, setSelectedFile }) => {
+const Composebar = ({ selectedFileType, setSelectedFile, setSelectedGif, selectedGif }) => {
   const { currentUser } = useAuth();
   const {
     inputText,
@@ -48,7 +48,6 @@ const Composebar = ({ selectedFileType, setSelectedFile }) => {
   const handleSend = async () => {
     if (attachment) {
       const storageRef = ref(storage, `${uuid()}/${selectedFileType}`);
-      // { console.log(selectedFile); }
       const uploadTask = uploadBytesResumable(storageRef, attachment);
 
       uploadTask.on(
@@ -75,7 +74,20 @@ const Composebar = ({ selectedFileType, setSelectedFile }) => {
           });
         }
       );
-    } else {
+    }
+    else if(selectedGif){
+      await updateDoc(doc(db, "chats", data.chatId), {
+        messages: arrayUnion({
+          id: uuid(),
+          text: inputText,
+          sender: currentUser.uid,
+          date: Timestamp.now(),
+          fileUrl: selectedGif, // changed 'img' to 'fileUrl'
+          read: false,
+        }),
+      });
+    }
+     else {
       await updateDoc(doc(db, "chats", data.chatId), {
         messages: arrayUnion({
           id: uuid(),
@@ -205,6 +217,7 @@ const Composebar = ({ selectedFileType, setSelectedFile }) => {
   const closepreview = () => {
     setAttachment(null);
     setSelectedFile(null);
+    setSelectedGif(null);
   };
 
   return (

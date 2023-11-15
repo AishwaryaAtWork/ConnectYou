@@ -96,7 +96,7 @@ const ChatFooter = () => {
   return (
     <div className="flex items-center bg-c1/[0.5] p-2 rounded-xl relative">
       <ToastMessage />
-      
+
       {openPopup && (
         <SendMoneyPopup setOpenPopup={setOpenPopup}/>
       )}
@@ -276,7 +276,8 @@ const ChatFooter = () => {
         </div>
       )}
 
-      <Composebar selectedFileType={selectedFileType} setSelectedFile={setSelectedFile}/>
+      <Composebar selectedFileType={selectedFileType} setSelectedFile={setSelectedFile} 
+        setSelectedGif={setSelectedGif} selectedGif={selectedGif}/>
     </div>
   );
 };

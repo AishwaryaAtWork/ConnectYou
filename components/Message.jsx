@@ -75,7 +75,7 @@ const Message = ({ message, theme }) => {
     setShowDeletePopup(true);
     setShowMenu(false);
   };
-
+  
   return (
     <div ref={ref} className={`mb-5 max-w-[75%] ${self ? "self-end" : ""}`}>
       {showDeletePopup && (
@@ -129,6 +129,32 @@ const Message = ({ message, theme }) => {
               }
             />
           )}
+          {message?.fileUrl?.includes("gif") && (
+            <img
+              src={message.fileUrl}
+              alt={`Image sent by ${message.senderName}`}
+              width={150}
+              height={150}
+              className="rounded-3xl max-w-[250px]"
+              onClick={() =>
+                setImageViewer({
+                  msgId: message.id,
+                  url: message.fileUrl,
+                })
+              }
+            />
+          )}
+          {message?.fileUrl?.includes("pdf") && (
+            <iframe
+            src={message.fileUrl}
+            width="100%"
+            height="400px" // Adjust the height as needed
+            frameBorder="0"
+            title={`PDF sent by ${message.senderName}`}
+            // sandbox="allow-downloads"
+          />
+
+          )}
           {message?.fileUrl?.includes("video") && (
             <video
               src={message.fileUrl}
@@ -141,7 +167,9 @@ const Message = ({ message, theme }) => {
           {message?.fileUrl?.includes("audio") && (
             <audio
               controls
-              className="w-full h-full object-contain object-center"
+              width={250}
+              height={250}
+              className="object-contain object-center"
               onLoadedMetadata={() => {}}
             >
               <source src={message.fileUrl} type="audio/mpeg" />
