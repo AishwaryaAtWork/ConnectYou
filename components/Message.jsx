@@ -37,7 +37,7 @@ const Message = ({ message, theme }) => {
     message.date?.nanoseconds
   );
   const date = timestamp.toDate();
-  console.log(message.fileUrl);
+
   const deleteMessage = async (action) => {
     try {
       const messageID = message.id;

@@ -51,7 +51,6 @@ const Messages = () => {
     return () => unsub();
   }, [data.chatId, data.user.uid, setIsTyping]); 
 
-  console.log(messages);
   return (
     <div
       ref={ref}

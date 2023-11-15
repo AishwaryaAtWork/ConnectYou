@@ -10,12 +10,14 @@ import EmojiPicker from "emoji-picker-react";
 import { useEffect, useState, useRef } from "react";
 import ClickAwayListener from "react-click-away-listener";
 import { CgAttachment } from "react-icons/cg";
+import { CiCreditCard1 } from "react-icons/ci";
 import { HiOutlineEmojiHappy } from "react-icons/hi";
 import { IoClose } from "react-icons/io5";
 import { MdDeleteForever, MdGif } from "react-icons/md";
 import { FixedSizeGrid as Grid } from "react-window";
 import Composebar from "./Composebar";
 import Icon from "./Icon";
+import SendMoneyPopup from "./popup/SendMoneyPopup";
 
 const gf = new GiphyFetch("2Gx7SvpPvoHFrCb0ho52ILe7S7c5487G");
 
@@ -25,6 +27,7 @@ const ChatFooter = () => {
   const [selectedFileType, setSelectedFileType] = useState("");
   const [showGifPicker, setShowGifPicker] = useState(false);
   const [gifs, setGifs] = useState([]);
+  const [openPopup, setOpenPopup] = useState(false);
   const fileInputRef = useRef(null);
   const [selectedFile, setSelectedFile] = useState(null);
 
@@ -91,6 +94,11 @@ const ChatFooter = () => {
 
   return (
     <div className="flex items-center bg-c1/[0.5] p-2 rounded-xl relative">
+
+      {openPopup && (
+        <SendMoneyPopup setOpenPopup={setOpenPopup}/>
+      )}
+
       {/* Renders a preview of the selected file.
             Allows deselecting the file. */}
       {selectedFile && (
@@ -195,7 +203,7 @@ const ChatFooter = () => {
         <Icon
           size="large"
           className={`${showGifPicker ? "bg-c1" : ""}`}
-          icon={<MdGif size={24} className="text-c3" />}
+          icon={<MdGif size={25} className="text-c3" />}
           onClick={() => setShowGifPicker(true)}
         />
         {showGifPicker && (
@@ -230,6 +238,11 @@ const ChatFooter = () => {
             </div>
           </ClickAwayListener>
         )}
+      </div>
+
+      <div onClick={()=> setOpenPopup(true)}>
+        <Icon size="large"
+            icon={<CiCreditCard1 size={23} className="text-c3" />}/>
       </div>
 
       {/* Conditionally renders a typing indicator
