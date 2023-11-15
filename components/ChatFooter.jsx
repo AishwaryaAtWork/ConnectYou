@@ -5,7 +5,7 @@
  */
 import { useChatContext } from "@/context/chatContext";
 import { GiphyFetch } from "@giphy/js-fetch-api";
-import { Viewer } from "@react-pdf-viewer/core";
+// import { Viewer } from "@react-pdf-viewer/core";
 import EmojiPicker from "emoji-picker-react";
 import { useEffect, useState, useRef } from "react";
 import ClickAwayListener from "react-click-away-listener";
@@ -115,9 +115,9 @@ const ChatFooter = () => {
               className="w-full h-full object-contain object-center"
             />
           )}
-          {selectedFileType === "application/pdf" && (
+          {/* {selectedFileType === "application/pdf" && (
             <Viewer fileUrl={selectedFile} />
-          )}
+          )} */}
           <div
             className="w-6 h-6 rounded-full bg-red-500 flex justify-center items-center absolute -right-2 -top-2 cursor-pointer"
             onClick={() => {
