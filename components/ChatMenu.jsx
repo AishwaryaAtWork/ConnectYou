@@ -26,10 +26,15 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import ClickAwayListener from "react-click-away-listener";
+import { useState } from "react";
+import AddMoneyPopup from "./popup/AddMoneyPopup";
+import ToastMessage from "./ToastMessage";
+import { toast } from "react-toastify";
 
 const ChatMenu = ({ setShowMenu, showMenu }) => {
   const { data, users, dispatch, chats, setSelectedChat } = useChatContext();
   const { currentUser } = useAuth();
+  const [openPopup, setOpenPopup] = useState(false);
 
   const isUserBlocked = users[currentUser.uid]?.blockedUsers?.find(
     (u) => u === data.user.uid
@@ -61,11 +66,19 @@ const ChatMenu = ({ setShowMenu, showMenu }) => {
         },
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-            console.log(downloadURL);
 
-            await updateDoc(doc(db, "chats", data.chatId), {
-              theme: downloadURL,
-            });
+            toast.promise(async ()=>{
+              await updateDoc(doc(db, "chats", data.chatId), {
+                theme: downloadURL,
+              });
+            },   {
+              pending: "Updating theme.",
+              success: "Theme updated successfully.",
+              error: "Theme udpate failed.",
+          },
+          {
+              autoClose: 2000,
+          })
           });
         }
       );
@@ -139,6 +152,11 @@ const ChatMenu = ({ setShowMenu, showMenu }) => {
       <div
         className={`w-[200px] absolute top-[70px] right-5 bg-c0 z-10 rounded-md overflow-hidden`}
       >
+      <ToastMessage />
+
+        {openPopup && (
+          <AddMoneyPopup setOpenPopup={setOpenPopup}/>
+        )}
         <ul className="flex flex-col py-2">
           {!IamBlocked && (
             <li
@@ -173,6 +191,12 @@ const ChatMenu = ({ setShowMenu, showMenu }) => {
               onChange={handleSelfieUpload}
             />
             Set Theme
+          </li>
+          <li
+            className="flex items-center py-3 px-5 hover:bg-black cursor-pointer"
+            onClick={()=> setOpenPopup(true)}
+          >
+            Update Wallet
           </li>
         </ul>
       </div>

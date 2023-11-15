@@ -1,64 +1,51 @@
 import { useAuth } from '@/context/authContext';
-import { useChatContext } from '@/context/chatContext';
 import { db } from '@/firebase/firebase';
-import { Timestamp, arrayUnion, doc, getDoc, updateDoc } from 'firebase/firestore';
-import React, { useEffect, useState } from 'react';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
+import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify';
-import { v4 as uuid } from "uuid";
 
-const SendMoneyPopup = ({ setOpenPopup }) => {
+const AddMoneyPopup = ({ setOpenPopup }) => {
 
     const { currentUser } = useAuth();
-    const { data } = useChatContext();
     const [amount, setAmount] = useState(0);
-    const [userCredits, setUserCredits] = useState(0);
-    const [otherUserCredits, setOtherUserCredits] = useState(0);
+    const [prevCredits, setPrevCredits] = useState(0);
 
     useEffect(()=>{
-        
-        const fetchData = async () => {
+        const fetchCredits = async () => {
       
             // Fetch current user's credit from users
             const userDoc = await getDoc(doc(db, "users", currentUser.uid));
-            setUserCredits(userDoc?.data()?.credits);
-      
-            // Fetch other user's credit from users 
-            const otherUserDoc = await getDoc(doc(db, "users", data.user.uid));
-            setOtherUserCredits(otherUserDoc?.data()?.credits);
+            setPrevCredits(userDoc?.data()?.credits);
             
           };
 
-        fetchData()
-    
+        fetchCredits()
     },[])
-    
-    const updateUserCredit = async() =>{
+
+    const addCredits = () =>{
         if(amount > 0){
-            const updatedCurrUserAmount = userCredits - amount;
-        const updatedOtherUserAmount = otherUserCredits + amount;
+            toast.promise(async()=>{
+                const updatedCredits = prevCredits + amount;
         
-        await updateDoc(doc(db, "users", currentUser.uid), {
-            credits: updatedCurrUserAmount
-        })
-
-        await updateDoc(doc(db, "users", data.user.uid), {
-            credits: updatedOtherUserAmount
-        })
-
-        await updateDoc(doc(db, "chats", data.chatId), {
-            messages: arrayUnion({
-              id: uuid(),
-              text: `${amount}Rs. is sent.`,
-              sender: currentUser.uid,
-              date: Timestamp.now(),
-              read: false,
-            }),
-          });
-
+                await updateDoc(doc(db, "users", currentUser.uid),{
+                    credits: updatedCredits
+                })
+    
+            },  {
+                pending: "Updating wallet.",
+                success: "Wallet updated successfully.",
+                error: "Wallet udpate failed.",
+            },
+            {
+                autoClose: 2000,
+            })
         }else{
-            toast.info("No amount is sent.")
+            toast.info("No amount is added.")
         }
-          setOpenPopup(false)
+
+        setTimeout(()=>{
+            setOpenPopup(false)
+        }, 1800)
     }
 
   return (
@@ -78,7 +65,7 @@ const SendMoneyPopup = ({ setOpenPopup }) => {
           <input
             type="number"
             className="w-full p-2 border border-gray-300 rounded-md text-black"
-            placeholder="Enter amount"
+            placeholder="Enter amount to add"
             onChange={(e)=> setAmount(parseInt(e.target.value))}
           />
         </div>
@@ -87,9 +74,9 @@ const SendMoneyPopup = ({ setOpenPopup }) => {
         <div className="mt-8 flex justify-center">
           <button
             className="mr-2 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 focus:outline-none focus:shadow-outline-blue"
-            onClick={updateUserCredit}
+            onClick={addCredits}
           >
-            Send
+            Add
           </button>
           <button
             className="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 focus:outline-none focus:shadow-outline-gray"
@@ -100,7 +87,7 @@ const SendMoneyPopup = ({ setOpenPopup }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SendMoneyPopup;
+export default AddMoneyPopup

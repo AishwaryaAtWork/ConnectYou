@@ -18,6 +18,7 @@ import { FixedSizeGrid as Grid } from "react-window";
 import Composebar from "./Composebar";
 import Icon from "./Icon";
 import SendMoneyPopup from "./popup/SendMoneyPopup";
+import ToastMessage from "./ToastMessage";
 
 const gf = new GiphyFetch("2Gx7SvpPvoHFrCb0ho52ILe7S7c5487G");
 
@@ -94,7 +95,8 @@ const ChatFooter = () => {
 
   return (
     <div className="flex items-center bg-c1/[0.5] p-2 rounded-xl relative">
-
+      <ToastMessage />
+      
       {openPopup && (
         <SendMoneyPopup setOpenPopup={setOpenPopup}/>
       )}
