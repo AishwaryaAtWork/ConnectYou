@@ -48,7 +48,7 @@ const ChatMenu = ({ setShowMenu, showMenu }) => {
     setShowMenu(false);
   };
 
-  const handleSelfieUpload = (e) => {
+  const handleThemeUpload = (e) => {
     const file = e.target.files[0];
 
     if (file) {
@@ -194,7 +194,7 @@ const ChatMenu = ({ setShowMenu, showMenu }) => {
               accept="image/*"
               id="themeinput"
               className="hidden"
-              onChange={handleSelfieUpload}
+              onChange={handleThemeUpload}
             />
             Set Theme
           </li>
