@@ -16,11 +16,10 @@ import {
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useCallback, useEffect, useState } from "react";
-import { IoLogoFacebook, IoLogoGoogle } from "react-icons/io";
+import { IoLogoGoogle } from "react-icons/io";
 import { toast } from "react-toastify";
 
 const gProvider = new GoogleAuthProvider();
-const fProvider = new FacebookAuthProvider();
 
 const Login = () => {
     const router = useRouter();
@@ -77,14 +76,6 @@ const Login = () => {
         }
     };
 
-    const signInWithFacebook = async () => {
-        try {
-            await signInWithPopup(auth, fProvider);
-        } catch (error) {
-            console.error("An error occurred", error);
-        }
-    };
-
     return isLoading || (!isLoading && !!currentUser) ? (
         <Loader />
     ) : (
@@ -109,15 +100,6 @@ const Login = () => {
                             <span>Login with Google</span>
                         </div>
                     </div>
-                    {/* <div
-                        className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 w-full h-14 rounded-md cursor-pointer p-[1px]"
-                        onClick={signInWithFacebook}
-                    >
-                        <div className="flex items-center justify-center gap-3 text-white font-semibold bg-c1 w-full h-full rounded-md">
-                            <IoLogoFacebook size={24} />
-                            <span>Login with Facebook</span>
-                        </div>
-                    </div> */}
                 </div>
                 <div className="flex items-center gap-1">
                     <span className="w-5 h-[1px] bg-c3"></span>
