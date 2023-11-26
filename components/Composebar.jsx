@@ -220,13 +220,6 @@ const Composebar = ({ selectedFileType, setSelectedFile, setSelectedGif, selecte
     setSelectedGif(null);
   };
 
-  /**
-   * Send message button.
-   * Renders a circular button with send icon.
-   * Triggers message send/edit handlers on click based on editMsg state.
-   * Applies custom styling when input has content.
-   * Closes any open file previews on click.
-   */
   return (
     <div className="flex items-center gap-2 grow">
       <input
@@ -239,9 +232,9 @@ const Composebar = ({ selectedFileType, setSelectedFile, setSelectedGif, selecte
       />
       <button
         onClick={!editMsg ? handleSend : handleEdit}
-        className={`h-10 w-10 rounded-xl shrink-0 flex justify-center items-center ${inputText.trim().length > 0 ? "bg-c4" : "bg-gray-400"
+        className={`h-10 w-10 rounded-xl shrink-0 flex justify-center items-center ${(inputText.trim().length > 0 || attachment || selectedGif) ? "bg-c4" : "bg-gray-400"
           }`}
-        disabled={inputText.trim().length === 0}
+        disabled={inputText.trim().length === 0 && !attachment && !selectedGif}
       >
         <TbSend size={20} className="text-white" onClick={closepreview} />
       </button>
