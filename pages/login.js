@@ -149,7 +149,7 @@ const Login = () => {
                             Forgot Password?
                         </span>
                     </div>
-                    <button className="mt-4 w-full h-14 rounded-xl outline-none text-base font-semibold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+                    <button className="mt-4 w-full h-14 rounded-xl outline-none text-base font-semibold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 transition duration-300 transform hover:scale-105">
                         Login to Your Account
                     </button>
                 </form>
