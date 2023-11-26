@@ -57,7 +57,6 @@ const FAQ = () => {
                 {/* Animated pulse effect */}
                 <div className="w-full h-px mt-8 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 animate-pulse"></div>
 
-
                 {/* Go Back button */}
                 <div className="mt-8 w-full flex justify-center">
                     <Link href="/">

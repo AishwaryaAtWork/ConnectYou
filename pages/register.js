@@ -1,30 +1,21 @@
-/**
- * @typedef {Object} RegisterProps
- * @property {Object} currentUser - The current user object.
- * @property {boolean} isLoading - A boolean indicating whether the page is currently loading.
- *
- * @returns {JSX.Element} - A JSX element containing the registration form.
- */
 import Loader from "@/components/Loader";
 import { useAuth } from "@/context/authContext";
 import { profileColors } from "@/utils/constants";
 import {
-    FacebookAuthProvider,
     GoogleAuthProvider,
     createUserWithEmailAndPassword,
     signInWithPopup,
-    updateProfile,
+    updateProfile
 } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useCallback, useEffect } from "react";
-import { IoLogoFacebook, IoLogoGoogle } from "react-icons/io";
+import { IoLogoGoogle } from "react-icons/io";
 import { auth, db, storage } from "../firebase/firebase";
 
 const gProvider = new GoogleAuthProvider();
-const fProvider = new FacebookAuthProvider();
 
 const Register = () => {
     const router = useRouter();
@@ -138,14 +129,6 @@ const Register = () => {
         }
     };
 
-    const signInWithFacebook = async () => {
-        try {
-            await signInWithPopup(auth, fProvider);
-        } catch (error) {
-            console.error("An error occured", error);
-        }
-    };
-
     return isLoading || (!isLoading && !!currentUser) ? (
         <Loader />
     ) : (
@@ -167,15 +150,6 @@ const Register = () => {
                             <span>Create with Google</span>
                         </div>
                     </div>
-                    {/* <div
-                        className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 w-full h-14 rounded-md cursor-pointer p-[1px]"
-                        onClick={signInWithFacebook}
-                    >
-                        <div className="flex items-center justify-center gap-3 text-white font-semibold bg-c1 w-full h-full rounded-md">
-                            <IoLogoFacebook size={24} />
-                            <span>Create with Facebook</span>
-                        </div>
-                    </div> */}
                 </div>
                 <div className="flex items-center gap-1">
                     <span className="w-5 h-[1px] bg-c3"></span>
