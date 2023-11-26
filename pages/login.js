@@ -109,7 +109,7 @@ const Login = () => {
                             <span>Login with Google</span>
                         </div>
                     </div>
-                    <div
+                    {/* <div
                         className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 w-full h-14 rounded-md cursor-pointer p-[1px]"
                         onClick={signInWithFacebook}
                     >
@@ -117,7 +117,7 @@ const Login = () => {
                             <IoLogoFacebook size={24} />
                             <span>Login with Facebook</span>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
                 <div className="flex items-center gap-1">
                     <span className="w-5 h-[1px] bg-c3"></span>
@@ -149,7 +149,7 @@ const Login = () => {
                             Forgot Password?
                         </span>
                     </div>
-                    <button className="mt-4 w-full h-14 rounded-xl outline-none text-base font-semibold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+                    <button className="mt-4 w-full h-14 rounded-xl outline-none text-base font-semibold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 transition duration-300 transform hover:scale-105">
                         Login to Your Account
                     </button>
                 </form>
