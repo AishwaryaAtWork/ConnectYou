@@ -24,7 +24,7 @@ const FAQ = () => {
                     {/* Question 2 */}
                     <div className="mb-6">
                         <p className="font-semibold">Q: How do I sign up?</p>
-                        <p>A: To sign up, click on the "Sign Up" button on the landing page, fill in the required information, and follow the registration process.</p>
+                        <p>A: To sign up, click on the &quot;Sign Up&quot; button on the landing page, fill in the required information, and follow the registration process.</p>
                     </div>
 
                     {/* Question 3 */}
