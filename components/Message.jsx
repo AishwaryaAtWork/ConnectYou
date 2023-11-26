@@ -176,6 +176,19 @@ const Message = ({ message, theme }) => {
               Your browser does not support the audio element.
             </audio>
           )}
+          {message?.fileUrl?.includes("map") && (
+          //   <iframe
+          //   width="100%"
+          //   height="400px"
+          //   frameBorder="0"
+          //   style={{ border: 0 }}
+          //   src={message.fileUrl}
+          //   allowFullScreen
+          //   title={`Map sent by ${message.senderName}`}
+          // />
+          
+            <a href={message.fileUrl} target="_blank" className="cursor-pointer text-blue-400">{message.fileUrl}</a>
+          )}
           <div
             className={`${
               showMenu ? "" : "hidden"

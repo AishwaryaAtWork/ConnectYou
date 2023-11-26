@@ -15,10 +15,15 @@ import { HiOutlineEmojiHappy } from "react-icons/hi";
 import { IoClose } from "react-icons/io5";
 import { MdDeleteForever, MdGif } from "react-icons/md";
 import { FixedSizeGrid as Grid } from "react-window";
+import { IoLocationOutline } from "react-icons/io5";
 import Composebar from "./Composebar";
 import Icon from "./Icon";
 import SendMoneyPopup from "./popup/SendMoneyPopup";
 import ToastMessage from "./ToastMessage";
+import { Timestamp, arrayUnion, doc, updateDoc } from "firebase/firestore";
+import { v4 as uuid } from "uuid";
+import { db } from "@/firebase/firebase";
+import { useAuth } from "@/context/authContext";
 
 const gf = new GiphyFetch("2Gx7SvpPvoHFrCb0ho52ILe7S7c5487G");
 
@@ -31,6 +36,8 @@ const ChatFooter = () => {
   const [openPopup, setOpenPopup] = useState(false);
   const fileInputRef = useRef(null);
   const [selectedFile, setSelectedFile] = useState(null);
+
+  const { currentUser } = useAuth();
 
   const {
     inputText,
@@ -92,6 +99,36 @@ const ChatFooter = () => {
     const { data } = await gf.search(query, { limit: 50 });
     setGifs(data);
   };
+
+  const shareLocation = () => {
+    if ("geolocation" in navigator) {
+      // Get the user's current location
+      navigator.geolocation.getCurrentPosition(
+        async (position) => {
+          const { latitude, longitude } = position.coords;
+  
+          // Generate the Google Maps link
+          const mapLink = `https://www.google.com/maps?q=${latitude},${longitude}`;
+  
+          await updateDoc(doc(db, "chats", data.chatId), {
+            messages: arrayUnion({
+              id: uuid(),
+              text: "",
+              sender: currentUser.uid,
+              fileUrl: mapLink,
+              date: Timestamp.now(),
+              read: false,
+            }),
+          });
+        },
+        (error) => {
+          console.error("Error getting user location:", error.message);
+        }
+      );
+    } else {
+      console.error("Geolocation is not supported by your browser");
+    }
+  }
 
   return (
     <div className="flex items-center bg-c1/[0.5] p-2 rounded-xl relative">
@@ -245,6 +282,11 @@ const ChatFooter = () => {
       <div onClick={()=> setOpenPopup(true)}>
         <Icon size="large"
             icon={<CiCreditCard1 size={23} className="text-c3" />}/>
+      </div>
+      
+      <div onClick={shareLocation}>
+        <Icon size="large"
+            icon={<IoLocationOutline size={23} className="text-c3" />}/>
       </div>
 
       {/* Conditionally renders a typing indicator
