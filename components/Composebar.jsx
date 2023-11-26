@@ -75,7 +75,7 @@ const Composebar = ({ selectedFileType, setSelectedFile, setSelectedGif, selecte
         }
       );
     }
-    else if(selectedGif){
+    else if (selectedGif) {
       await updateDoc(doc(db, "chats", data.chatId), {
         messages: arrayUnion({
           id: uuid(),
@@ -87,7 +87,7 @@ const Composebar = ({ selectedFileType, setSelectedFile, setSelectedGif, selecte
         }),
       });
     }
-     else {
+    else {
       await updateDoc(doc(db, "chats", data.chatId), {
         messages: arrayUnion({
           id: uuid(),
@@ -220,6 +220,13 @@ const Composebar = ({ selectedFileType, setSelectedFile, setSelectedGif, selecte
     setSelectedGif(null);
   };
 
+  /**
+   * Send message button.
+   * Renders a circular button with send icon.
+   * Triggers message send/edit handlers on click based on editMsg state.
+   * Applies custom styling when input has content.
+   * Closes any open file previews on click.
+   */
   return (
     <div className="flex items-center gap-2 grow">
       <input
@@ -232,9 +239,9 @@ const Composebar = ({ selectedFileType, setSelectedFile, setSelectedGif, selecte
       />
       <button
         onClick={!editMsg ? handleSend : handleEdit}
-        className={`h-10 w-10 rounded-xl shrink-0 flex justify-center items-center ${
-          inputText.trim().length > 0 ? "bg-c4" : ""
-        }`}
+        className={`h-10 w-10 rounded-xl shrink-0 flex justify-center items-center ${inputText.trim().length > 0 ? "bg-c4" : "bg-gray-400"
+          }`}
+        disabled={inputText.trim().length === 0}
       >
         <TbSend size={20} className="text-white" onClick={closepreview} />
       </button>
