@@ -21,11 +21,15 @@ import Avatar from "./Avatar";
 import Icon from "./Icon";
 import ToastMessage from "./ToastMessage";
 import UsersPopup from "./popup/UsersPopup";
+// import { FaWallet } from "react-icons/fa6";
+import { IoWalletOutline } from "react-icons/io5";
+import AddMoneyPopup from "./popup/AddMoneyPopup";
 
 const LeftNav = () => {
     const [userPopup, setUserPopup] = useState(false);
     const [editProfile, setEditProfile] = useState(false);
     const [nameEdited, setNameEdited] = useState(false);
+    const [openPopup, setOpenPopup] = useState(false);
 
     const { signOut, currentUser, setCurrentUser } = useAuth();
     const { data } = useChatContext();
@@ -221,11 +225,16 @@ const LeftNav = () => {
                 editProfile ? "w-[350px]" : "w-[80px] items-center"
             } flex flex-col justify-between py-5 shrink-0 transition-all`}
         >
+            {openPopup && (
+          <AddMoneyPopup setOpenPopup={setOpenPopup}/>
+        )}
+
             {editProfile ? (
                 editProfileContainer()
             ) : (
                 <>
                     {currentUser && (
+                        <>
                         <div
                             className="relative group cursor-pointer"
                             onClick={() => setEditProfile(true)}
@@ -234,7 +243,14 @@ const LeftNav = () => {
                             <div className="w-full h-full rounded-full bg-black/[0.5] absolute top-0 left-0 justify-center items-center hidden group-hover:flex">
                                 <BiEdit size={14} />
                             </div>
+                            
+                    
                         </div>
+                        <div className="h-full mt-5" onClick={()=> setOpenPopup(true)}>
+                            <Icon size="large"
+                                icon={<IoWalletOutline size={30} className="text-white" />}/>
+                            </div>
+                        </>
                     )}
                 </>
             )}
