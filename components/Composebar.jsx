@@ -75,7 +75,7 @@ const Composebar = ({ selectedFileType, setSelectedFile, setSelectedGif, selecte
         }
       );
     }
-    else if(selectedGif){
+    else if (selectedGif) {
       await updateDoc(doc(db, "chats", data.chatId), {
         messages: arrayUnion({
           id: uuid(),
@@ -87,7 +87,7 @@ const Composebar = ({ selectedFileType, setSelectedFile, setSelectedGif, selecte
         }),
       });
     }
-     else {
+    else {
       await updateDoc(doc(db, "chats", data.chatId), {
         messages: arrayUnion({
           id: uuid(),
@@ -232,9 +232,9 @@ const Composebar = ({ selectedFileType, setSelectedFile, setSelectedGif, selecte
       />
       <button
         onClick={!editMsg ? handleSend : handleEdit}
-        className={`h-10 w-10 rounded-xl shrink-0 flex justify-center items-center ${
-          inputText.trim().length > 0 ? "bg-c4" : ""
-        }`}
+        className={`h-10 w-10 rounded-xl shrink-0 flex justify-center items-center ${(inputText.trim().length > 0 || attachment || selectedGif) ? "bg-c4" : "bg-gray-400"
+          }`}
+        disabled={inputText.trim().length === 0 && !attachment && !selectedGif}
       >
         <TbSend size={20} className="text-white" onClick={closepreview} />
       </button>
