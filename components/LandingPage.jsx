@@ -1,9 +1,13 @@
 import Link from "next/link";
 
+// Define the LandingPage component
 const LandingPage = () => {
     return (
+        // Main container with background and styling
         <div className="h-[100vh] flex justify-center items-center bg-c1">
             <div className="flex flex-col items-center px-4">
+
+                {/* Welcome message */}
                 <div className="text-center">
                     <div className="text-3xl md:text-4xl font-bold">
                         Welcome to ConnectYou 👋
@@ -13,7 +17,10 @@ const LandingPage = () => {
                         Join our vibrant community today.
                     </div>
                 </div>
+
+                {/* Login and Sign Up buttons */}
                 <div className="flex flex-col md:flex-row items-center gap-2 w-full mt-10 mb-5">
+                    {/* Login button */}
                     <div className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 w-full h-14 rounded-md cursor-pointer p-[1px] transition duration-300 transform hover:scale-105">
                         <Link href="/login">
                             <div className="flex items-center justify-center gap-3 text-white font-semibold bg-c1 w-full h-full rounded-md">
@@ -21,7 +28,11 @@ const LandingPage = () => {
                             </div>
                         </Link>
                     </div>
-                    <div className="w-2 h-2 md:hidden"></div> {/* Adding a 2-unit gap for mobile */}
+
+                    {/* Spacer for mobile layout */}
+                    <div className="w-2 h-2 md:hidden"></div>
+
+                    {/* Sign Up button */}
                     <div className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 w-full h-14 rounded-md cursor-pointer p-[1px] transition duration-300 transform hover:scale-105">
                         <Link href="/register">
                             <div className="flex items-center justify-center gap-3 text-white font-semibold bg-c1 w-full h-full rounded-md">
@@ -30,6 +41,8 @@ const LandingPage = () => {
                         </Link>
                     </div>
                 </div>
+
+                {/* Features section */}
                 <div className="mt-8 text-c3">
                     <p>Explore our exciting features:</p>
                     <ul className="list-disc list-inside">
@@ -39,10 +52,24 @@ const LandingPage = () => {
                         <li>And many more!</li>
                     </ul>
                 </div>
+
+                {/* Animated pulse effect */}
                 <div className="w-full h-px mt-8 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 animate-pulse"></div>
+
+                {/* FAQ button */}
+                <div className="mt-5">
+                    <Link href="/faq">
+                        <div className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 w-full h-14 rounded-md cursor-pointer p-[1px] transition duration-300 transform hover:scale-105">
+                            <div className="flex items-center justify-center gap-3 text-white font-semibold bg-c1 w-full h-full rounded-md p-5">
+                                FAQ
+                            </div>
+                        </div>
+                    </Link>
+                </div>
             </div>
         </div>
     );
 };
 
+// Export the LandingPage component
 export default LandingPage;
