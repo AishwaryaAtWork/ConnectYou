@@ -2,11 +2,10 @@ import Loader from "@/components/Loader";
 import { useAuth } from "@/context/authContext";
 import { profileColors } from "@/utils/constants";
 import {
-    FacebookAuthProvider,
     GoogleAuthProvider,
     createUserWithEmailAndPassword,
     signInWithPopup,
-    updateProfile,
+    updateProfile
 } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
