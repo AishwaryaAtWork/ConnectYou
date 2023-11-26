@@ -34,7 +34,6 @@ import { toast } from "react-toastify";
 const ChatMenu = ({ setShowMenu, showMenu }) => {
   const { data, users, dispatch, chats, setSelectedChat } = useChatContext();
   const { currentUser } = useAuth();
-  const [openPopup, setOpenPopup] = useState(false);
 
   const isUserBlocked = users[currentUser.uid]?.blockedUsers?.find(
     (u) => u === data.user.uid
@@ -159,10 +158,7 @@ const ChatMenu = ({ setShowMenu, showMenu }) => {
       <div
         className={`w-[200px] absolute top-[70px] right-5 bg-c0 z-10 rounded-md overflow-hidden`}
       >
-
-        {openPopup && (
-          <AddMoneyPopup setOpenPopup={setOpenPopup}/>
-        )}
+   
         <ul className="flex flex-col py-2">
           {!IamBlocked && (
             <li
@@ -198,12 +194,7 @@ const ChatMenu = ({ setShowMenu, showMenu }) => {
             />
             Set Theme
           </li>
-          <li
-            className="flex items-center py-3 px-5 hover:bg-black cursor-pointer"
-            onClick={()=> setOpenPopup(true)}
-          >
-            Update Wallet
-          </li>
+      
         </ul>
       </div>
     </ClickAwayListener>
