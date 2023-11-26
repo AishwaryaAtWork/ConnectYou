@@ -1,11 +1,8 @@
-// Import necessary modules
 import React from 'react';
 import Link from 'next/link';
 
-// Define the FAQ component
 const FAQ = () => {
     return (
-        // Main container with background and styling
         <div className="h-[100vh] flex justify-center items-center bg-c1">
             <div className="w-full max-w-screen-md px-4">
 
@@ -76,5 +73,4 @@ const FAQ = () => {
     );
 };
 
-// Export the FAQ component
 export default FAQ;
