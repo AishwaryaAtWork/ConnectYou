@@ -7,11 +7,10 @@ import ToastMessage from "@/components/ToastMessage";
 import { useAuth } from "@/context/authContext";
 import { auth } from "@/firebase/firebase";
 import {
-    FacebookAuthProvider,
     GoogleAuthProvider,
     sendPasswordResetEmail,
     signInWithEmailAndPassword,
-    signInWithPopup,
+    signInWithPopup
 } from "firebase/auth";
 import Link from "next/link";
 import { useRouter } from "next/router";
