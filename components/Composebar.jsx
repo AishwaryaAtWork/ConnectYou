@@ -20,7 +20,9 @@ import {
 } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { TbSend } from "react-icons/tb";
+import { IoMicOutline } from "react-icons/io5";
 import { v4 as uuid } from "uuid";
+import Icon from "./Icon";
 
 let typingTimeout = null;
 
@@ -230,6 +232,10 @@ const Composebar = ({ selectedFileType, setSelectedFile, setSelectedGif, selecte
         onChange={handleTyping}
         onKeyUp={onKeyUp}
       />
+      <div >
+        <Icon size="large"
+            icon={<IoMicOutline size={31} className="text-white" />}/>
+      </div>
       <button
         onClick={!editMsg ? handleSend : handleEdit}
         className={`h-10 w-10 rounded-xl shrink-0 flex justify-center items-center ${(inputText.trim().length > 0 || attachment || selectedGif) ? "bg-c4" : "bg-gray-400"
