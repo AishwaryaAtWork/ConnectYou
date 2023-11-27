@@ -14,6 +14,8 @@ import { useRouter } from "next/router";
 import { useCallback, useEffect } from "react";
 import { IoLogoGoogle } from "react-icons/io";
 import { auth, db, storage } from "../firebase/firebase";
+import { toast } from "react-toastify";
+import ToastMessage from "@/components/ToastMessage";
 
 const gProvider = new GoogleAuthProvider();
 
@@ -36,8 +38,27 @@ const Register = () => {
         const displayName = e.target[0].value;
         const email = e.target[1].value;
         const password = e.target[2].value;
-        const file = e.target[3]?.files?.[0];
+        const confirmPassword = e.target[3].value;
+        const file = e.target[4]?.files?.[0];
         const colorIndex = Math.floor(Math.random() * profileColors.length);
+        
+        const validEmailDomains = ["@gmail.com", "@yahoo.com", "@outlook.com", "@icloud.com"];
+        const isValidEmail = validEmailDomains.some((domain) => email.endsWith(domain));
+
+        if (!isValidEmail) {
+            toast.error("Invalid email domain");
+            return;
+        }
+
+        if (password.length < 6) {
+            toast.error("Password should be at least 6 characters");
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            toast.error("Password and Confirm Password doesn't match");
+            return;
+        }
 
         /**
          * Registers a new user with email/password and additional profile data.
@@ -133,6 +154,8 @@ const Register = () => {
         <Loader />
     ) : (
         <div className="min-h-screen flex justify-center items-center bg-c1">
+            <ToastMessage />
+
             <div className="flex items-center flex-col">
                 <div className="text-center">
                     <div className="text-4xl font-bold">Create New Account</div>
@@ -177,6 +200,13 @@ const Register = () => {
                     <input
                         type="password"
                         placeholder="Password"
+                        className="w-full h-14 bg-c5 rounded-xl outline-none border-none px-5 text-c3"
+                        autoComplete="off"
+                        required
+                    />
+                    <input
+                        type="password"
+                        placeholder="Confirm Password"
                         className="w-full h-14 bg-c5 rounded-xl outline-none border-none px-5 text-c3"
                         autoComplete="off"
                         required

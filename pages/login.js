@@ -43,7 +43,20 @@ const Login = () => {
         try {
             await signInWithEmailAndPassword(auth, email, password);
         } catch (error) {
-            console.error(error);
+            const errorMessage = getFirebaseAuthErrorMessage(error.code);
+            toast.error(errorMessage);
+        }
+    };
+
+    // Function to map Firebase Auth error codes to user-friendly error messages
+    const getFirebaseAuthErrorMessage = (errorCode) => {
+        switch (errorCode) {
+            case 'auth/user-not-found':
+                return 'User not found. Please check your email.';
+            case 'auth/wrong-password':
+                return 'Invalid password. Please try again.';
+            default:
+                return 'Authentication failed. Please try again.';
         }
     };
 
