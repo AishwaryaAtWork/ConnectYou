@@ -1,5 +1,5 @@
 {
-  "name": "ConnectYou",
+  "name": "connectyou",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -10,8 +10,6 @@
   },
   "dependencies": {
     "@giphy/js-fetch-api": "^5.2.0",
-    "@react-pdf-viewer/core": "^3.12.0",
-    "@react-pdf-viewer/default-layout": "^3.12.0",
     "autoprefixer": "10.4.14",
     "emoji-picker-react": "^4.4.9",
     "eslint": "8.38.0",
