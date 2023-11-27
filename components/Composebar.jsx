@@ -23,6 +23,7 @@ import { TbSend } from "react-icons/tb";
 import { IoMicOutline } from "react-icons/io5";
 import { v4 as uuid } from "uuid";
 import Icon from "./Icon";
+import { useRef } from "react";
 
 let typingTimeout = null;
 
@@ -38,6 +39,39 @@ const Composebar = ({ selectedFileType, setSelectedFile, setSelectedGif, selecte
     editMsg,
     setEditMsg,
   } = useChatContext();
+
+  const recognitionRef = useRef(null);
+
+  const handleSpeechRecognition = () => {
+    try {
+      if (!recognitionRef.current) {
+        recognitionRef.current = new window.webkitSpeechRecognition();
+        recognitionRef.current.continuous = true;
+        recognitionRef.current.onresult = (event) => {
+          const transcript = event?.results[0]?.[0]?.transcript;
+          const capitalizedTranscript = transcript
+            ? transcript.charAt(0).toUpperCase() + transcript.slice(1)
+            : '';
+
+          setInputText(capitalizedTranscript);
+        };
+      }
+
+      if (recognitionRef.current.continuous) {
+        recognitionRef.current.stop();
+        recognitionRef.current.continuous = false;
+
+      } else {
+        recognitionRef.current.start();
+        recognitionRef.current.continuous = true;
+      }
+    } catch (error) {
+      console.error('Speech recognition error:', error);
+    }
+  };
+
+
+
 
   /**
    * Handles sending a new chat message.
@@ -192,6 +226,7 @@ const Composebar = ({ selectedFileType, setSelectedFile, setSelectedGif, selecte
   };
 
   const handleTyping = async (event) => {
+    // const newText = event.target.value || transcript;
     setInputText(event.target.value);
 
     await updateDoc(doc(db, "chats", data.chatId), {
@@ -233,8 +268,8 @@ const Composebar = ({ selectedFileType, setSelectedFile, setSelectedGif, selecte
         onKeyUp={onKeyUp}
       />
       <div >
-        <Icon size="large"
-            icon={<IoMicOutline size={31} className="text-white" />}/>
+        <Icon size="large" onClick={handleSpeechRecognition}
+          icon={<IoMicOutline size={31} className="text-white" />} />
       </div>
       <button
         onClick={!editMsg ? handleSend : handleEdit}
