@@ -63,7 +63,7 @@ const AddMoneyPopup = ({ setOpenPopup }) => {
       }, []);
 
   return (
-    <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-opacity-50 bg-gray-800">
+    <div className="fixed top-0 left-0 z-50 w-full h-full flex items-center justify-center bg-opacity-50 bg-gray-800">
       <div className="bg-[#202329] p-8 rounded-md shadow-lg" ref={popUpRef}>
         
       <div className='flex justify-center mb-4'>

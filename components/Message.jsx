@@ -176,11 +176,11 @@ const Message = ({ message, theme }) => {
                src={message.fileUrl}
                width={250}
                height={250}
-               className="object-contain object-center"
+               className="object-contain object-center hover:cursor-pointer"
                onClick={() => openVidImg(message.fileUrl)}
              />
              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
-              bg-gray-100 bg-opacity-80 p-2 rounded-full">
+              bg-gray-100 bg-opacity-80 p-2 rounded-full hover:cursor-pointer">
                <Icon
                  size="medium"
                  className="hover:bg-gray-100 hover:bg-opacity-80 rounded-full p-[0.1px] "
