@@ -38,7 +38,7 @@ const Avatar = ({ size, user, onClick }) => {
     return (
         <div
             className={`${c} rounded-full flex items-center justify-center text-base flex-shrink-0 relative`}
-            style={{ backgroundColor: user.color }}
+            style={{ backgroundColor: user?.color }}
             onClick={onClick}
         >
             {user?.isOnline && (
