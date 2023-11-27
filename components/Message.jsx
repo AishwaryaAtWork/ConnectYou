@@ -213,7 +213,12 @@ const Message = ({ message, theme }) => {
           //   title={`Map sent by ${message.senderName}`}
           // />
           
-            <a href={message.fileUrl} target="_blank" className="cursor-pointer text-blue-400">{message.fileUrl}</a>
+            <>
+            <p className="text-sm">{`${self ? "My" : `${data.user.displayName}'s`} geo loaction :`}</p>
+              <a href={message.fileUrl} target="_blank" 
+              className="cursor-pointer text-sm text-blue-400">{message.fileUrl}</a>
+            
+            </>
           )}
           <div
             className={`${
