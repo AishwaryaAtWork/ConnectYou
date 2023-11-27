@@ -133,7 +133,7 @@ const Message = ({ message, theme }) => {
               alt={`Image sent by ${message.senderName}`}
               width={250}
               height={250}
-              className="rounded-3xl max-w-[250px]"
+              className="rounded-3xl max-w-[250px] hover:cursor-pointer"
               onClick={() => {
                 openVidImg(message.fileUrl)
                 setImageViewer({
