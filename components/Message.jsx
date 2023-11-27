@@ -19,6 +19,8 @@ import Avatar from "./Avatar";
 import Icon from "./Icon";
 import Menu from "./Menu";
 import DeleteMsgPopup from "./popup/DeleteMsgPopup";
+import ImageVideoPopup from "./popup/ImageVideoPopup";
+import { FaPlay } from "react-icons/fa6";
 
 const Message = ({ message, theme }) => {
   const [showDeletePopup, setShowDeletePopup] = useState(false);
@@ -26,6 +28,8 @@ const Message = ({ message, theme }) => {
     useChatContext();
   const { currentUser } = useAuth();
   const [showMenu, setShowMenu] = useState(false);
+  const [openImgVidPopup, setOpenImgVidPopup] = useState(false);
+  const [imgVidPopupUrl, setImgVidPopupUrl] = useState("");
 
   const self = message.sender === currentUser.uid;
 
@@ -75,9 +79,18 @@ const Message = ({ message, theme }) => {
     setShowDeletePopup(true);
     setShowMenu(false);
   };
+
+  const openVidImg = (url) => {
+    setOpenImgVidPopup(true)
+    setImgVidPopupUrl(url)
+  }
   
   return (
     <div ref={ref} className={`mb-5 max-w-[75%] ${self ? "self-end" : ""}`}>
+      {openImgVidPopup && (
+        <ImageVideoPopup onClose={setOpenImgVidPopup} url={imgVidPopupUrl}/>
+      )}
+
       {showDeletePopup && (
         <DeleteMsgPopup
           onHide={() => setShowDeletePopup(false)}
@@ -121,11 +134,13 @@ const Message = ({ message, theme }) => {
               width={250}
               height={250}
               className="rounded-3xl max-w-[250px]"
-              onClick={() =>
+              onClick={() => {
+                openVidImg(message.fileUrl)
                 setImageViewer({
                   msgId: message.id,
                   url: message.fileUrl,
                 })
+              }
               }
             />
           )}
@@ -156,13 +171,24 @@ const Message = ({ message, theme }) => {
 
           )}
           {message?.fileUrl?.includes("video") && (
-            <video
-              src={message.fileUrl}
-              controls
-              width={250}
-              height={250}
-              className="object-contain object-center"
-            />
+             <div className="relative">
+             <video
+               src={message.fileUrl}
+               width={250}
+               height={250}
+               className="object-contain object-center"
+               onClick={() => openVidImg(message.fileUrl)}
+             />
+             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
+              bg-gray-100 bg-opacity-80 p-2 rounded-full">
+               <Icon
+                 size="medium"
+                 className="hover:bg-gray-100 hover:bg-opacity-80 rounded-full p-[0.1px] "
+                 onClick={() => openVidImg(message.fileUrl)}
+                 icon={<FaPlay size={30} className="text-black" />}
+               />
+             </div>
+           </div>
           )}
           {message?.fileUrl?.includes("audio") && (
             <audio
@@ -175,6 +201,19 @@ const Message = ({ message, theme }) => {
               <source src={message.fileUrl} type="audio/mpeg" />
               Your browser does not support the audio element.
             </audio>
+          )}
+          {message?.fileUrl?.includes("map") && (
+          //   <iframe
+          //   width="100%"
+          //   height="400px"
+          //   frameBorder="0"
+          //   style={{ border: 0 }}
+          //   src={message.fileUrl}
+          //   allowFullScreen
+          //   title={`Map sent by ${message.senderName}`}
+          // />
+          
+            <a href={message.fileUrl} target="_blank" className="cursor-pointer text-blue-400">{message.fileUrl}</a>
           )}
           <div
             className={`${
