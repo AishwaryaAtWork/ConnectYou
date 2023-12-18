@@ -24,7 +24,7 @@ const ImageVideoPopup = ({ url, onClose }) => {
 
       {/* Popup box */}
       <div className="relative p-8 bg-[#202329] rounded-lg shadow-md w-[60%] 
-        flex flex-col justify-center items-center" ref={popUpRef}>
+        flex flex-col justify-center items-center w-fit" ref={popUpRef}>
         {/* Close button */}
         <button
           className="absolute top-2 right-2 text-gray-600 hover:text-gray-500"
@@ -47,10 +47,10 @@ const ImageVideoPopup = ({ url, onClose }) => {
         </button>
 
         {url.includes("image") ? (
-        <img src={url} alt="Popup Image" className="w-full h-auto " />
+        <img src={url} alt="Popup Image" className="w-full h-auto max-h-[80vh] max-w-[50vw]" />
         ) : (
 
-        <video src={url}  controls className="object-contain object-center"/>
+        <video src={url}  controls className="object-contain object-center "/>
         )}
       </div>
     </div>

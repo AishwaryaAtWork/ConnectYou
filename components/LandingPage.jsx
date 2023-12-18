@@ -19,7 +19,7 @@ const LandingPage = () => {
                 </div>
 
                 {/* Login and Sign Up buttons */}
-                <div className="flex flex-col md:flex-row items-center gap-2 w-full mt-10 mb-5">
+                <div className="flex flex-col md:flex-row items-center gap-4 w-full mt-10 mb-5">
                     {/* Login button */}
                     <div className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 w-full h-14 rounded-md cursor-pointer p-[1px] transition duration-300 transform hover:scale-105">
                         <Link href="/login">
