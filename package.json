@@ -14,7 +14,7 @@
     "emoji-picker-react": "^4.4.9",
     "eslint": "8.38.0",
     "eslint-config-next": "13.3.0",
-    "firebase": "^9.19.1",
+    "firebase": "^9.23.0",
     "moment": "^2.29.4",
     "next": "13.3.0",
     "postcss": "8.4.22",
