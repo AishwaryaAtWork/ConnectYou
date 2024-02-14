@@ -2,6 +2,7 @@ import Link from "next/link";
 
 // Define the LandingPage component
 const LandingPage = () => {
+    console.log('Hi')
     return (
         // Main container with background and styling
         <div className="h-[100vh] flex justify-center items-center bg-c1">
