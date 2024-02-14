@@ -4,12 +4,12 @@ import { getStorage } from "firebase/storage";
 import { initializeApp } from "firebase/app";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDc2jWEUsBI_0NKsFE706XQBWbTNZkqGIY",
-  authDomain: "connectyou-327d6.firebaseapp.com",
-  projectId: "connectyou-327d6",
-  storageBucket: "connectyou-327d6.appspot.com",
-  messagingSenderId: "426948021888",
-  appId: "1:426948021888:web:226f98915509a172a5a065"
+  apiKey: "AIzaSyD07ycgcp90HIjcmQD3gFrmJwmXcqDSpRo",
+  authDomain: "connectyou-2bfb1.firebaseapp.com",
+  projectId: "connectyou-2bfb1",
+  storageBucket: "connectyou-2bfb1.appspot.com",
+  messagingSenderId: "201045855199",
+  appId: "1:201045855199:web:00b27340daf73a1879d26a"
 };
 
 export const app = initializeApp(firebaseConfig);
