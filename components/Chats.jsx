@@ -171,15 +171,15 @@ const Chats = () => {
 
     return (
         <div className="flex flex-col h-full">
-            <div className="shrink-0 sticky -top-[20px] z-10 flex justify-center w-full bg-c2 py-5">
+            <div className="shrink-0 sticky -top-[20px] z-10 flex justify-center w-full bg-c2 py-5 ">
                 {/* ... (search input code) */}
-                <RiSearch2Line className="absolute top-9 left-12 text-c3" />
+                <RiSearch2Line className="absolute top-9 left-5 text-c3" />
                 <input
                     type="Text"
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                     placeholder="Search username..."
-                    className="w-[300px] h-12 rounded-xl bg-c1/[0.5] pl-11 pr-5 placeholder:text-c3 outline-none text-base"
+                    className="w-[96%] h-12 rounded-xl bg-c1/[0.5] pl-11 pr-5 placeholder:text-c3 outline-none text-base"
                 />
             </div>
             {filteredChats.length === 0 ? ( // Check if there are no chats to display
@@ -211,7 +211,7 @@ const Chats = () => {
                                     key={chat[0]}
                                     id={chat[0]}
                                     onClick={() => handleSelect(user, chat[0])}
-                                    className={`h-[90px] flex items-center gap-4 rounded-3xl hover:bg-c1 p-4 cursor-pointer ${selectedChat?.uid === user.uid
+                                    className={`h-[80px] flex items-center gap-4 rounded-3xl hover:bg-c1 p-3 cursor-pointer mx-2 ${selectedChat?.uid === user.uid
                                         ? "bg-c1"
                                         : ""
                                         }`}
