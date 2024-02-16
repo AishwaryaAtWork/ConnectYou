@@ -9,11 +9,13 @@ import Loader from "@/components/Loader";
 import Sidebar from "@/components/Sidebar";
 import { useAuth } from "@/context/authContext";
 import { useChatContext } from "@/context/chatContext";
+import { useScreenSize } from "@/context/screenSizeContext";
 import { isMobile } from 'react-device-detect';
 
 const Home = () => {
     const { currentUser, isLoading } = useAuth();
     const { data } = useChatContext();
+    const { isSmallScreen } = useScreenSize();
 
     if (isLoading) {
         return <Loader />;
@@ -42,11 +44,12 @@ const Home = () => {
     }
 
     return (
-        <div className="bg-c1 flex h-[100vh]">
-            <div className="flex w-full shrink-0">
+        <div className="bg-c1 flex h-[90vh] w-[90vw] overflow-hidden">
+            <div className="flex w-full shrink-0 ">
                 <LeftNav />
-                <div className="flex bg-c2 grow">
+                <div className="flex bg-c2 ">
                     <Sidebar />
+                    <div className={`bg-c2 z-40 absolute  -right-10 w-full h-full`}>
                     {!data.user ? (
                         <div className="flex items-center justify-center w-full h-full">
                             <div className="text-center">
@@ -65,7 +68,9 @@ const Home = () => {
                     ) : (
                         <Chat />
                     )}
+                    </div>
                 </div>
+                
             </div>
         </div>
     );
