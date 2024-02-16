@@ -51,7 +51,7 @@ const Home = () => {
                     <div className={`${isSmallScreen ? "w-full" : "w-auto xxl:w-3/12"}`}>
                     <Sidebar />
                     </div>
-                    <div className={`bg-c2 ${isSmallScreen ? "z-40 absolute  -right-0 w-full h-full" : "w-9/12"}`}>
+                    <div className={`bg-c2 ${isSmallScreen ? "z-40 absolute  -right-0 w-full h-full" : "w-full"}`}>
                     {!data.user ? (
                         <div className="flex items-center justify-center w-full h-full">
                             <div className="text-center">
