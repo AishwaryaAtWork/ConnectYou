@@ -6,6 +6,8 @@
 import { useChatContext } from "@/context/chatContext";
 import { useState } from "react";
 import { IoEllipsisVerticalSharp } from "react-icons/io5";
+import { LuPhone } from "react-icons/lu";
+import { GoDeviceCameraVideo } from "react-icons/go";
 import Avatar from "./Avatar";
 import ChatMenu from "./ChatMenu";
 import Icon from "./Icon";
@@ -29,6 +31,31 @@ const ChatHeader = (props) => {
                 </div>
             )}
             <div className="flex items-center gap-2">
+                <div className="border-[3px] border-c3 rounded-lg px-3 py-1 flex items-center gap-4">
+                <Icon
+                    size="large"
+                    className={`${showMenu ? "bg-c1" : ""}`}
+                    onClick={() => setShowMenu(true)}
+                    icon={
+                        <GoDeviceCameraVideo
+                            size={25}
+                            className="text-gray-200"
+                        />
+                    }
+                />
+                <div className="bg-c3 h-[20px] w-[2px]"></div>
+                <Icon
+                    size="large"
+                    className={`${showMenu ? "bg-c1" : ""}`}
+                    onClick={() => setShowMenu(true)}
+                    icon={
+                        <LuPhone
+                            size={21}
+                            className="text-gray-300"
+                        />
+                    }
+                />
+                </div>
                 <Icon
                     size="large"
                     className={`${showMenu ? "bg-c1" : ""}`}
