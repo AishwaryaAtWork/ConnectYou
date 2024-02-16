@@ -48,7 +48,7 @@ const Home = () => {
             <div className="flex w-full shrink-0 overflow-hidden relative">
                 <LeftNav />
                 <div className="flex bg-c2 w-full ">
-                    <div className={`${isSmallScreen ? "w-full" : "w-3/12"}`}>
+                    <div className={`${isSmallScreen ? "w-full" : "w-auto xxl:w-3/12"}`}>
                     <Sidebar />
                     </div>
                     <div className={`bg-c2 ${isSmallScreen ? "z-40 absolute  -right-0 w-full h-full" : "w-9/12"}`}>
