@@ -44,12 +44,14 @@ const Home = () => {
     }
 
     return (
-        <div className="bg-c1 flex h-[90vh] w-[90vw] overflow-hidden">
-            <div className="flex w-full shrink-0 ">
+        <div className="bg-c1 flex ">
+            <div className="flex w-full shrink-0 overflow-hidden relative">
                 <LeftNav />
-                <div className="flex bg-c2 ">
+                <div className="flex bg-c2 w-full ">
+                    <div className={`${isSmallScreen ? "w-full" : "w-3/12"}`}>
                     <Sidebar />
-                    <div className={`bg-c2 z-40 absolute  -right-10 w-full h-full`}>
+                    </div>
+                    <div className={`bg-c2 ${isSmallScreen ? "z-40 absolute  -right-0 w-full h-full" : "w-9/12"}`}>
                     {!data.user ? (
                         <div className="flex items-center justify-center w-full h-full">
                             <div className="text-center">
