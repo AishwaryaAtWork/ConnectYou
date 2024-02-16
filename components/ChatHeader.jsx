@@ -31,14 +31,14 @@ const ChatHeader = (props) => {
                 </div>
             )}
             <div className="flex items-center gap-2">
-                <div className="border-[3px] border-c3 rounded-lg px-3 py-1 flex items-center gap-4">
+                <div className="border-[3px] border-c3 rounded-lg px-2 py-1 flex items-center gap-4">
                 <Icon
                     size="large"
                     className={`${showMenu ? "bg-c1" : ""}`}
-                    onClick={() => setShowMenu(true)}
+                    // onClick={() => }
                     icon={
                         <GoDeviceCameraVideo
-                            size={25}
+                            size={23}
                             className="text-gray-200"
                         />
                     }
@@ -47,10 +47,10 @@ const ChatHeader = (props) => {
                 <Icon
                     size="large"
                     className={`${showMenu ? "bg-c1" : ""}`}
-                    onClick={() => setShowMenu(true)}
+                    // onClick={() => }
                     icon={
                         <LuPhone
-                            size={21}
+                            size={19}
                             className="text-gray-300"
                         />
                     }
