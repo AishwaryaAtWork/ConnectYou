@@ -112,13 +112,13 @@ const Message = ({ message, theme }) => {
           className="mb-4"
         />
         <div
-          className={`group flex flex-col gap-4 p-4 rounded-3xl relative ${
+          className={` group flex flex-col gap-4 p-2 md:p-4 rounded-3xl relative ${
             self ? "rounded-br-md bg-c5" : "rounded-bl-md bg-c1"
           }`}
         >
           {message.text && (
             <div
-              className="text-sm"
+              className="text-sm "
               dangerouslySetInnerHTML={{
                 __html: wrapEmojisInHtmlTag(message.text),
               }}
@@ -133,7 +133,7 @@ const Message = ({ message, theme }) => {
               alt={`Image sent by ${message.senderName}`}
               width={250}
               height={250}
-              className="rounded-3xl max-w-[250px] hover:cursor-pointer"
+              className="rounded-3xl md:max-w-[250px] hover:cursor-pointer"
               onClick={() => {
                 openVidImg(message.fileUrl)
                 setImageViewer({
@@ -150,7 +150,7 @@ const Message = ({ message, theme }) => {
               alt={`Image sent by ${message.senderName}`}
               width={150}
               height={150}
-              className="rounded-3xl max-w-[250px]"
+              className="rounded-3xl md:max-w-[250px]"
               onClick={() =>
                 setImageViewer({
                   msgId: message.id,
