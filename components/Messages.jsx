@@ -10,6 +10,9 @@ import { DELETED_FOR_ME } from "@/utils/constants";
 import { doc, onSnapshot } from "firebase/firestore";
 import { useEffect, useRef, useState } from "react";
 import Message from "./Message";
+import Icon from "./Icon";
+import { IoArrowBack } from "react-icons/io5";
+import { useScreenSize } from "@/context/screenSizeContext";
 
 /**
  * @function Messages
@@ -21,6 +24,7 @@ const Messages = () => {
 
   const { data, setIsTyping } = useChatContext();
   const { currentUser } = useAuth();
+  const { isSmallScreen } = useScreenSize();
   const ref = useRef();
 
   /**
@@ -49,7 +53,7 @@ const Messages = () => {
     });
 
     return () => unsub();
-  }, [data.chatId, data.user.uid, setIsTyping]); 
+  }, [data.chatId, data.user.uid, setIsTyping]);
 
   return (
     <div
@@ -57,6 +61,14 @@ const Messages = () => {
       className="grow p-5 overflow-auto scrollbar flex flex-col bg-cover bg-center"
       style={{ backgroundImage: `url(${theme})` }}
     >
+      {isSmallScreen && (
+        <Icon
+        size="x-large"
+        className="bg-c3 absolute z-50 top-[12%] left-4"
+        icon={<IoArrowBack size={22} />}
+        // onClick={() => setUserPopup(!userPopup)}
+      />
+      )}
       {messages
         ?.filter(
           (m) =>

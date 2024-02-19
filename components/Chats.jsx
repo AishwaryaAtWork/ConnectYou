@@ -194,7 +194,7 @@ const Chats = () => {
                         Click on the + icon below to start a new chat.
                     </p>
                 </div>) : (
-                <ul className="flex flex-col w-full my-5 gap-[2px]">
+                <ul className="flex flex-col w-full my-3 md:my-5 gap-4">
                     {Object.keys(users || {}).length > 0 &&
                         filteredChats?.map((chat) => {
                             // ... (chat rendering code)
@@ -218,13 +218,13 @@ const Chats = () => {
                                 >
                                     <Avatar size="x-large" user={user} />
                                     <div className="flex flex-col gap-1 grow relative">
-                                        <span className="text-base text-white flex  items-center justify-between">
-                                            <div className="font-medium">
+                                        <div className="text-base text-white flex  items-center justify-between">
+                                            <div className="font-medium line-clamp-1 text-sm w-[50%] md:w-auto md:text-base">
                                                 {user.displayName}
                                             </div>
                                             <div className="text-xs text-c3">
                                                 {isValidDate && formatDate(date)}                                            </div>
-                                        </span>
+                                        </div>
                                         <p className="text-sm text-c3 line-clamp-1">
                                             {chat[1].lastMessage?.text ||
                                                 (chat[1].lastMessage?.img &&

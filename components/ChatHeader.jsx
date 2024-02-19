@@ -23,15 +23,14 @@ const ChatHeader = (props) => {
                 <div className="flex items-center gap-3">
                     <Avatar size="large" user={user} />
                     <div>
-                        <div className="font-medium">{user.displayName}</div>
+                        <div className="font-medium line-clamp-1">{user.displayName}</div>
                         <p className="text-sm text-c3">
                             {online ? "Online" : "Offline"}
                         </p>
                     </div>
                 </div>
             )}
-            <div className="flex items-center gap-2">
-                <div className="border-[3px] border-c3 rounded-lg px-2 py-1 flex items-center gap-4">
+            <div className="flex items-center gap-1">
                 <Icon
                     size="large"
                     className={`${showMenu ? "bg-c1" : ""}`}
@@ -39,11 +38,10 @@ const ChatHeader = (props) => {
                     icon={
                         <GoDeviceCameraVideo
                             size={23}
-                            className="text-gray-200"
+                            className="text-white"
                         />
                     }
                 />
-                <div className="bg-c3 h-[20px] w-[2px]"></div>
                 <Icon
                     size="large"
                     className={`${showMenu ? "bg-c1" : ""}`}
@@ -51,11 +49,10 @@ const ChatHeader = (props) => {
                     icon={
                         <LuPhone
                             size={19}
-                            className="text-gray-300"
+                            className="text-white"
                         />
                     }
                 />
-                </div>
                 <Icon
                     size="large"
                     className={`${showMenu ? "bg-c1" : ""}`}
