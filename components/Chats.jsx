@@ -219,7 +219,7 @@ const Chats = () => {
                                     <Avatar size="x-large" user={user} />
                                     <div className="flex flex-col gap-1 grow relative">
                                         <div className="text-base text-white flex  items-center justify-between">
-                                            <div className="font-medium line-clamp-1 text-sm w-[50%] md:w-auto md:text-base">
+                                            <div className="font-medium line-clamp-1 text-sm w-[50%] xl:w-auto md:text-base">
                                                 {user.displayName}
                                             </div>
                                             <div className="text-xs text-c3">

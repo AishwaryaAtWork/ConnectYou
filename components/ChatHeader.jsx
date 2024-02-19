@@ -5,22 +5,25 @@
  */
 import { useChatContext } from "@/context/chatContext";
 import { useState } from "react";
-import { IoEllipsisVerticalSharp } from "react-icons/io5";
+import { IoArrowBack, IoEllipsisVerticalSharp } from "react-icons/io5";
 import { LuPhone } from "react-icons/lu";
 import { GoDeviceCameraVideo } from "react-icons/go";
 import Avatar from "./Avatar";
 import ChatMenu from "./ChatMenu";
 import Icon from "./Icon";
+import { useScreenSize } from "@/context/screenSizeContext";
 
 const ChatHeader = (props) => {
     const [showMenu, setShowMenu] = useState(false);
     const { users, data } = useChatContext();
+    const { isSmallScreen } = useScreenSize();
     const online = users[data.user.uid]?.isOnline;
     const user = users[data.user.uid];
     return (
         <div className="flex justify-between items-center pb-5 border-b border-white/[0.05]">
             {user && (
                 <div className="flex items-center gap-3">
+                    {isSmallScreen && (<IoArrowBack size={22} />)}
                     <Avatar size="large" user={user} />
                     <div>
                         <div className="font-medium line-clamp-1">{user.displayName}</div>
