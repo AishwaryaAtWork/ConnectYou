@@ -29,19 +29,19 @@ const Home = () => {
         );
     }
 
-    if (isMobile) {
-        return (
-            <div className="h-[100vh] flex justify-center items-center bg-c1">
-                <div className="text-center px-4">
-                    <div className="text-2xl font-bold mb-4">
-                        Mobile Experience Coming Soon
-                    </div>
-                    <p className="text-gray-600">
-                        We are actively working on creating a mobile-friendly version of ConnectYou. Please continue to use the desktop version for the best experience.
-                    </p>
-                </div>
-            </div>);
-    }
+    // if (isMobile) {
+    //     return (
+    //         <div className="h-[100vh] flex justify-center items-center bg-c1">
+    //             <div className="text-center px-4">
+    //                 <div className="text-2xl font-bold mb-4">
+    //                     Mobile Experience Coming Soon
+    //                 </div>
+    //                 <p className="text-gray-600">
+    //                     We are actively working on creating a mobile-friendly version of ConnectYou. Please continue to use the desktop version for the best experience.
+    //                 </p>
+    //             </div>
+    //         </div>);
+    // }
 
     return (
         <div className="bg-c1 flex ">
@@ -72,7 +72,7 @@ const Home = () => {
                     )}
                     </div>
                 </div>
-                
+
             </div>
         </div>
     );
