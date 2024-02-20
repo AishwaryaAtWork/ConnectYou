@@ -16,12 +16,13 @@ import { useScreenSize } from "@/context/screenSizeContext";
 const ChatHeader = (props) => {
     const [showMenu, setShowMenu] = useState(false);
     const { users, data } = useChatContext();
-    const { isSmallScreen, setOpenChatBox } = useScreenSize();
+    const { isSmallScreen, setOpenChatBox, openChatBox } = useScreenSize();
     const online = users[data.user.uid]?.isOnline;
     const user = users[data.user.uid];
     const opn = () =>{
         setOpenChatBox(false)
         console.log("op")
+        console.log(openChatBox)
     }
     return (
         <div className="flex justify-between items-center pb-5 border-b border-white/[0.05]">
