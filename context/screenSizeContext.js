@@ -4,7 +4,7 @@ const ScreenSizeContext = createContext();
 
 export const ScreenSizeProvider = ({ children }) => {
     const [isSmallScreen, setIsSmallScreen] = useState(false);
-    const [openChatBox, setOpenChatBox] = useState(true);
+    const [openChatBox, setOpenChatBox] = useState(false);
 
     useEffect(() => {
         const checkScreenSize = () => {

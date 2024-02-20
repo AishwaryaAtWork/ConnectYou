@@ -5,17 +5,17 @@ import Chat from './Chat';
 
 const ChatBox = ({data}) => {
     const {isSmallScreen, openChatBox} = useScreenSize();
-    const [val, setVal] = useState('[100vw]');
+    const [val, setVal] = useState('');
 
     useEffect(()=>{
         if(openChatBox){
-            setVal('0')
+            setVal('-right-0')
         }else{
-            setVal('[100vw]')
+            setVal('-right-[100vw]')
         }
     }, [openChatBox])
   return (
-    <div className={`bg-c2 ${isSmallScreen ? `z-40 absolute -right-${val}
+    <div className={`bg-c2 ${isSmallScreen ? `z-40 absolute ${val}
                     w-full h-full transition-all duration-500 ease-in-out ` : "w-full"}`}>
                     {!data.user ? (
                         <div className="flex items-center justify-center w-full h-full">
