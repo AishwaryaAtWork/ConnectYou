@@ -51,7 +51,7 @@ const Home = () => {
                     <div className={`${isSmallScreen ? "w-full" : "md:w-7/12 xl:w-3/12"}`}>
                     <Sidebar />
                     </div>
-                    <div className={`bg-c2 ${isSmallScreen ? `z-40 absolute -right-${openChatBox ? "0" : "[100vw]"} 
+                    <div className={`bg-c2 ${isSmallScreen ? `z-40 absolute -right-0 
                     w-full h-full transition-all duration-500 ease-in-out ` : "w-full"}`}>
                     {!data.user ? (
                         <div className="flex items-center justify-center w-full h-full">
