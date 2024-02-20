@@ -16,7 +16,7 @@ import { isMobile } from 'react-device-detect';
 const Home = () => {
     const { currentUser, isLoading } = useAuth();
     const { data } = useChatContext();
-    const { isSmallScreen, openChatBox } = useScreenSize();
+    const { isSmallScreen } = useScreenSize();
 
     if (isLoading) {
         return <Loader />;

@@ -14,6 +14,7 @@ const ChatBox = ({data}) => {
             setVal('-right-[100vw]')
         }
     }, [openChatBox])
+
   return (
     <div className={`bg-c2 ${isSmallScreen ? `z-40 absolute ${val}
                     w-full h-full transition-all duration-500 ease-in-out ` : "w-full"}`}>
