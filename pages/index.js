@@ -47,6 +47,7 @@ const Home = () => {
     return (
         <div className="bg-c1 flex ">
             <div className="flex w-full shrink-0 overflow-hidden relative">
+            {/* <div className="w-full bg-c1 h-[200px] z-50 flex"></div> */}
                 <LeftNav />
                 <div className="flex bg-c2 w-full ">
                     <div className={`${isSmallScreen ? "w-full" : "md:w-7/12 xl:w-3/12"}`}>
