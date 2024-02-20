@@ -3,6 +3,7 @@
  * @returns {JSX.Element} The Home component.
  */
 import Chat from "@/components/Chat";
+import ChatBox from "@/components/ChatBox";
 import LandingPage from "@/components/LandingPage";
 import LeftNav from "@/components/LeftNav";
 import Loader from "@/components/Loader";
@@ -51,27 +52,7 @@ const Home = () => {
                     <div className={`${isSmallScreen ? "w-full" : "md:w-7/12 xl:w-3/12"}`}>
                     <Sidebar />
                     </div>
-                    <div className={`bg-c2 ${isSmallScreen ? `z-40 absolute -right-${true ? "0": "[100vw]"}
-                    w-full h-full transition-all duration-500 ease-in-out ` : "w-full"}`}>
-                    {!data.user ? (
-                        <div className="flex items-center justify-center w-full h-full">
-                            <div className="text-center">
-                                <span
-                                    role="img"
-                                    aria-label="No chats"
-                                    className="text-6xl mb-4"
-                                >
-                                    🤷‍♂️
-                                </span>
-                                <p className="text-gray-600 text-lg">
-                                    There are no chats to show.
-                                </p>
-                            </div>
-                        </div>
-                    ) : (
-                        <Chat />
-                    )}
-                    </div>
+                    <ChatBox data={data}/>
                 </div>
 
             </div>
