@@ -73,6 +73,7 @@ const ChatFooter = () => {
     setAttachment(file);
 
     if (file) {
+      setShowAttachmentMenu(false);
       setSelectedFileType(file.type);
       const blobUrl = URL.createObjectURL(file);
       setSelectedFile(blobUrl);
@@ -104,6 +105,7 @@ const ChatFooter = () => {
   };
 
   const shareLocation = () => {
+    setShowAttachmentMenu(false)
     if ("geolocation" in navigator) {
       // Get the user's current location
       navigator.geolocation.getCurrentPosition(
@@ -211,8 +213,8 @@ const ChatFooter = () => {
       />
 
       <div
-        className={`absolute bottom-[100%] w-auto h-auto p-2 border border-black rounded-2xl grid grid-cols-3 text-white 
-bg-c2 overflow-hidden ${showAttachmentMenu ? "" : "hidden"}`}
+        className={`absolute bottom-[100%] w-auto h-auto p-2 border border-black rounded-xl grid grid-cols-3 text-white 
+bg-c1 overflow-hidden ${showAttachmentMenu ? "" : "hidden"}`}
       >
         <div className="shrink-0">
           <input
@@ -293,7 +295,10 @@ bg-c2 overflow-hidden ${showAttachmentMenu ? "" : "hidden"}`}
           )}
         </div>
 
-        <div onClick={() => setOpenPopup(true)}>
+        <div onClick={() =>{
+           setOpenPopup(true)
+           setShowAttachmentMenu(false)
+        }}>
           <Icon
             size="large"
             icon={<CiCreditCard1 size={23} className="text-white" />}
@@ -388,7 +393,7 @@ bg-c2 overflow-hidden ${showAttachmentMenu ? "" : "hidden"}`}
             )}
           </div>
 
-          <div onClick={() => setOpenPopup(true)}>
+          <div onClick={() => setOpenPopup(true) }>
             <Icon
               size="large"
               icon={<CiCreditCard1 size={23} className="text-c3" />}
@@ -438,6 +443,7 @@ bg-c2 overflow-hidden ${showAttachmentMenu ? "" : "hidden"}`}
         setSelectedFile={setSelectedFile}
         setSelectedGif={setSelectedGif}
         selectedGif={selectedGif}
+        setShowAttachmentMenu={setShowAttachmentMenu}
       />
     </div>
   );
