@@ -27,7 +27,7 @@ import { useRef } from "react";
 
 let typingTimeout = null;
 
-const Composebar = ({ selectedFileType, setSelectedFile, setSelectedGif, selectedGif }) => {
+const Composebar = ({ selectedFileType, setSelectedFile, setSelectedGif, selectedGif, setShowAttachmentMenu }) => {
   const { currentUser } = useAuth();
   const {
     inputText,
@@ -82,6 +82,7 @@ const Composebar = ({ selectedFileType, setSelectedFile, setSelectedGif, selecte
    * Clears input fields on success.
    */
   const handleSend = async () => {
+    setShowAttachmentMenu(false);
     if (attachment) {
       const storageRef = ref(storage, `${uuid()}/${selectedFileType}`);
       const uploadTask = uploadBytesResumable(storageRef, attachment);

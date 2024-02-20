@@ -112,7 +112,7 @@ const Message = ({ message, theme }) => {
           className="mb-4"
         />
         <div
-          className={` group flex flex-col gap-4 p-2 md:p-4 rounded-3xl relative ${
+          className={` group flex flex-col gap-4 px-3 p-2 md:p-4 rounded-3xl relative ${
             self ? "rounded-br-md bg-c5" : "rounded-bl-md bg-c1"
           }`}
         >
@@ -214,9 +214,9 @@ const Message = ({ message, theme }) => {
           // />
           
             <>
-            <p className="text-sm px-2">{`${self ? "My" : `${data.user.displayName}'s`} geo loaction :`}</p>
+            <p className="text-sm ">{`${self ? "My" : `${data.user.displayName}'s`} geo loaction :`}</p>
               <a href={message.fileUrl} target="_blank" 
-              className="cursor-pointer px-2 text-sm text-blue-400">{message.fileUrl}</a>
+              className="cursor-pointer text-sm text-blue-400">{message.fileUrl}</a>
             
             </>
           )}

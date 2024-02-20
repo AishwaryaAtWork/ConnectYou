@@ -19,6 +19,7 @@ import {
 import { useEffect, useRef, useState } from "react";
 import { RiSearch2Line } from "react-icons/ri";
 import Avatar from "./Avatar";
+import { useScreenSize } from "@/context/screenSizeContext";
 
 const Chats = () => {
     const [search, setSearch] = useState("");
@@ -28,6 +29,7 @@ const Chats = () => {
     const isBlockExecutedRef = useRef(false);
 
     const { currentUser } = useAuth();
+    const {isSmallScreen, setOpenChatBox} = useScreenSize()
     const {
         chats,
         setChats,
@@ -161,13 +163,19 @@ const Chats = () => {
     };
 
     const handleSelect = (user, selectedChatId) => {
+        
         setSelectedChat(user);
         dispatch({ type: "CHANGE_USER", payload: user });
-
+        
         if (unreadMsgs?.[selectedChatId]?.length > 0) {
             readChat(selectedChatId);
         }
+        
+        if(isSmallScreen){
+            setTimeout(()=>  setOpenChatBox(true), 500)
+        }
     };
+    
 
     return (
         <div className="flex flex-col h-full">

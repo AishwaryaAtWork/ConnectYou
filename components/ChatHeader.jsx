@@ -16,14 +16,14 @@ import { useScreenSize } from "@/context/screenSizeContext";
 const ChatHeader = (props) => {
     const [showMenu, setShowMenu] = useState(false);
     const { users, data } = useChatContext();
-    const { isSmallScreen } = useScreenSize();
+    const { isSmallScreen, setOpenChatBox } = useScreenSize();
     const online = users[data.user.uid]?.isOnline;
     const user = users[data.user.uid];
     return (
         <div className="flex justify-between items-center pb-5 border-b border-white/[0.05]">
             {user && (
                 <div className="flex items-center gap-3">
-                    {isSmallScreen && (<IoArrowBack size={22} />)}
+                    {isSmallScreen && (<IoArrowBack size={22} onClick={()=>setOpenChatBox(false)} />)}
                     <Avatar size="large" user={user} />
                     <div>
                         <div className="font-medium line-clamp-1">{user.displayName}</div>
