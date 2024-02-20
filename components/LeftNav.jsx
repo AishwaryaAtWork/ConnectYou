@@ -222,7 +222,7 @@ const LeftNav = () => {
     return (
         <div
             className={`${
-                editProfile ? "w-[350px]" : "w-[80px] items-center"
+                editProfile ? "w-[350px]" : "w-[64px] md:w-[80px] items-center"
             } flex flex-col justify-between py-5 shrink-0 transition-all`}
         >
             {openPopup && (
