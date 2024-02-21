@@ -24,6 +24,7 @@ import UsersPopup from "./popup/UsersPopup";
 // import { FaWallet } from "react-icons/fa6";
 import { IoWalletOutline } from "react-icons/io5";
 import AddMoneyPopup from "./popup/AddMoneyPopup";
+import { useScreenSize } from "@/context/screenSizeContext";
 
 const LeftNav = () => {
     const [userPopup, setUserPopup] = useState(false);
@@ -33,6 +34,7 @@ const LeftNav = () => {
 
     const { signOut, currentUser, setCurrentUser } = useAuth();
     const { data } = useChatContext();
+    const { openLeftNav, isSmallScreen, openChatBox } = useScreenSize();
 
     const authUser = auth.currentUser;
 
@@ -222,7 +224,7 @@ const LeftNav = () => {
     return (
         <div
             className={`${
-                editProfile ? "w-[350px]" : "w-[64px] md:w-[80px] items-center"
+                editProfile ? "w-[350px] h-[92vh] md:h-auto z-50 bg-c1" : `${isSmallScreen ? "absolute top-0 z-50 bg-c1" : ""} ${openLeftNav ? "left-0": "-left-[100vw]"} transition-all ease-in-out duration-500 w-[64px] md:w-[80px] h-[94vh] md:h-auto items-center`
             } flex flex-col justify-between py-5 shrink-0 transition-all`}
         >
             {openPopup && (
@@ -262,7 +264,7 @@ const LeftNav = () => {
             >
                 <Icon
                     size="x-large"
-                    className="bg-green-500 hover:bg-green-600"
+                    className={`bg-green-500 hover:bg-green-600 ${openChatBox && isSmallScreen ? "hidden" : ""}`}
                     icon={<FiPlus size={24} />}
                     onClick={() => setUserPopup(!userPopup)}
                 />

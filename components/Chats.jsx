@@ -29,7 +29,7 @@ const Chats = () => {
     const isBlockExecutedRef = useRef(false);
 
     const { currentUser } = useAuth();
-    const {isSmallScreen, setOpenChatBox} = useScreenSize()
+    const {isSmallScreen, setOpenChatBox, setOpenLeftNav} = useScreenSize()
     const {
         chats,
         setChats,
@@ -216,6 +216,7 @@ const Chats = () => {
                                     id={chat[0]}
                                     onClick={() =>{ 
                                         handleSelect(user, chat[0])
+                                        setOpenLeftNav(false)
                                         if(isSmallScreen) setTimeout(()=>setOpenChatBox(true), 500)
                                     }}
                                     className={`h-[80px] flex items-center gap-4 rounded-3xl hover:bg-c1 p-3 cursor-pointer mx-2 ${selectedChat?.uid === user.uid

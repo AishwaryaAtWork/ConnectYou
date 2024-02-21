@@ -21,7 +21,7 @@ const Chat = () => {
     );
 
     return (
-        <div className="flex flex-col p-5 grow h-[100vh]">
+        <div className="flex flex-col p-5 grow h-[94vh] md:h-[100vh]">
             <ChatHeader />
             {data.chatId && (
                 <>

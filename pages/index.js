@@ -12,11 +12,12 @@ import { useAuth } from "@/context/authContext";
 import { useChatContext } from "@/context/chatContext";
 import { useScreenSize } from "@/context/screenSizeContext";
 import { isMobile } from "react-device-detect";
+import { RxHamburgerMenu } from "react-icons/rx";
 
 const Home = () => {
   const { currentUser, isLoading } = useAuth();
   const { data } = useChatContext();
-  const { isSmallScreen } = useScreenSize();
+  const { isSmallScreen, openLeftNav, setOpenLeftNav } = useScreenSize();
 
   if (isLoading) {
     return <Loader />;
@@ -46,15 +47,16 @@ const Home = () => {
 
   return (
     <>
-      {/* {isSmallScreen && (<>
-        <div className="w-full h-auto bg-c1 border-2 border-black z-50 p-3">
+      {isSmallScreen && (<>
+        <div className="w-full h-auto bg-c1 border-2 border-black z-50 px-5 py-2 flex justify-between items-center">
+        <RxHamburgerMenu className="text-2xl font-bold text-c3" onClick={()=>setOpenLeftNav((prev)=>!prev)}/>
         <p className="text-bold text-lg">ConnectYou</p>
       </div>
-      <div className="w-full h-px bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 animate-pulse"></div>
-      </>)} */}
+      {/* <div className="w-full h-px bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 animate-pulse"></div> */}
+      </>)}
       <div className="bg-c1 flex ">
         <div className="flex w-full shrink-0 overflow-hidden relative">
-          {!isSmallScreen && <LeftNav />}
+          <LeftNav />
           <div className="flex bg-c2 w-full ">
             <div
               className={`${isSmallScreen ? "w-full" : "md:w-7/12 xl:w-3/12"}`}
