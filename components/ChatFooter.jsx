@@ -35,12 +35,11 @@ const ChatFooter = () => {
   const [showGifPicker, setShowGifPicker] = useState(false);
   const [gifs, setGifs] = useState([]);
   const [openPopup, setOpenPopup] = useState(false);
-  const [showAttachmentMenu, setShowAttachmentMenu] = useState(false);
   const fileInputRef = useRef(null);
   const [selectedFile, setSelectedFile] = useState(null);
 
   const { currentUser } = useAuth();
-  const { isSmallScreen } = useScreenSize();
+  const { isSmallScreen, showAttachmentMenu, setShowAttachmentMenu } = useScreenSize();
 
   const {
     inputText,

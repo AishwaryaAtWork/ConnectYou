@@ -175,9 +175,9 @@ const Chats = () => {
 
     return (
         <div className="flex flex-col h-full">
-            <div className="shrink-0 sticky -top-[20px] z-10 flex justify-center w-full bg-c2 py-5 ">
+            <div className="shrink-0 sticky -top-[20px] z-10 flex justify-center w-full bg-c2 py-2 md:py-5 ">
                 {/* ... (search input code) */}
-                <RiSearch2Line className="absolute top-9 left-5 text-c3" />
+                <RiSearch2Line className="absolute top-6 md:top-9 left-5 text-c3" />
                 <input
                     type="Text"
                     value={search}
