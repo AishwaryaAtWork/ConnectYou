@@ -5,11 +5,12 @@ const ScreenSizeContext = createContext();
 export const ScreenSizeProvider = ({ children }) => {
     const [isSmallScreen, setIsSmallScreen] = useState(false);
     const [openChatBox, setOpenChatBox] = useState(false);
+    const [openLeftNav, setOpenLeftNav] = useState(false);
     const [showAttachmentMenu, setShowAttachmentMenu] = useState(false);
 
     useEffect(() => {
         const checkScreenSize = () => {
-            setIsSmallScreen(window.innerWidth < 769);
+            setIsSmallScreen(window.innerWidth < 768);
         };
 
         checkScreenSize();
@@ -22,7 +23,8 @@ export const ScreenSizeProvider = ({ children }) => {
     });
 
     return (
-        <ScreenSizeContext.Provider value={{ isSmallScreen, openChatBox, setOpenChatBox, showAttachmentMenu, setShowAttachmentMenu }}>
+        <ScreenSizeContext.Provider value={{ isSmallScreen, openChatBox, setOpenChatBox, 
+            showAttachmentMenu, setShowAttachmentMenu, openLeftNav, setOpenLeftNav }}>
             {children}
         </ScreenSizeContext.Provider>
     );

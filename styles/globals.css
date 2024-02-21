@@ -12,6 +12,8 @@
 
 body {
     color: white;
+    height: 10vh;
+    overflow: hidden;
 }
 
 * {

@@ -17,7 +17,7 @@ const ChatBox = ({data}) => {
 
   return (
     <div className={`bg-c2 ${isSmallScreen ? `z-40 absolute ${val}
-                    w-full h-full transition-all duration-500 ease-in-out ` : "w-full"}`}>
+                    w-full h-auto transition-all duration-500 ease-in-out ` : "w-full"}`}>
                     {!data.user ? (
                         <div className="flex items-center justify-center w-full h-full">
                             <div className="text-center">
