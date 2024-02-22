@@ -23,7 +23,7 @@ const Home = () => {
   const [userPopup, setUserPopup] = useState(false);
   const { currentUser, isLoading } = useAuth();
   const { data } = useChatContext();
-  const { isSmallScreen, openLeftNav, setOpenLeftNav, openChatBox } = useScreenSize();
+  const { isSmallScreen, openLeftNav, setOpenLeftNav, openChatBox,  setOpenSearch } = useScreenSize();
 
   if (isLoading) {
     return <Loader />;
@@ -58,12 +58,18 @@ const Home = () => {
         <div className={`w-full h-auto bg-c1 border-2 border-black z-50 px-5 py-2 flex ${openChatBox ? "justify-center": "justify-between"}  items-center`}>
         
         <RxHamburgerMenu className={`text-2xl font-bold text-c3 ${openChatBox ? "hidden": ""}`} 
-          onClick={()=>setOpenLeftNav((prev)=>!prev)}/>
+          onClick={()=>{
+            setOpenLeftNav((prev)=>!prev)
+            setOpenSearch(false)
+          }}/>
         
         <p className="text-bold text-lg">ConnectYou</p>
         
         <IoIosSearch className={`text-2xl font-bold text-c3 ${openChatBox ? "hidden": ""}`} 
-        // onClick={()=>}
+        onClick={()=> {
+          setOpenSearch((prev)=>!prev)
+          setOpenLeftNav(false)
+        }}
         />
       </div>
       {/* <div className="w-full h-px bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 animate-pulse"></div> */}
@@ -80,7 +86,11 @@ const Home = () => {
                     size="x-large"
                     className={`bg-green-500 hover:bg-green-600 absolute bottom-[11%] right-6 z-40`}
                     icon={<FiPlus size={24} />}
-                    onClick={() => setUserPopup(!userPopup)}
+                    onClick={() => {
+                      setUserPopup(!userPopup)
+                      setOpenSearch(false)
+                      setOpenLeftNav(false)
+                    }}
                 />}
             </div>
             <ChatBox data={data} />

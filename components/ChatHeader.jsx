@@ -48,7 +48,7 @@ const ChatHeader = (props) => {
                         />
                     }
                 />
-                <div className="h-4 w-[2px] bg-c3"></div>
+                <div className="h-4 w-[1px] bg-c3"></div>
                 <Icon
                     size="large"
                     className={`${showMenu ? "bg-c1" : ""}`}

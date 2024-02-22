@@ -224,7 +224,7 @@ const LeftNav = () => {
     return (
         <div
             className={`${
-                editProfile ? "w-[350px] h-[92vh] md:h-auto z-50 bg-c1" : ` ${openLeftNav ? "w-[64px]": "w-[0vw]"} z-50 bg-c1 transition-all ease-in-out duration-500  md:w-[80px] h-[94vh] md:h-auto overflow-hidden items-center shadow-lg shadow-gray-600`
+                editProfile ? "w-[350px] h-[92vh] md:h-auto z-50 bg-c1" : ` ${openLeftNav ? "w-[64px]": "w-[0vw]"} z-40 bg-c1 transition-all ease-in-out duration-500  md:w-[80px] h-[94vh] md:h-auto overflow-hidden items-center ${isSmallScreen ? "shadow-lg shadow-gray-600":""}`
             } flex flex-col justify-between py-5 shrink-0 transition-all`}
         >
             {openPopup && (
@@ -265,7 +265,7 @@ const LeftNav = () => {
                 {!isSmallScreen && (
                     <Icon
                     size="x-large"
-                    className={`bg-green-500 hover:bg-green-600 ${openChatBox && isSmallScreen ? "hidden" : ""}`}
+                    className={`bg-green-500 hover:bg-green-600 `}
                     icon={<FiPlus size={24} />}
                     onClick={() => setUserPopup(!userPopup)}
                 />
