@@ -5,7 +5,7 @@ export default function Document() {
     <Html lang="en">
       <Head />
       <title>ConnectYou</title>
-      <link rel="icon" href="/favicon.ico" sizes="any" />
+      <link rel="icon" href="/favicon.svg" sizes="x-large" />
       <body>
         <Main />
         <NextScript />
