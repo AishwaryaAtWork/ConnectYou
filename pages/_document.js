@@ -5,7 +5,7 @@ export default function Document() {
     <Html lang="en">
       <Head />
       <title>ConnectYou</title>
-      <link rel="icon" href="/WhatsApp-Image-2023-11-26-at-20.36.54_6fafbf2c.svg" sizes="any" />
+      <link rel="icon" href="/favicon.ico" sizes="any" />
       <body>
         <Main />
         <NextScript />
