@@ -13,11 +13,17 @@ import { useChatContext } from "@/context/chatContext";
 import { useScreenSize } from "@/context/screenSizeContext";
 import { isMobile } from "react-device-detect";
 import { RxHamburgerMenu } from "react-icons/rx";
+import { IoIosSearch } from "react-icons/io";
+import Icon from "@/components/Icon";
+import { FiPlus } from "react-icons/fi";
+import UsersPopup from "@/components/popup/UsersPopup";
+import { useState } from "react";
 
 const Home = () => {
+  const [userPopup, setUserPopup] = useState(false);
   const { currentUser, isLoading } = useAuth();
   const { data } = useChatContext();
-  const { isSmallScreen, openLeftNav, setOpenLeftNav } = useScreenSize();
+  const { isSmallScreen, openLeftNav, setOpenLeftNav, openChatBox } = useScreenSize();
 
   if (isLoading) {
     return <Loader />;
@@ -48,9 +54,17 @@ const Home = () => {
   return (
     <>
       {isSmallScreen && (<>
-        <div className="w-full h-auto bg-c1 border-2 border-black z-50 px-5 py-2 flex justify-between items-center">
-        <RxHamburgerMenu className="text-2xl font-bold text-c3" onClick={()=>setOpenLeftNav((prev)=>!prev)}/>
+        {userPopup && <UsersPopup onHide={() => setUserPopup(false)} />}
+        <div className={`w-full h-auto bg-c1 border-2 border-black z-50 px-5 py-2 flex ${openChatBox ? "justify-center": "justify-between"}  items-center`}>
+        
+        <RxHamburgerMenu className={`text-2xl font-bold text-c3 ${openChatBox ? "hidden": ""}`} 
+          onClick={()=>setOpenLeftNav((prev)=>!prev)}/>
+        
         <p className="text-bold text-lg">ConnectYou</p>
+        
+        <IoIosSearch className={`text-2xl font-bold text-c3 ${openChatBox ? "hidden": ""}`} 
+        // onClick={()=>}
+        />
       </div>
       {/* <div className="w-full h-px bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 animate-pulse"></div> */}
       </>)}
@@ -62,6 +76,12 @@ const Home = () => {
               className={`${isSmallScreen ? "w-full" : "md:w-7/12 xl:w-3/12"}`}
             >
               <Sidebar />
+              {isSmallScreen && <Icon
+                    size="x-large"
+                    className={`bg-green-500 hover:bg-green-600 absolute bottom-[11%] right-6 z-40`}
+                    icon={<FiPlus size={24} />}
+                    onClick={() => setUserPopup(!userPopup)}
+                />}
             </div>
             <ChatBox data={data} />
           </div>
