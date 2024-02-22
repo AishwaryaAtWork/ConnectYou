@@ -25,6 +25,7 @@ import { v4 as uuid } from "uuid";
 import { db } from "@/firebase/firebase";
 import { useAuth } from "@/context/authContext";
 import { useScreenSize } from "@/context/screenSizeContext";
+import MapPopup from "./popup/MapPopup";
 
 const gf = new GiphyFetch("2Gx7SvpPvoHFrCb0ho52ILe7S7c5487G");
 
@@ -37,7 +38,8 @@ const ChatFooter = () => {
   const [openPopup, setOpenPopup] = useState(false);
   const fileInputRef = useRef(null);
   const [selectedFile, setSelectedFile] = useState(null);
-
+  const [mapURL, setMapURL] = useState("");
+  const [openMapPopup, setOpenMapPopup] = useState(false);
   const { currentUser } = useAuth();
   const { isSmallScreen, showAttachmentMenu, setShowAttachmentMenu } = useScreenSize();
 
@@ -104,8 +106,12 @@ const ChatFooter = () => {
   };
 
   const shareLocation = () => {
-    setShowAttachmentMenu(false)
+    setShowAttachmentMenu(false);
+
+    // Check if the browser supports geolocation
     if ("geolocation" in navigator) {
+
+
       // Get the user's current location
       navigator.geolocation.getCurrentPosition(
         async (position) => {
@@ -113,7 +119,9 @@ const ChatFooter = () => {
 
           // Generate the Google Maps link
           const mapLink = `https://www.google.com/maps?q=${latitude},${longitude}`;
+          setMapURL(mapLink);
 
+          // Update Firestore document with the location data
           await updateDoc(doc(db, "chats", data.chatId), {
             messages: arrayUnion({
               id: uuid(),
@@ -129,14 +137,17 @@ const ChatFooter = () => {
           console.error("Error getting user location:", error.message);
         }
       );
+
     } else {
       console.error("Geolocation is not supported by your browser");
     }
   };
 
+
   return (
     <div className="flex items-center bg-c1/[0.5] p-2 rounded-xl relative">
       <ToastMessage />
+      {openMapPopup && <MapPopup setOpenMapPopup={setOpenMapPopup} mapURL={mapURL} shareLocation={shareLocation} />}
 
       {openPopup && <SendMoneyPopup setOpenPopup={setOpenPopup} />}
 
@@ -205,114 +216,114 @@ const ChatFooter = () => {
 
       {isSmallScreen ? (<>
         <Icon
-        size="large"
-        className={`${showAttachmentMenu ? "bg-c1" : ""}`}
-        onClick={() => setShowAttachmentMenu(prev => !prev)}
-        icon={<IoEllipsisVerticalSharp size={20} className="text-c3" />}
-      />
+          size="large"
+          className={`${showAttachmentMenu ? "bg-c1" : ""}`}
+          onClick={() => setShowAttachmentMenu(prev => !prev)}
+          icon={<IoEllipsisVerticalSharp size={20} className="text-c3" />}
+        />
 
-      <div
-        className={`absolute bottom-[100%] w-auto h-auto p-2 border border-black rounded-xl grid grid-cols-3 text-white 
+        <div
+          className={`absolute bottom-[100%] w-auto h-auto p-2 border border-black rounded-xl grid grid-cols-3 text-white
       bg-c1 ${showAttachmentMenu ? "" : "hidden"}`}
-      >
-        <div className="shrink-0">
-          <input
-            type="file"
-            id="fileUploader"
-            className="hidden"
-            ref={fileInputRef}
-            onChange={onFileChange}
-          />
+        >
+          <div className="shrink-0">
+            <input
+              type="file"
+              id="fileUploader"
+              className="hidden"
+              ref={fileInputRef}
+              onChange={onFileChange}
+            />
 
-          <label htmlFor="fileUploader">
+            <label htmlFor="fileUploader">
+              <Icon
+                size="large"
+                icon={<CgAttachment size={20} className="text-white" />}
+              />
+            </label>
+          </div>
+
+          <div className="shrink-0 relative">
             <Icon
               size="large"
-              icon={<CgAttachment size={20} className="text-white" />}
+              className={`${showImojiPicker ? "bg-c1" : ""}`}
+              icon={<HiOutlineEmojiHappy size={24} className="text-white" />}
+              onClick={() => setShowImojiPicker(true)}
             />
-          </label>
-        </div>
+            {showImojiPicker && (
+              <ClickAwayListener onClickAway={() => setShowImojiPicker(false)}>
+                <div className="absolute bottom-12 -left-8 shadow-lg">
+                  <EmojiPicker
+                    emojiStyle="native"
+                    theme="light"
+                    height={400}
+                    width={300}
+                    onEmojiClick={onEmojiClick}
+                    autoFocusSearch={false}
+                  />
+                </div>
+              </ClickAwayListener>
+            )}
+          </div>
 
-        <div className="shrink-0 relative">
-          <Icon
-            size="large"
-            className={`${showImojiPicker ? "bg-c1" : ""}`}
-            icon={<HiOutlineEmojiHappy size={24} className="text-white" />}
-            onClick={() => setShowImojiPicker(true)}
-          />
-          {showImojiPicker && (
-            <ClickAwayListener onClickAway={() => setShowImojiPicker(false)}>
-              <div className="absolute bottom-12 -left-8 shadow-lg">
-                <EmojiPicker
-                  emojiStyle="native"
-                  theme="light"
-                  height={400}
-                  width={300}
-                  onEmojiClick={onEmojiClick}
-                  autoFocusSearch={false}
-                />
-              </div>
-            </ClickAwayListener>
-          )}
-        </div>
+          <div className="shrink-0 relative">
+            <Icon
+              size="large"
+              className={`${showGifPicker ? "bg-c1" : ""}`}
+              icon={<MdGif size={25} className="text-white" />}
+              onClick={() => setShowGifPicker(true)}
+            />
+            {showGifPicker && (
+              <ClickAwayListener onClickAway={() => setShowGifPicker(false)}>
+                <div className="absolute bottom-12 -left-20 shadow-lg bg-white p-4 rounded-md">
+                  <input
+                    type="text"
+                    className="border-2 border-gray-300 rounded-md p-2 w-full mb-4 text-black"
+                    placeholder="Search for GIFs"
+                    onChange={(e) => fetchGifs(e.target.value)}
+                  />
+                  <Grid
+                    columnCount={3}
+                    columnWidth={100}
+                    height={200}
+                    rowCount={Math.ceil(gifs.length / 3)}
+                    rowHeight={100}
+                    width={280}
+                  >
+                    {({ columnIndex, rowIndex, style }) => {
+                      const gif = gifs[rowIndex * 3 + columnIndex];
+                      return gif ? (
+                        <img
+                          src={gif.images.fixed_height_small.url}
+                          style={style}
+                          onClick={() => onGifSelected(gif)}
+                          alt={gif.title}
+                        />
+                      ) : null;
+                    }}
+                  </Grid>
+                </div>
+              </ClickAwayListener>
+            )}
+          </div>
 
-        <div className="shrink-0 relative">
-          <Icon
-            size="large"
-            className={`${showGifPicker ? "bg-c1" : ""}`}
-            icon={<MdGif size={25} className="text-white" />}
-            onClick={() => setShowGifPicker(true)}
-          />
-          {showGifPicker && (
-            <ClickAwayListener onClickAway={() => setShowGifPicker(false)}>
-              <div className="absolute bottom-12 -left-20 shadow-lg bg-white p-4 rounded-md">
-                <input
-                  type="text"
-                  className="border-2 border-gray-300 rounded-md p-2 w-full mb-4 text-black"
-                  placeholder="Search for GIFs"
-                  onChange={(e) => fetchGifs(e.target.value)}
-                />
-                <Grid
-                  columnCount={3}
-                  columnWidth={100}
-                  height={200}
-                  rowCount={Math.ceil(gifs.length / 3)}
-                  rowHeight={100}
-                  width={280}
-                >
-                  {({ columnIndex, rowIndex, style }) => {
-                    const gif = gifs[rowIndex * 3 + columnIndex];
-                    return gif ? (
-                      <img
-                        src={gif.images.fixed_height_small.url}
-                        style={style}
-                        onClick={() => onGifSelected(gif)}
-                        alt={gif.title}
-                      />
-                    ) : null;
-                  }}
-                </Grid>
-              </div>
-            </ClickAwayListener>
-          )}
-        </div>
+          <div onClick={() => {
+            setOpenPopup(true)
+            setShowAttachmentMenu(false)
+          }}>
+            <Icon
+              size="large"
+              icon={<CiCreditCard1 size={23} className="text-white" />}
+            />
+          </div>
 
-        <div onClick={() =>{
-           setOpenPopup(true)
-           setShowAttachmentMenu(false)
-        }}>
-          <Icon
-            size="large"
-            icon={<CiCreditCard1 size={23} className="text-white" />}
-          />
+          <div onClick={() => setOpenMapPopup(true)}>
+            <Icon
+              size="large"
+              icon={<IoLocationOutline size={23} className="text-white" />}
+            />
+          </div>
         </div>
-
-        <div onClick={shareLocation}>
-          <Icon
-            size="large"
-            icon={<IoLocationOutline size={23} className="text-white" />}
-          />
-        </div>
-      </div>
       </>) : (
         <>
           <div className="shrink-0">
@@ -394,14 +405,14 @@ const ChatFooter = () => {
             )}
           </div>
 
-          <div onClick={() => setOpenPopup(true) }>
+          <div onClick={() => setOpenPopup(true)}>
             <Icon
               size="large"
               icon={<CiCreditCard1 size={23} className="text-c3" />}
             />
           </div>
 
-          <div onClick={shareLocation}>
+          <div onClick={() => setOpenMapPopup(true)}>
             <Icon
               size="large"
               icon={<IoLocationOutline size={23} className="text-c3" />}
