@@ -213,7 +213,7 @@ const ChatFooter = () => {
 
       <div
         className={`absolute bottom-[100%] w-auto h-auto p-2 border border-black rounded-xl grid grid-cols-3 text-white 
-bg-c1 overflow-hidden ${showAttachmentMenu ? "" : "hidden"}`}
+      bg-c1 ${showAttachmentMenu ? "" : "hidden"}`}
       >
         <div className="shrink-0">
           <input
@@ -241,10 +241,12 @@ bg-c1 overflow-hidden ${showAttachmentMenu ? "" : "hidden"}`}
           />
           {showImojiPicker && (
             <ClickAwayListener onClickAway={() => setShowImojiPicker(false)}>
-              <div className="absolute bottom-12 left-0 shadow-lg">
+              <div className="absolute bottom-12 -left-8 shadow-lg">
                 <EmojiPicker
                   emojiStyle="native"
                   theme="light"
+                  height={400}
+                  width={300}
                   onEmojiClick={onEmojiClick}
                   autoFocusSearch={false}
                 />
@@ -262,7 +264,7 @@ bg-c1 overflow-hidden ${showAttachmentMenu ? "" : "hidden"}`}
           />
           {showGifPicker && (
             <ClickAwayListener onClickAway={() => setShowGifPicker(false)}>
-              <div className="absolute bottom-12 left-0 shadow-lg bg-white p-4 rounded-md">
+              <div className="absolute bottom-12 -left-20 shadow-lg bg-white p-4 rounded-md">
                 <input
                   type="text"
                   className="border-2 border-gray-300 rounded-md p-2 w-full mb-4 text-black"
@@ -272,10 +274,10 @@ bg-c1 overflow-hidden ${showAttachmentMenu ? "" : "hidden"}`}
                 <Grid
                   columnCount={3}
                   columnWidth={100}
-                  height={300}
+                  height={200}
                   rowCount={Math.ceil(gifs.length / 3)}
                   rowHeight={100}
-                  width={300}
+                  width={280}
                 >
                   {({ columnIndex, rowIndex, style }) => {
                     const gif = gifs[rowIndex * 3 + columnIndex];
