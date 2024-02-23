@@ -21,13 +21,13 @@ const Chat = () => {
     );
 
     return (
-        <div className="flex flex-col p-5 grow h-[100vh] md:h-[100vh] overflow-auto">
+        <div className="flex flex-col p-5 grow h-[107vh] md:h-[100vh] overflow-auto">
             <ChatHeader />
             {data.chatId && (
                 <>
                     <Messages />
                     {!isUserBlocked && !IamBlocked && 
-                    <div className="mt-auto">
+                    <div className="">
                         <ChatFooter />
                     </div>
                     }

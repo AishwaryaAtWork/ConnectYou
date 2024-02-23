@@ -12,14 +12,29 @@
 
 body {
     color: white;
-    height: 10vh;
-    overflow: hidden;
+    height: 100vh;
+    overflow: auto;
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+::-webkit-scrollbar{
+    width: 0.1rem;
+    height: 0.1rem;
+}
+
+::-webkit-scrollbar-track{
+    background-color: #2e343d;
+    border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb{
+    background-color: black;
+    border-radius: 20px;
 }
 
 .glass-effect {

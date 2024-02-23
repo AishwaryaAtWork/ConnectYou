@@ -68,7 +68,7 @@ const Home = () => {
               <Sidebar />
               {isSmallScreen && <Icon
                     size="x-large"
-                    className={`bg-green-500 hover:bg-green-600 absolute top-[82%] right-6 z-40`}
+                    className={`bg-green-500 hover:bg-green-600 absolute top-[86%] right-6 z-40`}
                     icon={<FiPlus size={24} />}
                     onClick={() => {
                       setUserPopup(!userPopup)

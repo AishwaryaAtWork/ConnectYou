@@ -223,7 +223,7 @@ const LeftNav = () => {
     return (
         <div
             className={`${
-                editProfile ? "w-[350px] h-[92vh] md:h-auto z-50 bg-c1" : ` ${openLeftNav ? "left-0": "-left-[80vw]"} z-50 bg-c1 transition-all ease-in-out duration-500 w-[284px] md:w-[80px] h-[94vh] md:h-auto overflow-hidden items-center ${isSmallScreen ? "shadow-lg shadow-gray-600 absolute top-[4.1rem] rounded-r-xl":""}`
+                editProfile ? "w-[350px] h-[100vh] md:h-auto z-50 bg-c1" : ` ${openLeftNav ? "left-0": "-left-[80vw]"} z-50 bg-c1 transition-all ease-in-out duration-500 w-[284px] md:w-[80px] h-[100vh] md:h-auto overflow-hidden items-center ${isSmallScreen ? "shadow-lg shadow-gray-600 absolute top-[4.1rem] rounded-r-xl":""}`
             } flex flex-col justify-between py-5 shrink-0 transition-all`}
         >
             {openPopup && (
