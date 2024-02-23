@@ -21,6 +21,8 @@ import Menu from "./Menu";
 import DeleteMsgPopup from "./popup/DeleteMsgPopup";
 import ImageVideoPopup from "./popup/ImageVideoPopup";
 import { FaPlay } from "react-icons/fa6";
+import "leaflet/dist/leaflet.css";
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
 const Message = ({ message, theme }) => {
   const [showDeletePopup, setShowDeletePopup] = useState(false);
@@ -84,11 +86,11 @@ const Message = ({ message, theme }) => {
     setOpenImgVidPopup(true)
     setImgVidPopupUrl(url)
   }
-  
+
   return (
     <div ref={ref} className={`mb-5 max-w-[75%] ${self ? "self-end" : ""}`}>
       {openImgVidPopup && (
-        <ImageVideoPopup onClose={setOpenImgVidPopup} url={imgVidPopupUrl}/>
+        <ImageVideoPopup onClose={setOpenImgVidPopup} url={imgVidPopupUrl} />
       )}
 
       {showDeletePopup && (
@@ -102,9 +104,8 @@ const Message = ({ message, theme }) => {
         />
       )}
       <div
-        className={`flex items-end gap-3 mb-1 ${
-          self ? "justify-start flex-row-reverse" : ""
-        }`}
+        className={`flex items-end gap-3 mb-1 ${self ? "justify-start flex-row-reverse" : ""
+          }`}
       >
         <Avatar
           size="small"
@@ -112,9 +113,8 @@ const Message = ({ message, theme }) => {
           className="mb-4"
         />
         <div
-          className={` group flex flex-col gap-4 px-3 p-2 md:p-4 rounded-3xl relative ${
-            self ? "rounded-br-md bg-c5" : "rounded-bl-md bg-c1"
-          }`}
+          className={` group flex flex-col gap-4 px-3 p-2 md:p-4 rounded-3xl relative ${self ? "rounded-br-md bg-c5" : "rounded-bl-md bg-c1"
+            }`}
         >
           {message.text && (
             <div
@@ -161,34 +161,34 @@ const Message = ({ message, theme }) => {
           )}
           {message?.fileUrl?.includes("pdf") && (
             <iframe
-            src={message.fileUrl}
-            width="100%"
-            height="400px" // Adjust the height as needed
-            frameBorder="0"
-            title={`PDF sent by ${message.senderName}`}
+              src={message.fileUrl}
+              width="100%"
+              height="400px" // Adjust the height as needed
+              frameBorder="0"
+              title={`PDF sent by ${message.senderName}`}
             // sandbox="allow-downloads"
-          />
+            />
 
           )}
           {message?.fileUrl?.includes("video") && (
-             <div className="relative">
-             <video
-               src={message.fileUrl}
-               width={250}
-               height={250}
-               className="object-contain object-center hover:cursor-pointer"
-               onClick={() => openVidImg(message.fileUrl)}
-             />
-             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
+            <div className="relative">
+              <video
+                src={message.fileUrl}
+                width={250}
+                height={250}
+                className="object-contain object-center hover:cursor-pointer"
+                onClick={() => openVidImg(message.fileUrl)}
+              />
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
               bg-gray-100 bg-opacity-80 p-2 rounded-full hover:cursor-pointer">
-               <Icon
-                 size="medium"
-                 className="hover:bg-gray-100 hover:bg-opacity-80 rounded-full p-[0.1px] "
-                 onClick={() => openVidImg(message.fileUrl)}
-                 icon={<FaPlay size={30} className="text-black" />}
-               />
-             </div>
-           </div>
+                <Icon
+                  size="medium"
+                  className="hover:bg-gray-100 hover:bg-opacity-80 rounded-full p-[0.1px] "
+                  onClick={() => openVidImg(message.fileUrl)}
+                  icon={<FaPlay size={30} className="text-black" />}
+                />
+              </div>
+            </div>
           )}
           {message?.fileUrl?.includes("audio") && (
             <audio
@@ -196,36 +196,46 @@ const Message = ({ message, theme }) => {
               width={250}
               height={250}
               className="object-contain object-center"
-              onLoadedMetadata={() => {}}
+              onLoadedMetadata={() => { }}
             >
               <source src={message.fileUrl} type="audio/mpeg" />
               Your browser does not support the audio element.
             </audio>
           )}
-          {message?.fileUrl?.includes("map") && (
-          //   <iframe
-          //   width="100%"
-          //   height="400px"
-          //   frameBorder="0"
-          //   style={{ border: 0 }}
-          //   src={message.fileUrl}
-          //   allowFullScreen
-          //   title={`Map sent by ${message.senderName}`}
-          // />
-          
+          {message.mapURL && (
             <>
-            <p className="text-sm ">{`${self ? "My" : `${data.user.displayName}'s`} geo loaction :`}</p>
-              <a href={message.fileUrl} target="_blank" 
-              className="cursor-pointer text-sm text-blue-400">{message.fileUrl}</a>
-            
+
+              {/* //   <iframe
+            //   width="100%"
+            //   height="400px"
+            //   frameBorder="0"
+            //   style={{ border: 0 }}
+            //   src={message.fileUrl}
+            //   allowFullScreen
+            //   title={`Map sent by ${message.senderName}`}
+            // /> */}
+              <MapContainer center={[message.mapURL.hits[0].point.lat, message.mapURL.hits[0].point.lng]} zoom={13} style={{ height: '100%', width: '100%' }}>
+                <TileLayer
+                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                />
+                <Marker position={[message.mapURL.hits[0].point.lat, message.mapURL.hits[0].point.lng]}>
+                  <Popup>
+                    Your location: {message.mapURL.hits[0].name}
+                  </Popup>
+                </Marker>
+              </MapContainer>
+
+
+              <p className="text-sm ">{`${self ? "My" : `${data.user.displayName}'s`} geo loaction :`}</p>
+              {/* <a href={message.fileUrl} target="_blank"
+                className="cursor-pointer text-sm text-blue-400">{message.fileUrl}</a> */}
+
             </>
           )}
           <div
-            className={`${
-              showMenu ? "" : "hidden"
-            } group-hover:flex absolute top-2 ${
-              self ? "left-2 bg-c5" : "right-2 bg-c1"
-            }`}
+            className={`${showMenu ? "" : "hidden"
+              } group-hover:flex absolute top-2 ${self ? "left-2 bg-c5" : "right-2 bg-c1"
+              }`}
             onClick={() => setShowMenu(!showMenu)}
           >
             <Icon
@@ -246,9 +256,8 @@ const Message = ({ message, theme }) => {
         </div>
       </div>
       <div
-        className={`flex items-end ${
-          self ? "justify-start flex-row-reverse mr-12" : "ml-12"
-        }`}
+        className={`flex items-end ${self ? "justify-start flex-row-reverse mr-12" : "ml-12"
+          }`}
       >
         <div className="text-xs text-c3">{formatDate(date)}</div>
       </div>
