@@ -57,7 +57,7 @@ const Messages = () => {
   return (
     <div
       ref={ref}
-      className="grow px-1 py-5 md:p-5 overflow-auto scrollbar flex flex-col bg-cover bg-center"
+      className="grow px-2 py-5 md:p-5 overflow-auto scrollbar flex flex-col bg-cover bg-center"
       style={{ backgroundImage: `url(${theme})` }}
     >
       

@@ -162,7 +162,7 @@ const ChatFooter = () => {
 
 
   return (
-    <div className="flex items-center bg-c1/[0.5] p-2 rounded-xl relative">
+    <div className="flex items-center bg-c1/[0.5] p-2 rounded-xl relative my-2">
       <ToastMessage />
       {openMapPopup && <MapPopup setOpenMapPopup={setOpenMapPopup} mapURL={mapURL} shareLocation={shareLocation} />}
 
@@ -240,7 +240,7 @@ const ChatFooter = () => {
         />
 
         <div
-          className={`absolute bottom-[100%] w-auto h-auto p-2 border border-black rounded-xl grid grid-cols-3 text-white
+          className={`absolute left-6 bottom-[107%] w-auto h-auto p-3 border border-black rounded-t-xl rounded-br-xl flex gap-3 text-white
       bg-c1 ${showAttachmentMenu ? "" : "hidden"}`}
         >
           <div className="shrink-0">
@@ -255,7 +255,7 @@ const ChatFooter = () => {
             <label htmlFor="fileUploader">
               <Icon
                 size="large"
-                icon={<CgAttachment size={20} className="text-white" />}
+                icon={<CgAttachment size={25} className="text-white" />}
               />
             </label>
           </div>
@@ -264,7 +264,7 @@ const ChatFooter = () => {
             <Icon
               size="large"
               className={`${showImojiPicker ? "bg-c1" : ""}`}
-              icon={<HiOutlineEmojiHappy size={24} className="text-white" />}
+              icon={<HiOutlineEmojiHappy size={28} className="text-white" />}
               onClick={() => setShowImojiPicker(true)}
             />
             {showImojiPicker && (
@@ -287,7 +287,7 @@ const ChatFooter = () => {
             <Icon
               size="large"
               className={`${showGifPicker ? "bg-c1" : ""}`}
-              icon={<MdGif size={25} className="text-white" />}
+              icon={<MdGif size={30} className="text-white" />}
               onClick={() => setShowGifPicker(true)}
             />
             {showGifPicker && (
@@ -330,14 +330,14 @@ const ChatFooter = () => {
           }}>
             <Icon
               size="large"
-              icon={<CiCreditCard1 size={23} className="text-white" />}
+              icon={<CiCreditCard1 size={29} className="text-white" />}
             />
           </div>
 
           <div onClick={() => setOpenMapPopup(true)}>
             <Icon
               size="large"
-              icon={<IoLocationOutline size={23} className="text-white" />}
+              icon={<IoLocationOutline size={29} className="text-white" />}
             />
           </div>
         </div>
