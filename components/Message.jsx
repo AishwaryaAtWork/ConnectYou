@@ -21,8 +21,8 @@ import Menu from "./Menu";
 import DeleteMsgPopup from "./popup/DeleteMsgPopup";
 import ImageVideoPopup from "./popup/ImageVideoPopup";
 import { FaPlay } from "react-icons/fa6";
-import "leaflet/dist/leaflet.css";
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+// import "leaflet/dist/leaflet.css";
+// import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
 const Message = ({ message, theme }) => {
   const [showDeletePopup, setShowDeletePopup] = useState(false);
@@ -214,7 +214,7 @@ const Message = ({ message, theme }) => {
             //   allowFullScreen
             //   title={`Map sent by ${message.senderName}`}
             // /> */}
-              <MapContainer center={[message.mapURL.hits[0].point.lat, message.mapURL.hits[0].point.lng]} zoom={13} style={{ height: '100%', width: '100%' }}>
+              {/* <MapContainer center={[message.mapURL.hits[0].point.lat, message.mapURL.hits[0].point.lng]} zoom={13} style={{ height: '100%', width: '100%' }}>
                 <TileLayer
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
@@ -223,12 +223,12 @@ const Message = ({ message, theme }) => {
                     Your location: {message.mapURL.hits[0].name}
                   </Popup>
                 </Marker>
-              </MapContainer>
+              </MapContainer> */}
 
 
               <p className="text-sm ">{`${self ? "My" : `${data.user.displayName}'s`} geo loaction :`}</p>
-              {/* <a href={message.fileUrl} target="_blank"
-                className="cursor-pointer text-sm text-blue-400">{message.fileUrl}</a> */}
+              <a href={message.fileUrl} target="_blank"
+                className="cursor-pointer text-sm text-blue-400">{message.fileUrl}</a>
 
             </>
           )}

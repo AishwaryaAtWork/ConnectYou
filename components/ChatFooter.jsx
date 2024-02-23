@@ -118,23 +118,23 @@ const ChatFooter = () => {
           const { latitude, longitude } = position.coords;
 
           // Generate the Google Maps link
-          const url = "https://graphhopper.com/api/1/geocode?reverse=true&point=28.638549166718185,77.2747846991807&key=8a78a848-c3bb-4dd8-92a5-bb5eee5190df";
+          // const url = "https://graphhopper.com/api/1/geocode?reverse=true&point=28.638549166718185,77.2747846991807&key=8a78a848-c3bb-4dd8-92a5-bb5eee5190df";
 
-          fetch(url)
-            .then(response => {
-              if (!response.ok) {
-                throw new Error('Network response was not ok');
-              }
-              return response.json();
-            })
-            .then(data => {
-              // Handle the data here
-              console.log(data.hits[0]);
-              setMapURL(data);
-            })
-            .catch(error => {
-              console.error('There was a problem with your fetch operation:', error);
-            });
+          // fetch(url)
+          //   .then(response => {
+          //     if (!response.ok) {
+          //       throw new Error('Network response was not ok');
+          //     }
+          //     return response.json();
+          //   })
+          //   .then(data => {
+          //     // Handle the data here
+          //     console.log(data.hits[0]);
+          //     setMapURL(data);
+          //   })
+          //   .catch(error => {
+          //     console.error('There was a problem with your fetch operation:', error);
+          //   });
 
 
           // Update Firestore document with the location data
