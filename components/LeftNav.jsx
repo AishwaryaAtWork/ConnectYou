@@ -283,7 +283,7 @@ const LeftNav = () => {
                 />
                 )}
                 {isSmallScreen ? (
-                    <div className="w-[230px] mb-5 flex flex-col gap-3 text-sm">
+                    <div className={`${editProfile ? "w-[310px]":"w-[240px]"} mb-5 flex flex-col justify-center gap-3 text-sm`}>
                         <div className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 w-full h-10 rounded-md cursor-pointer p-[1.5px] overflow-hidden" onClick={()=>setOpenPopup(true)}>
                             <div className="rounded-md h-full bg-c1 text-center flex items-center justify-center">Add Money</div>
                         </div>
