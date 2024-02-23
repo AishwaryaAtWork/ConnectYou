@@ -30,10 +30,12 @@ import { useState } from "react";
 import AddMoneyPopup from "./popup/AddMoneyPopup";
 import ToastMessage from "./ToastMessage";
 import { toast } from "react-toastify";
+import { useScreenSize } from "@/context/screenSizeContext";
 
 const ChatMenu = ({ setShowMenu, showMenu }) => {
   const { data, users, dispatch, chats, setSelectedChat } = useChatContext();
   const { currentUser } = useAuth();
+  const { setOpenChatBox } = useScreenSize();
 
   const isUserBlocked = users[currentUser.uid]?.blockedUsers?.find(
     (u) => u === data.user.uid
@@ -151,6 +153,8 @@ const ChatMenu = ({ setShowMenu, showMenu }) => {
     } catch (err) {
       console.error(err);
     }
+
+    setOpenChatBox(false);
   };
 
   return (
