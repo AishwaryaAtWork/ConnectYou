@@ -23,7 +23,7 @@ const Home = () => {
   const [userPopup, setUserPopup] = useState(false);
   const { currentUser, isLoading } = useAuth();
   const { data } = useChatContext();
-  const { isSmallScreen, openLeftNav, setOpenLeftNav, openChatBox,  setOpenSearch } = useScreenSize();
+  const { isSmallScreen, setOpenLeftNav, setOpenSearch } = useScreenSize();
 
   if (isLoading) {
     return <Loader />;
