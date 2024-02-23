@@ -29,8 +29,8 @@ const ChatHeader = (props) => {
                     }} />)}
                     <Avatar size="large" user={user} />
                     <div>
-                        <div className="font-medium line-clamp-1">{user.displayName}</div>
-                        <p className="text-sm text-c3">
+                        <div className="font-medium text-sm md:text-base line-clamp-1">{user.displayName}</div>
+                        <p className="text-xs md:text-sm text-c3">
                             {online ? "Online" : "Offline"}
                         </p>
                     </div>

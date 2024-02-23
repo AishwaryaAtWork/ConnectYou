@@ -220,11 +220,10 @@ const LeftNav = () => {
             </div>
         );
     };
-
     return (
         <div
             className={`${
-                editProfile ? "w-[350px] h-[92vh] md:h-auto z-50 bg-c1" : ` ${openLeftNav ? "w-[64px]": "w-[0vw]"} z-40 bg-c1 transition-all ease-in-out duration-500  md:w-[80px] h-[94vh] md:h-auto overflow-hidden items-center ${isSmallScreen ? "shadow-lg shadow-gray-600":""}`
+                editProfile ? "w-[350px] h-[92vh] md:h-auto z-50 bg-c1" : ` ${openLeftNav ? "left-0": "-left-[80vw]"} z-50 bg-c1 transition-all ease-in-out duration-500 w-[284px] md:w-[80px] h-[94vh] md:h-auto overflow-hidden items-center ${isSmallScreen ? "shadow-lg shadow-gray-600 absolute top-[4.1rem] rounded-r-xl":""}`
             } flex flex-col justify-between py-5 shrink-0 transition-all`}
         >
             {openPopup && (
@@ -241,17 +240,30 @@ const LeftNav = () => {
                             className="relative group cursor-pointer"
                             onClick={() => setEditProfile(true)}
                         >
-                            <Avatar size="large" user={currentUser} />
+                            <Avatar size={`${isSmallScreen ? "xx-large": "large"}`} user={currentUser} />
                             <div className="w-full h-full rounded-full bg-black/[0.5] absolute top-0 left-0 justify-center items-center hidden group-hover:flex">
                                 <BiEdit size={14} />
                             </div>
                             
                     
                         </div>
-                        <div className="h-full mt-5" onClick={()=> setOpenPopup(true)}>
-                            <Icon size="large"
-                                icon={<IoWalletOutline size={30} className="text-white" />}/>
+                       {isSmallScreen ? (
+                         <div className="h-full mt-3 text-center font-light">
+                            
+                            <div className="text-c3 font-medium text-sm flex items-center justify-center gap-1 mb-1 italic">
+                                <div className={`h-2 w-2 rounded-full ${currentUser.isOnline ? "bg-green-500":"bg-yellow-600"}`}></div>
+                                {currentUser.isOnline ? "Online": "Last seen at 10:30"}
                             </div>
+                            
+                            <p className="text-gray-100">{currentUser.displayName}</p>
+                            <p className="text-gray-100">{currentUser.email}</p>
+                         </div>
+                       ):(
+                         <div className="h-full mt-5" onClick={()=> setOpenPopup(true)}>
+                         <Icon size="large"
+                             icon={<IoWalletOutline size={30} className="text-white" />}/>
+                         </div>
+                       )}
                         </>
                     )}
                 </>
@@ -259,7 +271,7 @@ const LeftNav = () => {
 
             <div
                 className={`flex  gap-5 ${
-                    editProfile ? "ml-5" : "flex-col items-center"
+                    editProfile ? "ml-5" : "flex-col items-center "
                 }`}
             >
                 {!isSmallScreen && (
@@ -270,12 +282,25 @@ const LeftNav = () => {
                     onClick={() => setUserPopup(!userPopup)}
                 />
                 )}
-                <Icon
-                    size="x-large"
-                    className="hover:bg-c2"
-                    icon={<IoLogOutOutline size={24} />}
-                    onClick={signOut}
-                />
+                {isSmallScreen ? (
+                    <div className="w-[230px] mb-5 flex flex-col gap-3 text-sm">
+                        <div className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 w-full h-10 rounded-md cursor-pointer p-[1.5px] overflow-hidden" onClick={()=>setOpenPopup(true)}>
+                            <div className="rounded-md h-full bg-c1 text-center flex items-center justify-center">Add Money</div>
+                        </div>
+
+                        <div className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 w-full h-10 rounded-md           cursor-pointer p-[1.5px] overflow-hidden" onClick={signOut}>
+                            <div className="rounded-md h-full bg-c1 text-center flex items-center justify-center">Log Out</div>
+                        </div>
+
+                    </div>
+                    ):(
+                         <Icon
+                         size="x-large"
+                         className="hover:bg-c2"
+                         icon={<IoLogOutOutline size={24} />}
+                         onClick={signOut}
+                     />
+                )}
             </div>
 
             {userPopup && <UsersPopup onHide={() => setUserPopup(false)} />}

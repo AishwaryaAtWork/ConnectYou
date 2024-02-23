@@ -55,28 +55,12 @@ const Home = () => {
     <>
       {isSmallScreen && (<>
         {userPopup && <UsersPopup onHide={() => setUserPopup(false)} />}
-        <div className={`w-full h-auto bg-c1 border-2 border-black z-50 px-5 py-2 flex ${openChatBox ? "justify-center": "justify-between"}  items-center`}>
-        
-        <RxHamburgerMenu className={`text-2xl font-bold text-c3 ${openChatBox ? "hidden": ""}`} 
-          onClick={()=>{
-            setOpenLeftNav((prev)=>!prev)
-            setOpenSearch(false)
-          }}/>
-        
-        <p className="text-bold text-lg">ConnectYou</p>
-        
-        <IoIosSearch className={`text-2xl font-bold text-c3 ${openChatBox ? "hidden": ""}`} 
-        onClick={()=> {
-          setOpenSearch((prev)=>!prev)
-          setOpenLeftNav(false)
-        }}
-        />
-      </div>
+   
       {/* <div className="w-full h-px bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 animate-pulse"></div> */}
       </>)}
       <div className="bg-c1 flex ">
         <div className="flex w-full shrink-0 overflow-hidden relative">
-          <LeftNav />
+          {!isSmallScreen && <LeftNav />}
           <div className="flex bg-c2 w-full ">
             <div
               className={`${isSmallScreen ? "w-full" : "md:w-7/12 xl:w-3/12"}`}
@@ -84,7 +68,7 @@ const Home = () => {
               <Sidebar />
               {isSmallScreen && <Icon
                     size="x-large"
-                    className={`bg-green-500 hover:bg-green-600 absolute bottom-[11%] right-6 z-40`}
+                    className={`bg-green-500 hover:bg-green-600 absolute top-[82%] right-6 z-40`}
                     icon={<FiPlus size={24} />}
                     onClick={() => {
                       setUserPopup(!userPopup)
