@@ -175,10 +175,10 @@ const Chats = () => {
 
     return (
         <div className="flex flex-col h-full">
-            {!isSmallScreen ? (
-                <div className={`shrink-0 sticky -top-[20px] z-10 flex justify-center w-full py-2 bg-c2 md:py-5`}>
+            {/* {!isSmallScreen ? ( */}
+                <div className={`shrink-0 sticky -top-[20px] z-10 flex justify-center w-full py-1 bg-c2 md:py-5 ${openSearch ? "h-auto":"h-0 overflow-hidden opacity-0"} transition-all ease-in-out duration-500`}>
                 {/* ... (search input code) */}
-                <RiSearch2Line className="absolute top-6 md:top-9 left-5 text-c3" />
+                <RiSearch2Line className="absolute top-5 md:top-9 left-5 text-c3" />
                 <input
                     type="Text"
                     value={search}
@@ -187,9 +187,9 @@ const Chats = () => {
                     className="w-[96%] h-12 rounded-xl bg-c1/[0.5] pl-11 pr-5 placeholder:text-c3 outline-none text-base"
                 />
             </div>
-            ) : (
+           {/*  ) : (
                 <div className={`absolute left-0 z-10 flex justify-center w-full py-2 bg-c2 md:py-5 ${openSearch ? "top-0 shadow-lg shadow-c1": "-top-[10vh]"} transition-all ease-in-out duration-700 `}>
-                {/* ... (search input code) */}
+       
                 <RiSearch2Line className="absolute top-6 md:top-9 left-5 text-c3" />
                 <input
                     type="Text"
@@ -199,7 +199,7 @@ const Chats = () => {
                     className="w-[96%] h-12 rounded-xl bg-c1/[0.5] pl-11 pr-5 placeholder:text-c3 outline-none text-base"
                 />
             </div>
-            )}
+            )} */}
             
             {filteredChats.length === 0 ? ( // Check if there are no chats to display
                 <div className="flex flex-col items-center justify-center h-[calc(100vh-220px)]">
