@@ -162,7 +162,7 @@ const ChatFooter = () => {
 
 
   return (
-    <div className="flex items-center bg-c1/[0.5] p-2 rounded-xl relative my-2">
+    <div className="flex items-center bg-c1/[0.5] p-2 rounded-xl relative my-2 md:mt-3 md:mb-0">
       <ToastMessage />
       {openMapPopup && <MapPopup setOpenMapPopup={setOpenMapPopup} mapURL={mapURL} shareLocation={shareLocation} />}
 
