@@ -34,7 +34,7 @@ const LeftNav = () => {
 
     const { signOut, currentUser, setCurrentUser } = useAuth();
     const { data } = useChatContext();
-    const { openLeftNav, isSmallScreen, openChatBox } = useScreenSize();
+    const { openLeftNav, isSmallScreen } = useScreenSize();
 
     const authUser = auth.currentUser;
 
@@ -133,11 +133,11 @@ const LeftNav = () => {
 
     const editProfileContainer = () => {
         return (
-            <div className="flex flex-col items-center relative">
+            <div className="flex flex-col items-center relative ">
                 <ToastMessage />
                 <Icon
                     size="small"
-                    className="absolute top-0 right-5 hover:bg-c2"
+                    className="absolute -top-3 md:top-0 -right-3 md:right-5 hover:bg-c2"
                     icon={<IoClose size={20} />}
                     onClick={() => setEditProfile(false)}
                 />
@@ -223,12 +223,10 @@ const LeftNav = () => {
     return (
         <div
             className={`${
-                editProfile ? "w-[350px] h-[100vh] md:h-auto z-50 bg-c1" : ` ${openLeftNav ? "left-0": "-left-[80vw]"} z-50 bg-c1 transition-all ease-in-out duration-500 w-[284px] md:w-[80px] h-[100vh] md:h-auto overflow-hidden items-center ${isSmallScreen ? "shadow-lg shadow-gray-600 absolute top-[4.1rem] rounded-r-xl":""}`
+                editProfile ? `${isSmallScreen ? " shadow-lg shadow-gray-600 absolute top-[4.1rem] px-5 rounded-r-xl h-[100vh] bg-c1 z-50" :"w-[350px] h-[100vh] md:h-auto z-50 bg-c1"}` : ` ${openLeftNav ? "left-0": "-left-[80vw]"} z-50 bg-c1 transition-all ease-in-out duration-500 w-[284px] md:w-[80px] h-[100vh] md:h-auto overflow-hidden items-center ${isSmallScreen ? "shadow-lg shadow-gray-600 absolute top-[4.1rem] rounded-r-xl":""}`
             } flex flex-col justify-between py-5 shrink-0 transition-all`}
         >
-            {openPopup && (
-          <AddMoneyPopup setOpenPopup={setOpenPopup}/>
-        )}
+            {openPopup && <AddMoneyPopup setOpenPopup={setOpenPopup}/>}
 
             {editProfile ? (
                 editProfileContainer()
@@ -283,7 +281,7 @@ const LeftNav = () => {
                 />
                 )}
                 {isSmallScreen ? (
-                    <div className={`${editProfile ? "w-[310px]":"w-[240px]"} mb-5 flex flex-col justify-center gap-3 text-sm`}>
+                    <div className={`${editProfile ? "w-[225px]":"w-[240px]"} mb-5 flex flex-col justify-center gap-3 text-sm`}>
                         <div className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 w-full h-10 rounded-md cursor-pointer p-[1.5px] overflow-hidden" onClick={()=>setOpenPopup(true)}>
                             <div className="rounded-md h-full bg-c1 text-center flex items-center justify-center">Add Money</div>
                         </div>
