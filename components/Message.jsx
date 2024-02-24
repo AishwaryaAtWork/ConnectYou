@@ -26,8 +26,7 @@ import { FaPlay } from "react-icons/fa6";
 
 const Message = ({ message, theme }) => {
   const [showDeletePopup, setShowDeletePopup] = useState(false);
-  const { users, data, setEditMsg, imageViewer, setImageViewer } =
-    useChatContext();
+  const { users, data, setEditMsg, imageViewer, setImageViewer } = useChatContext();
   const { currentUser } = useAuth();
   const [showMenu, setShowMenu] = useState(false);
   const [openImgVidPopup, setOpenImgVidPopup] = useState(false);
@@ -51,6 +50,7 @@ const Message = ({ message, theme }) => {
 
       // Retrieve the chat document from Firestore
       const chatDoc = await getDoc(chatRef);
+      const chatInfo = chatDoc.data().messages
 
       // Create a new "messages" array that excludes the message with the matching ID
       const updatedMessages = chatDoc.data().messages.map((message) => {
@@ -62,11 +62,13 @@ const Message = ({ message, theme }) => {
           }
 
           if (action === DELETED_FOR_EVERYONE) {
+            message.text="This message was deleted.",
             message.deletedInfo = {
               deletedForEveryone: true,
-            };
+            }
           }
         }
+        setShowDeletePopup(false);
         return message;
       });
 
@@ -97,12 +99,14 @@ const Message = ({ message, theme }) => {
         <DeleteMsgPopup
           onHide={() => setShowDeletePopup(false)}
           deleteMessage={deleteMessage}
+          message={message}
           className="DeleteMsgPopup"
           noHeader={true}
           shortHeight={true}
           self={self}
         />
       )}
+      
       <div
         className={`flex items-end gap-3 mb-1 ${self ? "justify-start flex-row-reverse" : ""
           }`}
@@ -118,7 +122,7 @@ const Message = ({ message, theme }) => {
         >
           {message.text && (
             <div
-              className="text-sm "
+              className={`text-sm cursor-default ${message.text==="This message was deleted."?"italic":""}`}
               dangerouslySetInnerHTML={{
                 __html: wrapEmojisInHtmlTag(message.text),
               }}
@@ -232,7 +236,8 @@ const Message = ({ message, theme }) => {
 
             </>
           )}
-          <div
+          {!(message.text === "This message was deleted.") && (
+            <div
             className={`${showMenu ? "" : "hidden"
               } group-hover:flex absolute top-2 ${self ? "left-2 bg-c5" : "right-2 bg-c1"
               }`}
@@ -253,6 +258,7 @@ const Message = ({ message, theme }) => {
               />
             )}
           </div>
+          )}
         </div>
       </div>
       <div
