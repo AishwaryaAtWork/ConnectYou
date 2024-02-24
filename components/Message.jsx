@@ -12,7 +12,7 @@ import { DELETED_FOR_EVERYONE, DELETED_FOR_ME } from "@/utils/constants";
 import { formatDate, wrapEmojisInHtmlTag } from "@/utils/helpers";
 import { Timestamp, doc, getDoc, updateDoc } from "firebase/firestore";
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { GoChevronDown } from "react-icons/go";
 import ImageViewer from "react-simple-image-viewer";
 import Avatar from "./Avatar";
@@ -31,17 +31,33 @@ const Message = ({ message, theme }) => {
   const [showMenu, setShowMenu] = useState(false);
   const [openImgVidPopup, setOpenImgVidPopup] = useState(false);
   const [imgVidPopupUrl, setImgVidPopupUrl] = useState("");
+  const [dateTimeNow, setDateTimeNow] = useState("");
 
   const self = message.sender === currentUser.uid;
 
   const ref = useRef();
   const imagePreviewUrl = useRef(message.img || null);
 
-  const timestamp = new Timestamp(
+  const date = new Timestamp(
     message.date?.seconds,
     message.date?.nanoseconds
-  );
-  const date = timestamp.toDate();
+  )?.toDate();
+  // const date = timestamp.toDate();
+
+  useEffect(()=>{
+    if(date) setDateTimeNow(formatDate(date));
+
+    // Update setDateTimeNow every minute
+    const intervalId = setInterval(() => {
+      if (date) {
+          setDateTimeNow(formatDate(date));
+      }
+  }, 60000); // 60000 milliseconds = 1 minute
+
+  // Clean up the interval on component unmount
+  return () => clearInterval(intervalId);
+
+  },[date])
 
   const deleteMessage = async (action) => {
     try {
@@ -269,7 +285,7 @@ const Message = ({ message, theme }) => {
         className={`flex items-end ${self ? "justify-start flex-row-reverse mr-12" : "ml-12"
           }`}
       >
-        <div className="text-xs text-c3">{formatDate(date)}</div>
+        <div className="text-xs text-c3">{dateTimeNow}</div>
       </div>
     </div>
   );
