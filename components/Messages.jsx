@@ -53,7 +53,6 @@ const Messages = () => {
 
     return () => unsub();
   }, [data.chatId, data.user.uid, setIsTyping]);
-
   return (
     <div
       ref={ref}
@@ -65,7 +64,7 @@ const Messages = () => {
         ?.filter(
           (m) =>
             m?.deletedInfo?.[currentUser.uid] !== DELETED_FOR_ME &&
-            !m?.deletedInfo?.deletedForEveryone &&
+            // !m?.deletedInfo?.deletedForEveryone &&
             !m?.deleteChatInfo?.[currentUser.uid]
         )
         ?.map((m) => {
