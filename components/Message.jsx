@@ -62,7 +62,11 @@ const Message = ({ message, theme }) => {
           }
 
           if (action === DELETED_FOR_EVERYONE) {
-            if(message?.fileUrl?.includes("map")){ message.fileUrl = '' };
+            if(message?.fileUrl?.includes("map") || message?.fileUrl?.includes("image") || message?.fileUrl?.includes("audio") || 
+                message?.fileUrl?.includes("video") || message?.fileUrl?.includes("pdf") || message?.fileUrl?.includes("gif") )
+            { 
+              message.fileUrl = '' 
+            };
             message.text="This message was deleted.",
             message.deletedInfo = {
               deletedForEveryone: true,
