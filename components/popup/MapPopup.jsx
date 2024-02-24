@@ -4,7 +4,7 @@ import { useChatContext } from '@/context/chatContext';
 import Image from 'next/image';
 import mapImage from '@/public/map.png';
 
-const MapPopup = ({ mapURL, setOpenMapPopup, shareLocation }) => {
+const MapPopup = ({ setOpenMapPopup, shareLocation }) => {
     const popUpRef = useRef(null);
     const { data } = useChatContext();
     const onShare = () => {

@@ -38,7 +38,7 @@ const ChatFooter = () => {
   const [openPopup, setOpenPopup] = useState(false);
   const fileInputRef = useRef(null);
   const [selectedFile, setSelectedFile] = useState(null);
-  const [mapURL, setMapURL] = useState("");
+  // const [mapURL, setMapURL] = useState("");
   const [openMapPopup, setOpenMapPopup] = useState(false);
   const { currentUser } = useAuth();
   const { isSmallScreen, showAttachmentMenu, setShowAttachmentMenu } = useScreenSize();
@@ -118,6 +118,9 @@ const ChatFooter = () => {
           const { latitude, longitude } = position.coords;
 
           // Generate the Google Maps link
+          const mapLink = `https://www.google.com/maps?q=${latitude},${longitude}`;
+          
+          // Code for fetching and rendering map
           // const url = "https://graphhopper.com/api/1/geocode?reverse=true&point=28.638549166718185,77.2747846991807&key=8a78a848-c3bb-4dd8-92a5-bb5eee5190df";
 
           // fetch(url)
@@ -143,8 +146,8 @@ const ChatFooter = () => {
               id: uuid(),
               text: "",
               sender: currentUser.uid,
-              fileUrl: "",
-              mapURL: mapURL,
+              fileUrl: mapLink,
+              // mapURL: mapURL,
               date: Timestamp.now(),
               read: false,
             }),
@@ -164,7 +167,7 @@ const ChatFooter = () => {
   return (
     <div className="flex items-center bg-c1/[0.5] p-2 rounded-xl relative my-2 md:mt-3 md:mb-0">
       <ToastMessage />
-      {openMapPopup && <MapPopup setOpenMapPopup={setOpenMapPopup} mapURL={mapURL} shareLocation={shareLocation} />}
+      {openMapPopup && <MapPopup setOpenMapPopup={setOpenMapPopup} shareLocation={shareLocation} />}
 
       {openPopup && <SendMoneyPopup setOpenPopup={setOpenPopup} />}
 

@@ -62,6 +62,7 @@ const Message = ({ message, theme }) => {
           }
 
           if (action === DELETED_FOR_EVERYONE) {
+            if(message?.fileUrl?.includes("map")){ message.fileUrl = '' };
             message.text="This message was deleted.",
             message.deletedInfo = {
               deletedForEveryone: true,
@@ -206,7 +207,7 @@ const Message = ({ message, theme }) => {
               Your browser does not support the audio element.
             </audio>
           )}
-          {message.mapURL && (
+          {message?.fileUrl?.includes('map') && (
             <>
 
               {/* //   <iframe
@@ -231,8 +232,7 @@ const Message = ({ message, theme }) => {
 
 
               <p className="text-sm ">{`${self ? "My" : `${data.user.displayName}'s`} geo loaction :`}</p>
-              <a href={message.fileUrl} target="_blank"
-                className="cursor-pointer text-sm text-blue-400">{message.fileUrl}</a>
+              <a href={message.fileUrl} target="_blank" className="cursor-pointer text-sm text-blue-400 w-[15rem] md:w-auto whitespace-wrap overflow-hidden">{message.fileUrl}</a>
 
             </>
           )}
