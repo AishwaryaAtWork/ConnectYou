@@ -21,6 +21,7 @@ import Menu from "./Menu";
 import DeleteMsgPopup from "./popup/DeleteMsgPopup";
 import ImageVideoPopup from "./popup/ImageVideoPopup";
 import { FaPlay } from "react-icons/fa6";
+import { RiCheckDoubleFill } from "react-icons/ri";
 // import "leaflet/dist/leaflet.css";
 // import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
@@ -32,6 +33,7 @@ const Message = ({ message, theme }) => {
   const [openImgVidPopup, setOpenImgVidPopup] = useState(false);
   const [imgVidPopupUrl, setImgVidPopupUrl] = useState("");
   const [dateTimeNow, setDateTimeNow] = useState("");
+  const [readRecieptNow, setReadRecieptNow] = useState("text-gray-400");
 
   const self = message.sender === currentUser.uid;
 
@@ -46,18 +48,23 @@ const Message = ({ message, theme }) => {
 
   useEffect(()=>{
     if(date) setDateTimeNow(formatDate(date));
-
+    message?.read ? setReadRecieptNow("text-green-500") : setReadRecieptNow("text-gray-400");
+    
     // Update setDateTimeNow every minute
     const intervalId = setInterval(() => {
       if (date) {
           setDateTimeNow(formatDate(date));
       }
-  }, 60000); // 60000 milliseconds = 1 minute
+
+      if(message.read){
+        setReadRecieptNow("text-green-400");
+      }
+  }, 600); // 60000 milliseconds = 1 minute
 
   // Clean up the interval on component unmount
   return () => clearInterval(intervalId);
 
-  },[date])
+  },[date, readRecieptNow, message])
 
   const deleteMessage = async (action) => {
     try {
@@ -138,9 +145,11 @@ const Message = ({ message, theme }) => {
           className="mb-4"
         />
         <div
-          className={` group flex flex-col gap-4 px-3 p-2 md:p-4 rounded-3xl relative ${self ? "rounded-br-md bg-c5" : "rounded-bl-md bg-c1"
+          className={` group flex flex-col gap-4 px-3 py-3 md:px-5 md:py-3 rounded-3xl relative ${self ? "rounded-br-md bg-c5" : "rounded-bl-md bg-c1"
             }`}
         >
+          {self && <RiCheckDoubleFill className={`absolute bottom-[0.5px] md:bottom-[1px] right-1 md:right-[5px] text-sm md:text-base ${readRecieptNow}`}/>}
+
           {message.text && (
             <div
               className={`text-sm cursor-default ${message.text==="This message was deleted."?"italic":""}`}
