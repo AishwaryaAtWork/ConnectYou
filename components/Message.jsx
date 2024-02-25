@@ -22,6 +22,7 @@ import DeleteMsgPopup from "./popup/DeleteMsgPopup";
 import ImageVideoPopup from "./popup/ImageVideoPopup";
 import { FaPlay } from "react-icons/fa6";
 import { RiCheckDoubleFill } from "react-icons/ri";
+import { useScreenSize } from "@/context/screenSizeContext";
 // import "leaflet/dist/leaflet.css";
 // import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
@@ -39,6 +40,7 @@ const Message = ({ message, theme }) => {
 
   const ref = useRef();
   const imagePreviewUrl = useRef(message.img || null);
+  const { isSmallScreen } = useScreenSize();
 
   const date = new Timestamp(
     message.date?.seconds,
@@ -268,7 +270,7 @@ const Message = ({ message, theme }) => {
           {!(message.text === "This message was deleted.") && (
             <div
             className={`${showMenu ? "" : "hidden"
-              } group-hover:flex absolute top-2 ${self ? "left-2 bg-c5" : "right-2 bg-c1"
+              } group-hover:flex absolute top-2 ${self ? `bg-c5 ${isSmallScreen ? "right-2":"left-2"}` : `bg-c1 ${isSmallScreen ? "left-2":"right-2"}`
               }`}
             onClick={() => setShowMenu(!showMenu)}
           >
