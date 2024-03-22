@@ -3,29 +3,29 @@
  * Includes input field, emoji picker, attachment button, typing indicator,
  * and other UI elements related to composing and sending messages.
  */
+import { useAuth } from "@/context/authContext";
 import { useChatContext } from "@/context/chatContext";
+import { useScreenSize } from "@/context/screenSizeContext";
+import { db } from "@/firebase/firebase";
+import compressImage from "@/utils/file_compression";
 import { GiphyFetch } from "@giphy/js-fetch-api";
-// import { Viewer } from "@react-pdf-viewer/core";
 import EmojiPicker from "emoji-picker-react";
-import { useEffect, useState, useRef } from "react";
+import { Timestamp, arrayUnion, doc, updateDoc } from "firebase/firestore";
+import { useEffect, useRef, useState } from "react";
 import ClickAwayListener from "react-click-away-listener";
 import { CgAttachment } from "react-icons/cg";
 import { CiCreditCard1 } from "react-icons/ci";
 import { HiOutlineEmojiHappy } from "react-icons/hi";
-import { IoClose, IoEllipsisVerticalSharp } from "react-icons/io5";
+import { IoClose, IoEllipsisVerticalSharp, IoLocationOutline } from "react-icons/io5";
 import { MdDeleteForever, MdGif } from "react-icons/md";
 import { FixedSizeGrid as Grid } from "react-window";
-import { IoLocationOutline } from "react-icons/io5";
+import { v4 as uuid } from "uuid";
 import Composebar from "./Composebar";
 import Icon from "./Icon";
-import SendMoneyPopup from "./popup/SendMoneyPopup";
 import ToastMessage from "./ToastMessage";
-import { Timestamp, arrayUnion, doc, updateDoc } from "firebase/firestore";
-import { v4 as uuid } from "uuid";
-import { db } from "@/firebase/firebase";
-import { useAuth } from "@/context/authContext";
-import { useScreenSize } from "@/context/screenSizeContext";
 import MapPopup from "./popup/MapPopup";
+import SendMoneyPopup from "./popup/SendMoneyPopup";
+
 
 const gf = new GiphyFetch("2Gx7SvpPvoHFrCb0ho52ILe7S7c5487G");
 
@@ -38,7 +38,7 @@ const ChatFooter = () => {
   const [openPopup, setOpenPopup] = useState(false);
   const fileInputRef = useRef(null);
   const [selectedFile, setSelectedFile] = useState(null);
-  // const [mapURL, setMapURL] = useState("");
+  const [mapURL, setMapURL] = useState("");
   const [openMapPopup, setOpenMapPopup] = useState(false);
   const { currentUser } = useAuth();
   const { isSmallScreen, showAttachmentMenu, setShowAttachmentMenu } = useScreenSize();
@@ -69,9 +69,30 @@ const ChatFooter = () => {
    * If file exists, generates blob URL for preview.
    * Sets attachmentPreview state to the blob URL.
    */
-  const onFileChange = (e) => {
-    const file = e.target.files[0];
+  const onFileChange = async (e) => {
+    let file = e.target.files[0];
+    if (!file) {
+      console.log("No file selected");
+      return;
+    }
+
+    // Print the file size in MB
+    let fileSizeInMB = file.size / (1024 * 1024);
+    console.log(`File size: ${fileSizeInMB.toFixed(2)} MB`);
+
+    // Check if the file is an image and compress it
+    if (file.type.startsWith('image/')) {
+      try {
+        file = await compressImage(file);
+      } catch (error) {
+        console.error('Failed to compress image', error);
+      }
+    }
+
     setAttachment(file);
+    // Print the file size in MB
+    fileSizeInMB = file.size / (1024 * 1024);
+    console.log(`File size: ${fileSizeInMB.toFixed(2)} MB`);
 
     if (file) {
       setShowAttachmentMenu(false);
@@ -117,37 +138,14 @@ const ChatFooter = () => {
         async (position) => {
           const { latitude, longitude } = position.coords;
 
-          // Generate the Google Maps link
-          const mapLink = `https://www.google.com/maps?q=${latitude},${longitude}`;
-          
-          // Code for fetching and rendering map
-          // const url = "https://graphhopper.com/api/1/geocode?reverse=true&point=28.638549166718185,77.2747846991807&key=8a78a848-c3bb-4dd8-92a5-bb5eee5190df";
-
-          // fetch(url)
-          //   .then(response => {
-          //     if (!response.ok) {
-          //       throw new Error('Network response was not ok');
-          //     }
-          //     return response.json();
-          //   })
-          //   .then(data => {
-          //     // Handle the data here
-          //     console.log(data.hits[0]);
-          //     setMapURL(data);
-          //   })
-          //   .catch(error => {
-          //     console.error('There was a problem with your fetch operation:', error);
-          //   });
-
-
           // Update Firestore document with the location data
           await updateDoc(doc(db, "chats", data.chatId), {
             messages: arrayUnion({
               id: uuid(),
               text: "",
               sender: currentUser.uid,
-              fileUrl: mapLink,
-              // mapURL: mapURL,
+              fileUrl: "",
+              mapURL: mapURL,
               date: Timestamp.now(),
               read: false,
             }),
@@ -165,9 +163,9 @@ const ChatFooter = () => {
 
 
   return (
-    <div className="flex items-center bg-c1/[0.5] p-2 rounded-xl relative my-2 md:mt-3 md:mb-0">
+    <div className="flex items-center bg-c1/[0.5] p-2 rounded-xl relative">
       <ToastMessage />
-      {openMapPopup && <MapPopup setOpenMapPopup={setOpenMapPopup} shareLocation={shareLocation} />}
+      {openMapPopup && <MapPopup setOpenMapPopup={setOpenMapPopup} mapURL={mapURL} shareLocation={shareLocation} />}
 
       {openPopup && <SendMoneyPopup setOpenPopup={setOpenPopup} />}
 
@@ -195,9 +193,6 @@ const ChatFooter = () => {
               className="w-full h-full object-contain object-center"
             />
           )}
-          {/* {selectedFileType === "application/pdf" && (
-            <Viewer fileUrl={selectedFile} />
-          )} */}
           <div
             className="w-6 h-6 rounded-full bg-red-500 flex justify-center items-center absolute -right-2 -top-2 cursor-pointer"
             onClick={() => {
@@ -243,7 +238,7 @@ const ChatFooter = () => {
         />
 
         <div
-          className={`absolute left-6 bottom-[107%] w-auto h-auto p-3 border border-black rounded-t-xl rounded-br-xl flex gap-3 text-white
+          className={`absolute bottom-[100%] w-auto h-auto p-2 border border-black rounded-xl grid grid-cols-3 text-white
       bg-c1 ${showAttachmentMenu ? "" : "hidden"}`}
         >
           <div className="shrink-0">
@@ -258,7 +253,7 @@ const ChatFooter = () => {
             <label htmlFor="fileUploader">
               <Icon
                 size="large"
-                icon={<CgAttachment size={25} className="text-white" />}
+                icon={<CgAttachment size={20} className="text-white" />}
               />
             </label>
           </div>
@@ -267,7 +262,7 @@ const ChatFooter = () => {
             <Icon
               size="large"
               className={`${showImojiPicker ? "bg-c1" : ""}`}
-              icon={<HiOutlineEmojiHappy size={28} className="text-white" />}
+              icon={<HiOutlineEmojiHappy size={24} className="text-white" />}
               onClick={() => setShowImojiPicker(true)}
             />
             {showImojiPicker && (
@@ -290,7 +285,7 @@ const ChatFooter = () => {
             <Icon
               size="large"
               className={`${showGifPicker ? "bg-c1" : ""}`}
-              icon={<MdGif size={30} className="text-white" />}
+              icon={<MdGif size={25} className="text-white" />}
               onClick={() => setShowGifPicker(true)}
             />
             {showGifPicker && (
@@ -328,19 +323,19 @@ const ChatFooter = () => {
           </div>
 
           <div onClick={() => {
-            setOpenPopup(true)
-            setShowAttachmentMenu(false)
+            setOpenPopup(true);
+            setShowAttachmentMenu(false);
           }}>
             <Icon
               size="large"
-              icon={<CiCreditCard1 size={29} className="text-white" />}
+              icon={<CiCreditCard1 size={23} className="text-white" />}
             />
           </div>
 
           <div onClick={() => setOpenMapPopup(true)}>
             <Icon
               size="large"
-              icon={<IoLocationOutline size={29} className="text-white" />}
+              icon={<IoLocationOutline size={23} className="text-white" />}
             />
           </div>
         </div>
