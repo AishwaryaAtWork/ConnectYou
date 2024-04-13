@@ -142,6 +142,7 @@ const ChatFooter = () => {
       navigator.geolocation.getCurrentPosition(
         async (position) => {
           const { latitude, longitude } = position.coords;
+          const mapURL = `https://www.google.com/maps?q=${latitude},${longitude}`
 
           // Update Firestore document with the location data
           await updateDoc(doc(db, "chats", data.chatId), {
@@ -149,7 +150,7 @@ const ChatFooter = () => {
               id: uuid(),
               text: "",
               sender: currentUser.uid,
-              fileUrl: "",
+              fileUrl: mapURL,
               mapURL: mapURL,
               date: Timestamp.now(),
               read: false,
@@ -243,8 +244,7 @@ const ChatFooter = () => {
         />
 
         <div
-          className={`absolute bottom-[100%] w-auto h-auto p-2 border border-black rounded-xl grid grid-cols-3 text-white
-      bg-c1 ${showAttachmentMenu ? "" : "hidden"}`}
+          className={`absolute bottom-[110%] left-6 w-auto h-auto p-3 border border-black rounded-t-xl rounded-br-xl flex gap-3 items-center text-white bg-c1 ${showAttachmentMenu ? "" : "hidden"}`}
         >
           <div className="shrink-0">
             <input
@@ -258,7 +258,7 @@ const ChatFooter = () => {
             <label htmlFor="fileUploader">
               <Icon
                 size="large"
-                icon={<CgAttachment size={20} className="text-white" />}
+                icon={<CgAttachment size={25} className="text-white" />}
               />
             </label>
           </div>
@@ -267,7 +267,7 @@ const ChatFooter = () => {
             <Icon
               size="large"
               className={`${showImojiPicker ? "bg-c1" : ""}`}
-              icon={<HiOutlineEmojiHappy size={24} className="text-white" />}
+              icon={<HiOutlineEmojiHappy size={28} className="text-white" />}
               onClick={() => setShowImojiPicker(true)}
             />
             {showImojiPicker && (
@@ -290,7 +290,7 @@ const ChatFooter = () => {
             <Icon
               size="large"
               className={`${showGifPicker ? "bg-c1" : ""}`}
-              icon={<MdGif size={25} className="text-white" />}
+              icon={<MdGif size={35} className="text-white" />}
               onClick={() => setShowGifPicker(true)}
             />
             {showGifPicker && (
@@ -333,14 +333,14 @@ const ChatFooter = () => {
           }}>
             <Icon
               size="large"
-              icon={<CiCreditCard1 size={23} className="text-white" />}
+              icon={<CiCreditCard1 size={28} className="text-white" />}
             />
           </div>
 
           <div onClick={() => setOpenMapPopup(true)}>
             <Icon
               size="large"
-              icon={<IoLocationOutline size={23} className="text-white" />}
+              icon={<IoLocationOutline size={28} className="text-white" />}
             />
           </div>
         </div>
