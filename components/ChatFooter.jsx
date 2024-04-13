@@ -7,7 +7,7 @@ import { useAuth } from "@/context/authContext";
 import { useChatContext } from "@/context/chatContext";
 import { useScreenSize } from "@/context/screenSizeContext";
 import { db } from "@/firebase/firebase";
-import compressImage from "@/utils/file_compression";
+import compressImage from "@/utils/image_compress";
 import { GiphyFetch } from "@giphy/js-fetch-api";
 import EmojiPicker from "emoji-picker-react";
 import { Timestamp, arrayUnion, doc, updateDoc } from "firebase/firestore";
@@ -18,6 +18,7 @@ import { CiCreditCard1 } from "react-icons/ci";
 import { HiOutlineEmojiHappy } from "react-icons/hi";
 import { IoClose, IoEllipsisVerticalSharp, IoLocationOutline } from "react-icons/io5";
 import { MdDeleteForever, MdGif } from "react-icons/md";
+import { toast } from 'react-toastify';
 import { FixedSizeGrid as Grid } from "react-window";
 import { v4 as uuid } from "uuid";
 import Composebar from "./Composebar";
@@ -25,6 +26,7 @@ import Icon from "./Icon";
 import ToastMessage from "./ToastMessage";
 import MapPopup from "./popup/MapPopup";
 import SendMoneyPopup from "./popup/SendMoneyPopup";
+
 
 
 const gf = new GiphyFetch("2Gx7SvpPvoHFrCb0ho52ILe7S7c5487G");
@@ -79,6 +81,9 @@ const ChatFooter = () => {
     // Print the file size in MB
     let fileSizeInMB = file.size / (1024 * 1024);
     console.log(`File size: ${fileSizeInMB.toFixed(2)} MB`);
+    if (fileSizeInMB > 10) {
+      toast.error("File size should be less than 10MB");
+    }
 
     // Check if the file is an image and compress it
     if (file.type.startsWith('image/')) {
