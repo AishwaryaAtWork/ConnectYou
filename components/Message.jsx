@@ -196,6 +196,7 @@ const Message = ({ message, theme }) => {
             />
           )}
           {message?.fileUrl?.includes("pdf") && (
+            <div> 
             <iframe
               src={message.fileUrl}
               width="100%"
@@ -204,6 +205,7 @@ const Message = ({ message, theme }) => {
               title={`PDF sent by ${message.senderName}`}
             // sandbox="allow-downloads"
             />
+            </div>
 
           )}
           {message?.fileUrl?.includes("video") && (
