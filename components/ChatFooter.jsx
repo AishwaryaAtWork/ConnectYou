@@ -26,6 +26,7 @@ import Icon from "./Icon";
 import ToastMessage from "./ToastMessage";
 import MapPopup from "./popup/MapPopup";
 import SendMoneyPopup from "./popup/SendMoneyPopup";
+import { FaFilePdf } from "react-icons/fa6";
 
 
 
@@ -53,6 +54,7 @@ const ChatFooter = () => {
     setEditMsg,
     isTyping,
     setAttachment,
+    attachment
   } = useChatContext();
 
   useEffect(() => {
@@ -178,7 +180,7 @@ const ChatFooter = () => {
       {/* Renders a preview of the selected file.
             Allows deselecting the file. */}
       {selectedFile && (
-        <div className="absolute w-[100px] h-[100px] bottom-16 left-0 bg-c1 p-2 rounded-md">
+        <div className="absolute w-[100px] h-[100px] bottom-16 left-5 bg-c1 p-2 rounded-md">
           {selectedFileType.startsWith("image") && (
             <img
               src={selectedFile}
@@ -198,6 +200,13 @@ const ChatFooter = () => {
               controls
               className="w-full h-full object-contain object-center"
             />
+          )}
+          {selectedFileType.includes("pdf") && (
+            <div className="h-full flex flex-col gap-2 items-center justify-center">
+              <FaFilePdf size={27} className="text-gray-300"/>
+              <p className="text-[10px] font-light text-gray-300 text-wrap w-[96%] h-auto break-all text-center">
+                {attachment?.name}</p>
+            </div>
           )}
           <div
             className="w-6 h-6 rounded-full bg-red-500 flex justify-center items-center absolute -right-2 -top-2 cursor-pointer"

@@ -86,7 +86,7 @@ const Composebar = ({ selectedFileType, setSelectedFile, setSelectedGif, selecte
     if (attachment) {
       const storageRef = ref(storage, `${uuid()}/${selectedFileType}`);
       const uploadTask = uploadBytesResumable(storageRef, attachment);
-
+      
       uploadTask.on(
         "state_changed",
         (snapshot) => {
@@ -106,6 +106,7 @@ const Composebar = ({ selectedFileType, setSelectedFile, setSelectedGif, selecte
                 date: Timestamp.now(),
                 fileUrl: downloadURL, // changed 'img' to 'fileUrl'
                 read: false,
+                pdfName: attachment.name.includes("pdf") ? attachment.name : null 
               }),
             });
           });
