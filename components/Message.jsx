@@ -23,6 +23,8 @@ import ImageVideoPopup from "./popup/ImageVideoPopup";
 import { FaPlay } from "react-icons/fa6";
 import { RiCheckDoubleFill } from "react-icons/ri";
 import { useScreenSize } from "@/context/screenSizeContext";
+import { FaFilePdf } from "react-icons/fa6";
+import Link from "next/link";
 // import "leaflet/dist/leaflet.css";
 // import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
@@ -195,19 +197,27 @@ const Message = ({ message, theme }) => {
               }
             />
           )}
-          {message?.fileUrl?.includes("pdf") && (
-            <div> 
-            <iframe
+          {(message?.fileUrl?.includes("pdf") && !isSmallScreen ) && (
+              <iframe
               src={message.fileUrl}
               width="100%"
               height="400px" // Adjust the height as needed
               frameBorder="0"
-              title={`PDF sent by ${message.senderName}`}
+              title={`PDF sent by ${message.pdfName}`}
             // sandbox="allow-downloads"
             />
+            )}
+          {(message?.fileUrl?.includes("pdf") && isSmallScreen ) && (
+            <Link href={message.fileUrl} target="_blank">
+             <div className="w-auto h-[60px] px-3 rounded-lg border border-gray-500 flex items-center justify-between overflow-hidden">
+            <div className="w-[8%] mr-2">
+            <FaFilePdf size={27} className="text-gray-300"/>
             </div>
+            <p className="text-gray-300 text-xs w-[160px] break-all line-clamp-3">{message.pdfName}</p>
+            </div>
+            </Link>
+            )}
 
-          )}
           {message?.fileUrl?.includes("video") && (
             <div className="relative">
               <video
