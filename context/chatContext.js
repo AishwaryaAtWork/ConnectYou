@@ -22,6 +22,8 @@ export const ChatContextProvider = ({ children }) => {
     const [users, setUsers] = useState(false);
     const [inputText, setInputText] = useState("");
     const [attachment, setAttachment] = useState(null);
+    const [selectedFile, setSelectedFile] = useState(null);
+    const [selectedGif, setSelectedGif] = useState(null);
     const [attachmentPreview, setAttachmentPreview] = useState(null);
     const [editMsg, setEditMsg] = useState(null);
     const [isTyping, setIsTyping] = useState(null);
@@ -77,6 +79,10 @@ export const ChatContextProvider = ({ children }) => {
                 setInputText,
                 attachment,
                 setAttachment,
+                selectedFile,
+                setSelectedFile,
+                selectedGif,
+                setSelectedGif,
                 attachmentPreview,
                 setAttachmentPreview,
                 data: state,
