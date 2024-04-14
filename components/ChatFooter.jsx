@@ -34,13 +34,11 @@ const gf = new GiphyFetch("2Gx7SvpPvoHFrCb0ho52ILe7S7c5487G");
 
 const ChatFooter = () => {
   const [showImojiPicker, setShowImojiPicker] = useState(false);
-  const [selectedGif, setSelectedGif] = useState(null);
   const [selectedFileType, setSelectedFileType] = useState("");
   const [showGifPicker, setShowGifPicker] = useState(false);
   const [gifs, setGifs] = useState([]);
   const [openPopup, setOpenPopup] = useState(false);
   const fileInputRef = useRef(null);
-  const [selectedFile, setSelectedFile] = useState(null);
   const [mapURL, setMapURL] = useState("");
   const [openMapPopup, setOpenMapPopup] = useState(false);
   const { currentUser } = useAuth();
@@ -54,7 +52,11 @@ const ChatFooter = () => {
     setEditMsg,
     isTyping,
     setAttachment,
-    attachment
+    attachment,
+    selectedFile, 
+    setSelectedFile,
+    selectedGif, 
+    setSelectedGif
   } = useChatContext();
 
   useEffect(() => {
@@ -169,7 +171,6 @@ const ChatFooter = () => {
     }
   };
 
-
   return (
     <div className="flex items-center bg-c1/[0.5] p-2 rounded-xl relative">
       <ToastMessage />
@@ -226,7 +227,7 @@ const ChatFooter = () => {
       {/* Renders a preview of the selected GIF.
             Allows deselecting the GIF. */}
       {selectedGif && (
-        <div className="absolute w-[100px] h-[100px] bottom-16 left-0 bg-c1 p-2 rounded-md">
+        <div className="absolute w-[100px] h-[100px] bottom-16 left-5 bg-c1 p-2 rounded-md">
           <img
             src={selectedGif}
             className="w-full h-full object-contain object-center"
@@ -325,7 +326,10 @@ const ChatFooter = () => {
                         <img
                           src={gif.images.fixed_height_small.url}
                           style={style}
-                          onClick={() => onGifSelected(gif)}
+                          onClick={() => {
+                            onGifSelected(gif)
+                            setShowAttachmentMenu(false)
+                          }}
                           alt={gif.title}
                         />
                       ) : null;
