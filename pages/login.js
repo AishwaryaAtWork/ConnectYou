@@ -3,6 +3,7 @@
  * @returns {JSX.Element} Login form with options to sign in with Google or Facebook.
  */
 import Loader from "@/components/Loader";
+import Navbar from "@/components/Navbar";
 import ToastMessage from "@/components/ToastMessage";
 import { useAuth } from "@/context/authContext";
 import { auth } from "@/firebase/firebase";
@@ -91,6 +92,8 @@ const Login = () => {
     return isLoading || (!isLoading && !!currentUser) ? (
         <Loader />
     ) : (
+       <>
+        <Navbar />
         <div className="min-h-screen flex justify-center items-center bg-c1">
             <ToastMessage />
             <div className="flex items-center flex-col">
@@ -158,6 +161,7 @@ const Login = () => {
                 </div>
             </div>
         </div>
+       </>
     );
 };
 

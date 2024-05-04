@@ -16,6 +16,7 @@ import { IoLogoGoogle } from "react-icons/io";
 import { auth, db, storage } from "../firebase/firebase";
 import { toast } from "react-toastify";
 import ToastMessage from "@/components/ToastMessage";
+import Navbar from "@/components/Navbar";
 
 const gProvider = new GoogleAuthProvider();
 
@@ -153,7 +154,9 @@ const Register = () => {
     return isLoading || (!isLoading && !!currentUser) ? (
         <Loader />
     ) : (
-        <div className="min-h-screen flex justify-center items-center bg-c1">
+        <>
+        <Navbar />
+        <div className="min-h-screen mt-10 flex justify-center items-center bg-c1">
             <ToastMessage />
 
             <div className="flex items-center flex-col">
@@ -226,6 +229,7 @@ const Register = () => {
                 </div>
             </div>
         </div>
+        </>
     );
 };
 
