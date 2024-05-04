@@ -6,22 +6,34 @@ import { useEffect, useState } from "react";
 
 const WelcomeAnimation = () => {
 
-    const [val, setVal]= useState('-right-[22vw]')
+    const [imgVal, setImgVal]= useState({right: '-right-[18vw]', opacity: 'opacity-0'})
+    const [textVal, setTextVal]= useState({left: '-left-[22vw]', opacity: 'opacity-0'})
+    const [textVal2, setTextVal2]= useState({left: '-left-[22vw]', opacity: 'opacity-0'})
 
     useEffect(()=>{
         setTimeout(()=>{
-            setVal("right-0")
-        }, 200)
+            setTextVal({left: 'left-0', opacity: 'opacity-100'})
+        }, 100)
+        setTimeout(()=>{
+            setImgVal({right: 'right-0', opacity: 'opacity-100'})
+        }, 660)
+        setTimeout(()=>{
+            setTextVal2({left: 'left-0', opacity: 'opacity-100'})
+        }, 1500)
     },[])
 
   return (
     <div className="h-[90vh] w-full mt-10 flex items-center justify-center ">
-      <div className="mr-3 w-3/12 overflow-clip relative">
-       <div className="abolute top-0 left-0">
-       <p className="text-5xl font-bold pb-5">
+      <div className="mr-3 w-3/12 h-[42vh] overflow-hidden relative">
+       <div className={`absolute top-0 ${textVal.left} ${textVal.opacity} h-full w-full transition-all 
+            duration-700 ease-in`}>
+       <p className="text-5xl font-bold ">
           Keep in touch with your friends and family
         </p>
-        <p className="text-c3 text-justify py-3">
+
+        <div  className={`absolute ${textVal2.left} ${textVal2.opacity} h-full w-full transition-all 
+            duration-700 ease-in`}>
+        <p className="text-c3 text-justify py-5">
           Effortlessly connect with loved ones, share your world, and discover
           endless connections with our intuitive chat application—where every
           interaction sparks a new journey. Join today and unlock the power of
@@ -36,11 +48,13 @@ const WelcomeAnimation = () => {
             {" > "}
         </Link>
 
+        </div>
        </div>
       </div>
 
       <div className="ml-3 w-3/12 relative h-[45vh] overflow-hidden">
-        <Image src={img} alt="ConnectYou" height={380} width={380} className={`absolute top-0 ${val} transition-all duration-500 ease-in`}/>
+        <Image src={img} alt="ConnectYou" height={380} width={380} className={`absolute top-0 ${imgVal.right} ${imgVal.opacity} transition-all 
+            duration-700 ease-in`}/>
       </div>
     </div>
   );
