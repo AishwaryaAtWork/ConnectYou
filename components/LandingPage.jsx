@@ -1,12 +1,15 @@
 import Link from "next/link";
 import Navbar from "./Navbar";
+import WelcomeAnimation from "./WelcomeAnimation";
 
 // Define the LandingPage component
 const LandingPage = () => {
     return (
         // Main container with background and styling
-        <div className="h-[100vh] bg-c1">
+        <div className="h-[100vh] bg-c1 text-white">
             <Navbar />
+
+            <WelcomeAnimation />
 
             {/* <div className="flex flex-col items-center px-4">
         Welcome message

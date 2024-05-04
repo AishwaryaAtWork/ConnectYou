@@ -10,7 +10,7 @@ const Navbar = () => {
         {/* Logo and name  */}
         <Link href="/">
         <div className="text-xl md:text-3xl font-bold text-white flex items-center gap-1">
-            <Image src={logo} alt="Logo" height={42} width={42}/>
+            <Image src={logo} alt="ConnectYouLogo" height={42} width={42}/>
             ConnectYou 
           </div>
         </Link>
