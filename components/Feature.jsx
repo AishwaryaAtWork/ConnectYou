@@ -7,7 +7,7 @@ const Feature = () => {
 
   const data = [1, 2, 3, 4, 5]
   return (
-    <div className='w-full h-[98vh] bg-gradient-to-b to-c1 from-c2 flex flex-col items-center justify-center pb-8 pt-20 cursor-default'
+    <div className='w-full h-[100vh] bg-gradient-to-b to-c1 from-c2 flex flex-col items-center justify-center pb-8 pt-20 cursor-default'
        id='features'>
       <h2 className='text-5xl font-semibold pb-5'>Features</h2>
       <div className='w-full h-auto flex justify-center gap-8 px-8'>
