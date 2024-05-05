@@ -156,7 +156,7 @@ const Register = () => {
     ) : (
         <>
         <Navbar />
-        <div className="min-h-screen mt-10 flex justify-center items-center bg-c1">
+        <div className="min-h-screen flex justify-center items-center bg-c1">
             <ToastMessage />
 
             <div className="flex items-center flex-col">

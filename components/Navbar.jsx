@@ -4,7 +4,7 @@ import logo from "@/public/favicon.ico";
 
 const Navbar = () => {
   return (
-    <div className="absolute top-0">
+    <div className="sticky top-0 z-50">
     <div className="bg-c1 p-4 h-auto w-[100vw] flex items-center justify-between ">
         
         {/* Logo and name  */}
@@ -23,7 +23,7 @@ const Navbar = () => {
             <Link href="/faq">
                 <li className="hover:text-white duration-500">FAQ</li>
             </Link>
-            <Link href="/">
+            <Link href="/#features">
                 <li className="hover:text-white duration-500">Feature</li>
             </Link>
         </div>
