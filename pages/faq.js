@@ -6,7 +6,7 @@ const FAQ = () => {
   return (
     <>
       <Navbar />
-      <div className="h-[100vh] mt-10 flex justify-center items-center bg-c1">
+      <div className="h-[100vh] flex justify-center items-center bg-c1">
         <FAQAnimation />
       </div>
     </>
