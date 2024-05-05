@@ -40,7 +40,7 @@ const WelcomeAnimation = () => {
           meaningful connections, effortlessly.
         </p>
 
-        <Link href='/' className="font-extralight text-md flex gap-2">
+        <Link href='/faq' className="font-extralight text-md flex gap-2">
             <div className="w-fit overflow-hidden">
             Learn More 
             <div className="w-full h-px mt-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 animate-pulse"></div>
