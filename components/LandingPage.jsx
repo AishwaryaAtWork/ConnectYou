@@ -8,7 +8,7 @@ import LandingFooter from "./LandingFooter";
 const LandingPage = () => {
     return (
         // Main container with background and styling
-        <div className="h-[90vh] bg-c1 text-white">
+        <div className="h-[90vh] bg-c1 text-white" id="home">
             <Navbar />
             <WelcomeAnimation />
             <Feature />

@@ -28,10 +28,10 @@ const Navbar = () => {
             </Link>
             {path === '/' ? 
               <SLink to="features" smooth={true}>
-                <li className="hover:text-white duration-500 cursor-pointer">Feature</li>
+                <li className="hover:text-white duration-500 cursor-pointer">Features</li>
               </SLink> : 
               <Link href='/#features'>
-                <li className="hover:text-white duration-500 cursor-pointer">Feature</li>
+                <li className="hover:text-white duration-500 cursor-pointer">Features</li>
               </Link>
               }
         </div>
