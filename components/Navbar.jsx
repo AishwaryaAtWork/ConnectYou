@@ -1,10 +1,13 @@
 import Link from "next/link";
 import Image from "next/image";
 import logo from "@/public/favicon.ico";
-
+import { Link as SLink } from "react-scroll";
+import { usePathname } from "next/navigation";
 const Navbar = () => {
+  const path = usePathname()
+  
   return (
-    <div className="sticky top-0 z-50">
+    <div className="fixed top-0 z-50">
     <div className="bg-c1 p-4 h-auto w-[100vw] flex items-center justify-between ">
         
         {/* Logo and name  */}
@@ -23,9 +26,14 @@ const Navbar = () => {
             <Link href="/faq">
                 <li className="hover:text-white duration-500">FAQ</li>
             </Link>
-            <Link href="/#features">
-                <li className="hover:text-white duration-500">Feature</li>
-            </Link>
+            {path === '/' ? 
+              <SLink to="features" smooth={true}>
+                <li className="hover:text-white duration-500 cursor-pointer">Feature</li>
+              </SLink> : 
+              <Link href='/#features'>
+                <li className="hover:text-white duration-500 cursor-pointer">Feature</li>
+              </Link>
+              }
         </div>
 
           {/* Login and Sign Up buttons */}
