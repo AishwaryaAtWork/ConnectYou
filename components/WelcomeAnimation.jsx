@@ -23,7 +23,7 @@ const WelcomeAnimation = () => {
     },[])
 
   return (
-    <div className="h-[90vh] w-full bg-gradient-to-b from-c1 to-c2 flex items-center justify-center ">
+    <div className="h-[90vh] w-full bg-gradient-to-b from-c1 to-c2 flex items-center justify-center mt-12">
       <div className="mr-3 w-3/12 h-[56%] overflow-hidden relative">
        <div className={`absolute top-0 ${textVal.left} ${textVal.opacity} h-full w-full transition-all 
             duration-700 ease-in`}>

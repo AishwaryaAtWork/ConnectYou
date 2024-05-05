@@ -2,15 +2,17 @@ import Link from "next/link";
 import Navbar from "./Navbar";
 import WelcomeAnimation from "./WelcomeAnimation";
 import Feature from "./Feature";
+import LandingFooter from "./LandingFooter";
 
 // Define the LandingPage component
 const LandingPage = () => {
     return (
         // Main container with background and styling
-        <div className="h-[90vh] bg-c1 text-white">
+        <div className="h-[90vh] bg-c1 text-white" id="home">
             <Navbar />
             <WelcomeAnimation />
             <Feature />
+            <LandingFooter />
             {/* <div className="flex flex-col items-center px-4">
         Welcome message
         <div className="text-center">
