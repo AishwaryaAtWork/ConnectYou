@@ -58,7 +58,7 @@ const ChatMenu = ({ setShowMenu, showMenu }) => {
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         },
         (error) => {
-          console.error(error);
+          // console.error(error);
         },
         () => {
           try {
@@ -81,7 +81,7 @@ const ChatMenu = ({ setShowMenu, showMenu }) => {
               }
             );
           } catch (error) {
-            console.error("Error updating theme:", error);
+            // console.error("Error updating theme:", error);
           }
         }
       );
@@ -146,7 +146,7 @@ const ChatMenu = ({ setShowMenu, showMenu }) => {
         dispatch({ type: "EMPTY" });
       }
     } catch (err) {
-      console.error(err);
+      // console.error(err);
     }
 
     setOpenChatBox(false);

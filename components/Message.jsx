@@ -100,7 +100,7 @@ const Message = ({ message, theme }) => {
       // Update the chat document in Firestore with the new "messages" array
       await updateDoc(chatRef, { messages: updatedMessages });
     } catch (err) {
-      console.error(err);
+      // console.error(err);
     }
   };
 
