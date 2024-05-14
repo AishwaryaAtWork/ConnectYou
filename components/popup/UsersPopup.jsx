@@ -1,5 +1,6 @@
-import Search from "../Search";
-import PopupWrapper from "./PopupWrapper";
+import { useAuth } from "@/context/authContext";
+import { useChatContext } from "@/context/chatContext";
+import { useScreenSize } from "@/context/screenSizeContext";
 import { db } from "@/firebase/firebase";
 import {
     deleteField,
@@ -10,14 +11,13 @@ import {
     updateDoc,
 } from "firebase/firestore";
 import Avatar from "../Avatar";
-import { useAuth } from "@/context/authContext";
-import { useChatContext } from "@/context/chatContext";
-import { useScreenSize } from "@/context/screenSizeContext";
+import Search from "../Search";
+import PopupWrapper from "./PopupWrapper";
 
 const UsersPopup = (props) => {
     const { currentUser } = useAuth();
     const { users, dispatch } = useChatContext();
-    const { setOpenChatBox } = useScreenSize()
+    const { setOpenChatBox } = useScreenSize();
 
     const handleSelect = async (user) => {
         try {
@@ -85,9 +85,9 @@ const UsersPopup = (props) => {
                         Object.values(users).map((user) => (
                             <div
                                 key={user.uid}
-                                onClick={() =>{
-                                    handleSelect(user)
-                                    setTimeout(()=>setOpenChatBox(true), 500)
+                                onClick={() => {
+                                    handleSelect(user);
+                                    setTimeout(() => setOpenChatBox(true), 500);
                                 }}
                                 className="flex items-center gap-4 rounded-xl hover:bg-c5 py-2 px-4 cursor-pointer"
                             >

@@ -26,9 +26,8 @@ const Menu = ({ self, setShowMenu, showMenu, setShowDeletePopup, editMsg }) => {
         <ClickAwayListener onClickAway={handleClickAway}>
             <div
                 ref={ref}
-                className={`w-[200px] absolute top-8 bg-c0 z-10 rounded-md overflow-hidden ${
-                    self ? "right-0" : "left-0"
-                }`}
+                className={`w-[200px] absolute top-8 bg-c0 z-10 rounded-md overflow-hidden ${self ? "right-0" : "left-0"
+                    }`}
             >
                 <ul className="flex flex-col py-2">
                     {self && (

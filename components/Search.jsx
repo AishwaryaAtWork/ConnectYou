@@ -1,21 +1,21 @@
-import React, { useState } from "react";
-import {
-    collection,
-    query,
-    where,
-    getDocs,
-    doc,
-    updateDoc,
-    serverTimestamp,
-    getDoc,
-    setDoc,
-    deleteField,
-} from "firebase/firestore";
-import { db } from "@/firebase/firebase";
 import { useAuth } from "@/context/authContext";
 import { useChatContext } from "@/context/chatContext";
-import Avatar from "./Avatar";
+import { db } from "@/firebase/firebase";
+import {
+    collection,
+    deleteField,
+    doc,
+    getDoc,
+    getDocs,
+    query,
+    serverTimestamp,
+    setDoc,
+    updateDoc,
+    where,
+} from "firebase/firestore";
+import { useState } from "react";
 import { RiSearch2Line } from "react-icons/ri";
+import Avatar from "./Avatar";
 
 const Search = () => {
     const [username, setUsername] = useState("");

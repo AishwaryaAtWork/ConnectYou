@@ -26,10 +26,10 @@ const Chat = () => {
             {data.chatId && (
                 <>
                     <Messages />
-                    {!isUserBlocked && !IamBlocked && 
-                    <div className="mt-auto">
-                        <ChatFooter />
-                    </div>
+                    {!isUserBlocked && !IamBlocked &&
+                        <div className="mt-auto">
+                            <ChatFooter />
+                        </div>
                     }
 
                     {isUserBlocked && (

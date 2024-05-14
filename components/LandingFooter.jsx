@@ -1,9 +1,8 @@
-import React from "react";
-import Image from "next/image";
 import logo from "@/public/favicon.ico";
+import Image from "next/image";
+import Link from "next/link";
 import { MdKeyboardDoubleArrowUp } from "react-icons/md";
 import { Link as SLink } from "react-scroll";
-import Link from "next/link";
 
 const LandingFooter = () => {
   return (
@@ -19,7 +18,7 @@ const LandingFooter = () => {
             <div className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-full cursor-pointer p-[1px] transition duration-300 transform hover:scale-105">
               <SLink to="home" smooth={true}>
                 <div className="flex items-center justify-center p-3 gap-3 text-white font-semibold bg-c1 whitespace-nowrap h-full rounded-full">
-                  <MdKeyboardDoubleArrowUp className="text-3xl"/>
+                  <MdKeyboardDoubleArrowUp className="text-3xl" />
                 </div>
               </SLink>
             </div>
@@ -27,15 +26,15 @@ const LandingFooter = () => {
           <div className="w-[50%] h-[80%] flex flex-col justify-center cursor-default">
             <p className="text-md  uppercase">Who We Are</p>
             <div className="list-none py-5 text-xl uppercase text-c3">
-               <Link href='https://github.com/itsamit108' target="_blank" >
-                    <li className="py-2 hover:text-white duration-500">Amit Gupta | App Developer</li>
-                </Link>
-                <Link href='https://github.com/Ayush40' target="_blank" >
-                    <li className="py-2 hover:text-white duration-500">Ayush Aggarwal | Flutter Developer</li>
-                </Link>
-                <Link href='https://github.com/AishwaryaAtWork' target="_blank" >
-                    <li className="py-2 hover:text-white duration-500">Aishwarya Pathak | Web Developer</li>
-                </Link>
+              <Link href='https://github.com/itsamit108' target="_blank" >
+                <li className="py-2 hover:text-white duration-500">Amit Gupta | App Developer</li>
+              </Link>
+              <Link href='https://github.com/Ayush40' target="_blank" >
+                <li className="py-2 hover:text-white duration-500">Ayush Aggarwal | Flutter Developer</li>
+              </Link>
+              <Link href='https://github.com/AishwaryaAtWork' target="_blank" >
+                <li className="py-2 hover:text-white duration-500">Aishwarya Pathak | Web Developer</li>
+              </Link>
             </div>
           </div>
         </div>

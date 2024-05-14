@@ -7,26 +7,21 @@
  */
 import { useAuth } from "@/context/authContext";
 import { useChatContext } from "@/context/chatContext";
+import { useScreenSize } from "@/context/screenSizeContext";
 import { db } from "@/firebase/firebase";
 import { DELETED_FOR_EVERYONE, DELETED_FOR_ME } from "@/utils/constants";
 import { formatDate, wrapEmojisInHtmlTag } from "@/utils/helpers";
 import { Timestamp, doc, getDoc, updateDoc } from "firebase/firestore";
-import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { FaFilePdf, FaPlay } from "react-icons/fa6";
 import { GoChevronDown } from "react-icons/go";
-import ImageViewer from "react-simple-image-viewer";
+import { RiCheckDoubleFill } from "react-icons/ri";
 import Avatar from "./Avatar";
 import Icon from "./Icon";
 import Menu from "./Menu";
 import DeleteMsgPopup from "./popup/DeleteMsgPopup";
 import ImageVideoPopup from "./popup/ImageVideoPopup";
-import { FaPlay } from "react-icons/fa6";
-import { RiCheckDoubleFill } from "react-icons/ri";
-import { useScreenSize } from "@/context/screenSizeContext";
-import { FaFilePdf } from "react-icons/fa6";
-import Link from "next/link";
-// import "leaflet/dist/leaflet.css";
-// import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
 const Message = ({ message, theme }) => {
   const [showDeletePopup, setShowDeletePopup] = useState(false);
@@ -48,27 +43,26 @@ const Message = ({ message, theme }) => {
     message.date?.seconds,
     message.date?.nanoseconds
   )?.toDate();
-  // const date = timestamp.toDate();
 
-  useEffect(()=>{
-    if(date) setDateTimeNow(formatDate(date));
+  useEffect(() => {
+    if (date) setDateTimeNow(formatDate(date));
     message?.read ? setReadRecieptNow("text-green-500") : setReadRecieptNow("text-gray-400");
-    
+
     // Update setDateTimeNow every minute
     const intervalId = setInterval(() => {
       if (date) {
-          setDateTimeNow(formatDate(date));
+        setDateTimeNow(formatDate(date));
       }
 
-      if(message.read){
+      if (message.read) {
         setReadRecieptNow("text-green-400");
       }
-  }, 600); // 60000 milliseconds = 1 minute
+    }, 600); // 60000 milliseconds = 1 minute
 
-  // Clean up the interval on component unmount
-  return () => clearInterval(intervalId);
+    // Clean up the interval on component unmount
+    return () => clearInterval(intervalId);
 
-  },[date, readRecieptNow, message])
+  }, [date, readRecieptNow, message]);
 
   const deleteMessage = async (action) => {
     try {
@@ -77,7 +71,7 @@ const Message = ({ message, theme }) => {
 
       // Retrieve the chat document from Firestore
       const chatDoc = await getDoc(chatRef);
-      const chatInfo = chatDoc.data().messages
+      const chatInfo = chatDoc.data().messages;
 
       // Create a new "messages" array that excludes the message with the matching ID
       const updatedMessages = chatDoc.data().messages.map((message) => {
@@ -89,15 +83,14 @@ const Message = ({ message, theme }) => {
           }
 
           if (action === DELETED_FOR_EVERYONE) {
-            if(message?.fileUrl?.includes("map") || message?.fileUrl?.includes("image") || message?.fileUrl?.includes("audio") || 
-                message?.fileUrl?.includes("video") || message?.fileUrl?.includes("pdf") || message?.fileUrl?.includes("gif") )
-            { 
-              message.fileUrl = '' 
+            if (message?.fileUrl?.includes("map") || message?.fileUrl?.includes("image") || message?.fileUrl?.includes("audio") ||
+              message?.fileUrl?.includes("video") || message?.fileUrl?.includes("pdf") || message?.fileUrl?.includes("gif")) {
+              message.fileUrl = '';
             };
-            message.text="This message was deleted.",
-            message.deletedInfo = {
-              deletedForEveryone: true,
-            }
+            message.text = "This message was deleted.",
+              message.deletedInfo = {
+                deletedForEveryone: true,
+              };
           }
         }
         setShowDeletePopup(false);
@@ -117,9 +110,9 @@ const Message = ({ message, theme }) => {
   };
 
   const openVidImg = (url) => {
-    setOpenImgVidPopup(true)
-    setImgVidPopupUrl(url)
-  }
+    setOpenImgVidPopup(true);
+    setImgVidPopupUrl(url);
+  };
 
   return (
     <div ref={ref} className={`mb-5 max-w-[75%] ${self ? "self-end" : ""}`}>
@@ -138,7 +131,7 @@ const Message = ({ message, theme }) => {
           self={self}
         />
       )}
-      
+
       <div
         className={`flex items-end gap-3 mb-1 ${self ? "justify-start flex-row-reverse" : ""
           }`}
@@ -152,11 +145,11 @@ const Message = ({ message, theme }) => {
           className={` group flex flex-col gap-4 px-3 py-3 md:px-5 md:py-3 rounded-3xl relative ${self ? "rounded-br-md bg-c5" : "rounded-bl-md bg-c1"
             }`}
         >
-          {self && <RiCheckDoubleFill className={`absolute bottom-[0.5px] md:bottom-[1px] right-1 md:right-[5px] text-sm md:text-base ${readRecieptNow}`}/>}
+          {self && <RiCheckDoubleFill className={`absolute bottom-[0.5px] md:bottom-[1px] right-1 md:right-[5px] text-sm md:text-base ${readRecieptNow}`} />}
 
           {message.text && (
             <div
-              className={`text-sm cursor-default ${message.text==="This message was deleted."?"italic":""}`}
+              className={`text-sm cursor-default ${message.text === "This message was deleted." ? "italic" : ""}`}
               dangerouslySetInnerHTML={{
                 __html: wrapEmojisInHtmlTag(message.text),
               }}
@@ -173,11 +166,11 @@ const Message = ({ message, theme }) => {
               height={250}
               className="rounded-3xl md:max-w-[250px] hover:cursor-pointer"
               onClick={() => {
-                openVidImg(message.fileUrl)
+                openVidImg(message.fileUrl);
                 setImageViewer({
                   msgId: message.id,
                   url: message.fileUrl,
-                })
+                });
               }
               }
             />
@@ -197,26 +190,25 @@ const Message = ({ message, theme }) => {
               }
             />
           )}
-          {(message?.fileUrl?.includes("pdf") && !isSmallScreen ) && (
-              <iframe
+          {(message?.fileUrl?.includes("pdf") && !isSmallScreen) && (
+            <iframe
               src={message.fileUrl}
               width="100%"
               height="400px" // Adjust the height as needed
               frameBorder="0"
               title={`PDF sent by ${message.pdfName}`}
-            // sandbox="allow-downloads"
             />
-            )}
-          {(message?.fileUrl?.includes("pdf") && isSmallScreen ) && (
+          )}
+          {(message?.fileUrl?.includes("pdf") && isSmallScreen) && (
             <Link href={message.fileUrl} target="_blank">
-             <div className="w-auto h-[60px] px-3 rounded-lg border border-gray-500 flex items-center justify-between overflow-hidden">
-            <div className="w-[8%] mr-2">
-            <FaFilePdf size={27} className="text-gray-300"/>
-            </div>
-            <p className="text-gray-300 text-xs w-[160px] break-all line-clamp-3">{message.pdfName}</p>
-            </div>
+              <div className="w-auto h-[60px] px-3 rounded-lg border border-gray-500 flex items-center justify-between overflow-hidden">
+                <div className="w-[8%] mr-2">
+                  <FaFilePdf size={27} className="text-gray-300" />
+                </div>
+                <p className="text-gray-300 text-xs w-[160px] break-all line-clamp-3">{message.pdfName}</p>
+              </div>
             </Link>
-            )}
+          )}
 
           {message?.fileUrl?.includes("video") && (
             <div className="relative">
@@ -252,28 +244,6 @@ const Message = ({ message, theme }) => {
           )}
           {message?.fileUrl?.includes('map') && (
             <>
-
-              {/* //   <iframe
-            //   width="100%"
-            //   height="400px"
-            //   frameBorder="0"
-            //   style={{ border: 0 }}
-            //   src={message.fileUrl}
-            //   allowFullScreen
-            //   title={`Map sent by ${message.senderName}`}
-            // /> */}
-              {/* <MapContainer center={[message.mapURL.hits[0].point.lat, message.mapURL.hits[0].point.lng]} zoom={13} style={{ height: '100%', width: '100%' }}>
-                <TileLayer
-                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
-                <Marker position={[message.mapURL.hits[0].point.lat, message.mapURL.hits[0].point.lng]}>
-                  <Popup>
-                    Your location: {message.mapURL.hits[0].name}
-                  </Popup>
-                </Marker>
-              </MapContainer> */}
-
-
               <p className="text-sm ">{`${self ? "My" : `${data.user.displayName}'s`} geo loaction :`}</p>
               <a href={message.fileUrl} target="_blank" className="cursor-pointer text-sm text-blue-400 w-[15rem] md:w-auto whitespace-wrap overflow-hidden">{message.fileUrl}</a>
 
@@ -281,26 +251,26 @@ const Message = ({ message, theme }) => {
           )}
           {!(message.text === "This message was deleted.") && (
             <div
-            className={`${showMenu ? "" : "hidden"
-              } group-hover:flex absolute top-2 ${self ? `bg-c5 ${isSmallScreen ? "right-2":"left-2"}` : `bg-c1 ${isSmallScreen ? "left-2":"right-2"}`
-              }`}
-            onClick={() => setShowMenu(!showMenu)}
-          >
-            <Icon
-              size="medium"
-              className="hover:bg-inherit rounded-none"
-              icon={<GoChevronDown size={24} className="text-c3" />}
-            />
-            {showMenu && (
-              <Menu
-                self={self}
-                setShowMenu={setShowMenu}
-                showMenu={showMenu}
-                setShowDeletePopup={deletePopupHandler}
-                editMsg={() => setEditMsg(message)}
+              className={`${showMenu ? "" : "hidden"
+                } group-hover:flex absolute top-2 ${self ? `bg-c5 ${isSmallScreen ? "right-2" : "left-2"}` : `bg-c1 ${isSmallScreen ? "left-2" : "right-2"}`
+                }`}
+              onClick={() => setShowMenu(!showMenu)}
+            >
+              <Icon
+                size="medium"
+                className="hover:bg-inherit rounded-none"
+                icon={<GoChevronDown size={24} className="text-c3" />}
               />
-            )}
-          </div>
+              {showMenu && (
+                <Menu
+                  self={self}
+                  setShowMenu={setShowMenu}
+                  showMenu={showMenu}
+                  setShowDeletePopup={deletePopupHandler}
+                  editMsg={() => setEditMsg(message)}
+                />
+              )}
+            </div>
           )}
         </div>
       </div>

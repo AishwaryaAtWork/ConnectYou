@@ -3,14 +3,13 @@
  * selected chat, chat messages, input text, attachments etc.
  * Exports ChatContextProvider component and useChatContext hook.
  */
+import { useAuth } from "@/context/authContext";
 import {
     createContext,
     useContext,
-    useState,
-    useEffect,
     useReducer,
+    useState
 } from "react";
-import { useAuth } from "@/context/authContext";
 
 const ChatContext = createContext();
 

@@ -1,6 +1,6 @@
 import PopupWrapper from "./PopupWrapper";
 
-import { DELETED_FOR_ME, DELETED_FOR_EVERYONE } from "@/utils/constants";
+import { DELETED_FOR_EVERYONE, DELETED_FOR_ME } from "@/utils/constants";
 
 import { RiErrorWarningLine } from "react-icons/ri";
 

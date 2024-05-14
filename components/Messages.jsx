@@ -10,9 +10,6 @@ import { DELETED_FOR_ME } from "@/utils/constants";
 import { doc, onSnapshot } from "firebase/firestore";
 import { useEffect, useRef, useState } from "react";
 import Message from "./Message";
-import Icon from "./Icon";
-import { IoArrowBack } from "react-icons/io5";
-import { useScreenSize } from "@/context/screenSizeContext";
 
 /**
  * @function Messages
@@ -59,12 +56,11 @@ const Messages = () => {
       className="grow px-2 py-5 md:p-5 overflow-auto scrollbar flex flex-col bg-cover bg-center"
       style={{ backgroundImage: `url(${theme})` }}
     >
-      
+
       {messages
         ?.filter(
           (m) =>
             m?.deletedInfo?.[currentUser.uid] !== DELETED_FOR_ME &&
-            // !m?.deletedInfo?.deletedForEveryone &&
             !m?.deleteChatInfo?.[currentUser.uid]
         )
         ?.map((m) => {

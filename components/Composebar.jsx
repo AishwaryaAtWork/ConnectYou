@@ -19,11 +19,11 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import { TbSend } from "react-icons/tb";
+import { useRef } from "react";
 import { IoMicOutline } from "react-icons/io5";
+import { TbSend } from "react-icons/tb";
 import { v4 as uuid } from "uuid";
 import Icon from "./Icon";
-import { useRef } from "react";
 
 let typingTimeout = null;
 
@@ -86,7 +86,7 @@ const Composebar = ({ selectedFileType, setSelectedFile, setSelectedGif, selecte
     if (attachment) {
       const storageRef = ref(storage, `${uuid()}/${selectedFileType}`);
       const uploadTask = uploadBytesResumable(storageRef, attachment);
-      
+
       uploadTask.on(
         "state_changed",
         (snapshot) => {
@@ -106,7 +106,7 @@ const Composebar = ({ selectedFileType, setSelectedFile, setSelectedGif, selecte
                 date: Timestamp.now(),
                 fileUrl: downloadURL, // changed 'img' to 'fileUrl'
                 read: false,
-                pdfName: attachment.name.includes("pdf") ? attachment.name : null 
+                pdfName: attachment.name.includes("pdf") ? attachment.name : null
               }),
             });
           });

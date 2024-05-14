@@ -2,7 +2,7 @@ import { useAuth } from '@/context/authContext';
 import { useChatContext } from '@/context/chatContext';
 import { db } from '@/firebase/firebase';
 import { Timestamp, arrayUnion, doc, getDoc, updateDoc } from 'firebase/firestore';
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 import { v4 as uuid } from "uuid";
 
@@ -23,49 +23,49 @@ const SendMoneyPopup = ({ setOpenPopup }) => {
       const userDoc = await getDoc(doc(db, "users", currentUser.uid));
       setUserCredits(userDoc?.data()?.credits);
 
-      // Fetch other user's credit from users 
+      // Fetch other user's credit from users
       const otherUserDoc = await getDoc(doc(db, "users", data.user.uid));
       setOtherUserCredits(otherUserDoc?.data()?.credits);
 
     };
 
-    fetchData()
+    fetchData();
 
-  }, [])
+  }, []);
 
   const updateUserCredit = async () => {
     if (amount > 0) {
-      if(amount <= userCredits){
+      if (amount <= userCredits) {
         const updatedCurrUserAmount = userCredits - amount;
-      const updatedOtherUserAmount = otherUserCredits + amount;
+        const updatedOtherUserAmount = otherUserCredits + amount;
 
-      await updateDoc(doc(db, "users", currentUser.uid), {
-        credits: updatedCurrUserAmount
-      })
+        await updateDoc(doc(db, "users", currentUser.uid), {
+          credits: updatedCurrUserAmount
+        });
 
-      await updateDoc(doc(db, "users", data.user.uid), {
-        credits: updatedOtherUserAmount
-      })
+        await updateDoc(doc(db, "users", data.user.uid), {
+          credits: updatedOtherUserAmount
+        });
 
-      await updateDoc(doc(db, "chats", data.chatId), {
-        messages: arrayUnion({
-          id: uuid(),
-          text: `${amount}Rs. sent.`,
-          sender: currentUser.uid,
-          date: Timestamp.now(),
-          read: false,
-        }),
-      });
+        await updateDoc(doc(db, "chats", data.chatId), {
+          messages: arrayUnion({
+            id: uuid(),
+            text: `${amount}Rs. sent.`,
+            sender: currentUser.uid,
+            date: Timestamp.now(),
+            read: false,
+          }),
+        });
       }
-      else{
-        toast.error("Amount is more than the amount in wallet.")
+      else {
+        toast.error("Amount is more than the amount in wallet.");
       }
 
     } else {
-      toast.info("No amount is sent.")
+      toast.info("No amount is sent.");
     }
-    setOpenPopup(false)
-  }
+    setOpenPopup(false);
+  };
 
   const handleClickOutside = (event) => {
     if (popUpRef.current && !popUpRef.current.contains(event.target)) {

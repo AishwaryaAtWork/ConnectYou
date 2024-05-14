@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect, useContext } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 
 const ScreenSizeContext = createContext();
 
@@ -12,7 +12,6 @@ export const ScreenSizeProvider = ({ children }) => {
     useEffect(() => {
         const checkScreenSize = () => {
             setIsSmallScreen(window.innerWidth < 768);
-            // setOpenSearch(!(window.innerWidth < 768));
         };
 
         checkScreenSize();
@@ -25,8 +24,10 @@ export const ScreenSizeProvider = ({ children }) => {
     });
 
     return (
-        <ScreenSizeContext.Provider value={{ isSmallScreen, openChatBox, setOpenChatBox, showAttachmentMenu, setShowAttachmentMenu, 
-            openLeftNav, setOpenLeftNav, openSearch, setOpenSearch }}>
+        <ScreenSizeContext.Provider value={{
+            isSmallScreen, openChatBox, setOpenChatBox, showAttachmentMenu, setShowAttachmentMenu,
+            openLeftNav, setOpenLeftNav, openSearch, setOpenSearch
+        }}>
             {children}
         </ScreenSizeContext.Provider>
     );
@@ -35,4 +36,3 @@ export const ScreenSizeProvider = ({ children }) => {
 export const useScreenSize = () => {
     return useContext(ScreenSizeContext);
 };
-

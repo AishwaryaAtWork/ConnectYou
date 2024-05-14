@@ -1,6 +1,5 @@
-import React from "react";
-import Navbar from "@/components/Navbar";
 import FAQAnimation from "@/components/FAQAnimation";
+import Navbar from "@/components/Navbar";
 
 const FAQ = () => {
   return (

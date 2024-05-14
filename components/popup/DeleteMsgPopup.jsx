@@ -1,6 +1,6 @@
 import PopupWrapper from "./PopupWrapper";
 
-import { DELETED_FOR_ME, DELETED_FOR_EVERYONE } from "@/utils/constants";
+import { DELETED_FOR_EVERYONE, DELETED_FOR_ME } from "@/utils/constants";
 import { useEffect, useState } from "react";
 
 import { RiErrorWarningLine } from "react-icons/ri";
@@ -8,13 +8,13 @@ import { RiErrorWarningLine } from "react-icons/ri";
 const DeleteMsgPopup = (props) => {
     const [showDelForEveryone, setShowDelForEveryone] = useState(true);
     const currTime = new Date();
-    const msgTime = new Date(props.message.date.seconds * 1000 + props.message.date.nanoseconds / 1000000)
+    const msgTime = new Date(props.message.date.seconds * 1000 + props.message.date.nanoseconds / 1000000);
 
-    useEffect(()=>{
-        (currTime.getTime() - msgTime?.getTime()) /(1000*60) > 30 ? 
-        setShowDelForEveryone(false) : setShowDelForEveryone(true)        
-    },[])
-    
+    useEffect(() => {
+        (currTime.getTime() - msgTime?.getTime()) / (1000 * 60) > 30 ?
+            setShowDelForEveryone(false) : setShowDelForEveryone(true);
+    }, []);
+
     return (
         <PopupWrapper {...props}>
             <div className="mt-10 mb-5">

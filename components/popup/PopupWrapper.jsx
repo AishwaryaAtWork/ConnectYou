@@ -1,6 +1,5 @@
-import React from "react";
-import Icon from "../Icon";
 import { IoClose } from "react-icons/io5";
+import Icon from "../Icon";
 
 const PopupWrapper = (props) => {
     return (
@@ -10,9 +9,8 @@ const PopupWrapper = (props) => {
                 onClick={props.onHide}
             />
             <div
-                className={`flex flex-col w-[500px] max-h-[80%]  bg-c2 relative z-10 rounded-3xl ${
-                    props.shortHeight ? "" : "min-h-[600px]"
-                }`}
+                className={`flex flex-col w-[500px] max-h-[80%]  bg-c2 relative z-10 rounded-3xl ${props.shortHeight ? "" : "min-h-[600px]"
+                    }`}
             >
                 {!props.noHeader && (
                     <div className="shrink-0 p-6 flex items-center justify-between">

@@ -11,13 +11,7 @@ import { useChatContext } from "@/context/chatContext";
 import { db, storage } from "@/firebase/firebase";
 import { v4 as uuid } from "uuid";
 
-import {
-  getStorage,
-  ref,
-  uploadBytes,
-  getDownloadURL,
-  uploadBytesResumable,
-} from "firebase/storage";
+import { useScreenSize } from "@/context/screenSizeContext";
 import {
   arrayRemove,
   arrayUnion,
@@ -25,12 +19,13 @@ import {
   getDoc,
   updateDoc,
 } from "firebase/firestore";
+import {
+  getDownloadURL,
+  ref,
+  uploadBytesResumable
+} from "firebase/storage";
 import ClickAwayListener from "react-click-away-listener";
-import { useState } from "react";
-import AddMoneyPopup from "./popup/AddMoneyPopup";
-import ToastMessage from "./ToastMessage";
 import { toast } from "react-toastify";
-import { useScreenSize } from "@/context/screenSizeContext";
 
 const ChatMenu = ({ setShowMenu, showMenu }) => {
   const { data, users, dispatch, chats, setSelectedChat } = useChatContext();
@@ -162,7 +157,7 @@ const ChatMenu = ({ setShowMenu, showMenu }) => {
       <div
         className={`w-[200px] absolute top-[70px] right-5 bg-c0 z-10 rounded-md overflow-hidden`}
       >
-   
+
         <ul className="flex flex-col py-2">
           {!IamBlocked && (
             <li
@@ -198,7 +193,7 @@ const ChatMenu = ({ setShowMenu, showMenu }) => {
             />
             Set Theme
           </li>
-      
+
         </ul>
       </div>
     </ClickAwayListener>

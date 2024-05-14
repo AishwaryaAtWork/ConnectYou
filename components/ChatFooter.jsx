@@ -15,6 +15,7 @@ import { useEffect, useRef, useState } from "react";
 import ClickAwayListener from "react-click-away-listener";
 import { CgAttachment } from "react-icons/cg";
 import { CiCreditCard1 } from "react-icons/ci";
+import { FaFilePdf } from "react-icons/fa6";
 import { HiOutlineEmojiHappy } from "react-icons/hi";
 import { IoClose, IoEllipsisVerticalSharp, IoLocationOutline } from "react-icons/io5";
 import { MdDeleteForever, MdGif } from "react-icons/md";
@@ -26,7 +27,6 @@ import Icon from "./Icon";
 import ToastMessage from "./ToastMessage";
 import MapPopup from "./popup/MapPopup";
 import SendMoneyPopup from "./popup/SendMoneyPopup";
-import { FaFilePdf } from "react-icons/fa6";
 
 
 
@@ -53,9 +53,9 @@ const ChatFooter = () => {
     isTyping,
     setAttachment,
     attachment,
-    selectedFile, 
+    selectedFile,
     setSelectedFile,
-    selectedGif, 
+    selectedGif,
     setSelectedGif
   } = useChatContext();
 
@@ -146,7 +146,7 @@ const ChatFooter = () => {
       navigator.geolocation.getCurrentPosition(
         async (position) => {
           const { latitude, longitude } = position.coords;
-          const mapURL = `https://www.google.com/maps?q=${latitude},${longitude}`
+          const mapURL = `https://www.google.com/maps?q=${latitude},${longitude}`;
 
           // Update Firestore document with the location data
           await updateDoc(doc(db, "chats", data.chatId), {
@@ -204,7 +204,7 @@ const ChatFooter = () => {
           )}
           {selectedFileType.includes("pdf") && (
             <div className="h-full flex flex-col gap-2 items-center justify-center">
-              <FaFilePdf size={27} className="text-gray-300"/>
+              <FaFilePdf size={27} className="text-gray-300" />
               <p className="text-[10px] font-light text-gray-300 text-wrap w-[96%] h-auto break-all text-center">
                 {attachment?.name}</p>
             </div>
@@ -327,8 +327,8 @@ const ChatFooter = () => {
                           src={gif.images.fixed_height_small.url}
                           style={style}
                           onClick={() => {
-                            onGifSelected(gif)
-                            setShowAttachmentMenu(false)
+                            onGifSelected(gif);
+                            setShowAttachmentMenu(false);
                           }}
                           alt={gif.title}
                         />

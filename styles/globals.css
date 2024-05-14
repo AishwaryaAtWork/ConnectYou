@@ -23,17 +23,17 @@ body {
     box-sizing: border-box;
 }
 
-::-webkit-scrollbar{
+::-webkit-scrollbar {
     width: 0.1rem;
     height: 0.1rem;
 }
 
-::-webkit-scrollbar-track{
+::-webkit-scrollbar-track {
     background-color: #2e343d;
     border-radius: 20px;
 }
 
-::-webkit-scrollbar-thumb{
+::-webkit-scrollbar-thumb {
     background-color: black;
     border-radius: 20px;
 }
@@ -50,18 +50,22 @@ body {
     scrollbar-color: #2e343d transparent;
     scrollbar-width: thin;
 }
+
 .scrollbar::-webkit-scrollbar {
     width: 8px;
     height: 6px;
 }
+
 .scrollbar::-webkit-scrollbar-track {
     background: transparent;
 }
+
 .scrollbar::-webkit-scrollbar-thumb {
     background-color: transparent;
     border-radius: 10px;
     opacity: 0;
 }
+
 .scrollbar:hover::-webkit-scrollbar-thumb {
     background-color: #2e343d;
     opacity: 1;
@@ -70,6 +74,7 @@ body {
 #ReactSimpleImageViewer {
     z-index: 99;
 }
+
 #ReactSimpleImageViewer .react-simple-image-viewer__close {
     width: 40px;
     height: 40px;

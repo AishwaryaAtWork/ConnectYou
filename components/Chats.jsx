@@ -4,6 +4,7 @@
  */
 import { useAuth } from "@/context/authContext";
 import { useChatContext } from "@/context/chatContext";
+import { useScreenSize } from "@/context/screenSizeContext";
 import { db } from "@/firebase/firebase";
 import { formatDate } from "@/utils/helpers";
 import {
@@ -19,7 +20,6 @@ import {
 import { useEffect, useRef, useState } from "react";
 import { RiSearch2Line } from "react-icons/ri";
 import Avatar from "./Avatar";
-import { useScreenSize } from "@/context/screenSizeContext";
 
 const Chats = () => {
     const [search, setSearch] = useState("");
@@ -29,7 +29,7 @@ const Chats = () => {
     const isBlockExecutedRef = useRef(false);
 
     const { currentUser } = useAuth();
-    const {isSmallScreen, setOpenChatBox, setOpenLeftNav, openSearch, setOpenSearch} = useScreenSize()
+    const { isSmallScreen, setOpenChatBox, setOpenLeftNav, openSearch, setOpenSearch } = useScreenSize();
     const {
         chats,
         setChats,
@@ -163,44 +163,44 @@ const Chats = () => {
     };
 
     const handleSelect = (user, selectedChatId) => {
-        
+
         setSelectedChat(user);
         dispatch({ type: "CHANGE_USER", payload: user });
-        
+
         if (unreadMsgs?.[selectedChatId]?.length > 0) {
             readChat(selectedChatId);
         }
     };
-    
+
 
     return (
         <div className="flex flex-col h-full">
             {isSmallScreen ? (
-                <div className={`shrink-0 sticky -top-[20px] z-10 flex justify-center w-full py-1 bg-c2 md:py-5 ${openSearch ? "h-auto":"h-0 overflow-hidden opacity-0"} transition-all ease-in-out duration-500`}>
-                {/* ... (search input code) */}
-                <RiSearch2Line className="absolute top-5 md:top-9 left-5 text-c3" />
-                <input
-                    type="Text"
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-                    placeholder="Search username..."
-                    className="w-[96%] h-12 rounded-xl bg-c1/[0.5] pl-11 pr-5 placeholder:text-c3 outline-none text-base"
-                />
-            </div>
+                <div className={`shrink-0 sticky -top-[20px] z-10 flex justify-center w-full py-1 bg-c2 md:py-5 ${openSearch ? "h-auto" : "h-0 overflow-hidden opacity-0"} transition-all ease-in-out duration-500`}>
+                    {/* ... (search input code) */}
+                    <RiSearch2Line className="absolute top-5 md:top-9 left-5 text-c3" />
+                    <input
+                        type="Text"
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                        placeholder="Search username..."
+                        className="w-[96%] h-12 rounded-xl bg-c1/[0.5] pl-11 pr-5 placeholder:text-c3 outline-none text-base"
+                    />
+                </div>
             ) : (
                 <div className={`shrink-0 sticky -top-[20px] z-10 flex justify-center w-full bg-c2 md:py-4  `}>
-       
-                <RiSearch2Line className="absolute top-6 md:top-9 left-5 text-c3" />
-                <input
-                    type="Text"
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-                    placeholder="Search username..."
-                    className="w-[96%] h-12 rounded-xl bg-c1/[0.5] pl-11 pr-5 placeholder:text-c3 outline-none text-base"
-                />
-            </div>
-            )} 
-            
+
+                    <RiSearch2Line className="absolute top-6 md:top-9 left-5 text-c3" />
+                    <input
+                        type="Text"
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                        placeholder="Search username..."
+                        className="w-[96%] h-12 rounded-xl bg-c1/[0.5] pl-11 pr-5 placeholder:text-c3 outline-none text-base"
+                    />
+                </div>
+            )}
+
             {filteredChats.length === 0 ? ( // Check if there are no chats to display
                 <div className="flex flex-col items-center justify-center h-[calc(100vh-220px)]">
                     <span role="img" aria-label="No chats" className="text-6xl mb-4">
@@ -229,11 +229,11 @@ const Chats = () => {
                                 <li
                                     key={chat[0]}
                                     id={chat[0]}
-                                    onClick={() =>{ 
-                                        handleSelect(user, chat[0])
-                                        setOpenLeftNav(false)
-                                        setOpenSearch(false)
-                                        if(isSmallScreen) setTimeout(()=>setOpenChatBox(true), 500)
+                                    onClick={() => {
+                                        handleSelect(user, chat[0]);
+                                        setOpenLeftNav(false);
+                                        setOpenSearch(false);
+                                        if (isSmallScreen) setTimeout(() => setOpenChatBox(true), 500);
                                     }}
                                     className={`h-[80px] flex items-center gap-4 rounded-3xl hover:bg-c1 p-3 cursor-pointer mx-2 ${selectedChat?.uid === user.uid
                                         ? "bg-c1"

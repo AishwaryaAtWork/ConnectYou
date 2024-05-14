@@ -4,14 +4,14 @@
  * Has controls for chat menu.
  */
 import { useChatContext } from "@/context/chatContext";
+import { useScreenSize } from "@/context/screenSizeContext";
 import { useState } from "react";
+import { GoDeviceCameraVideo } from "react-icons/go";
 import { IoArrowBack, IoEllipsisVerticalSharp } from "react-icons/io5";
 import { LuPhone } from "react-icons/lu";
-import { GoDeviceCameraVideo } from "react-icons/go";
 import Avatar from "./Avatar";
 import ChatMenu from "./ChatMenu";
 import Icon from "./Icon";
-import { useScreenSize } from "@/context/screenSizeContext";
 
 const ChatHeader = (props) => {
     const [showMenu, setShowMenu] = useState(false);
@@ -20,13 +20,13 @@ const ChatHeader = (props) => {
     const online = users[data.user.uid]?.isOnline;
     const user = users[data.user.uid];
 
-    const onBack = () =>{
-        setOpenChatBox(false) 
-        setShowAttachmentMenu(false)
-        setAttachment(null)
-        setSelectedFile(null)
-        setSelectedGif(null)
-    }
+    const onBack = () => {
+        setOpenChatBox(false);
+        setShowAttachmentMenu(false);
+        setAttachment(null);
+        setSelectedFile(null);
+        setSelectedGif(null);
+    };
 
     return (
         <div className="flex justify-between items-center pb-5 border-b border-white/[0.05]">
