@@ -18,7 +18,7 @@ const LandingFooter = () => {
               ConnectYou
             </div>
             <div className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-full cursor-pointer p-[1px] transition duration-300 transform hover:scale-105">
-              <SLink to="home" smooth={true}>
+              <SLink to="home" smooth={true} offset={-100}>
                 <div className="flex items-center justify-center p-3 gap-3 text-white font-semibold bg-c1 whitespace-nowrap h-full rounded-full">
                   <MdKeyboardDoubleArrowUp className="text-3xl"/>
                 </div>
