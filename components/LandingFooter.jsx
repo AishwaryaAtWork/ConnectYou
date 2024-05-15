@@ -9,10 +9,11 @@ const LandingFooter = () => {
   return (
     <>
       <div className="w-full h-px bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 animate-pulse"></div>
-      <div className="h-auto w-full bg-gradient-to-b from-c1 via-c2 to-c1 text-white flex flex-col items-center justify-between">
-        <div className="w-7/12 h-[40vh] flex gap-5 justify-center items-center mt-8">
-          <div className="w-[50%] h-full flex flex-col items-center justify-center gap-5">
-            <div className="flex gap-1 text-4xl font-semibold items-center cursor-default">
+      <div className="h-[66vh] md:h-auto w-full bg-gradient-to-b from-c1 via-c2 to-c1 text-white flex flex-col items-center 
+        justify-between overflow-hidden">
+        <div className="w-full h-[65%] md:w-7/12 md:h-[40vh] flex flex-col lg:flex-row gap-5 justify-center items-center mt-8">
+          <div className="w-[50%] h-full flex flex-col items-center justify-center gap-5 ">
+            <div className="hidden lg:flex gap-1 text-4xl font-semibold items-center cursor-default">
               <Image src={logo} alt="ConnectYouLogo" height={68} width={68} />
               ConnectYou
             </div>
@@ -24,9 +25,9 @@ const LandingFooter = () => {
               </SLink>
             </div>
           </div>
-          <div className="w-[50%] h-[80%] flex flex-col justify-center cursor-default">
-            <p className="text-md  uppercase">Who We Are</p>
-            <div className="list-none py-5 text-xl uppercase text-c3">
+          <div className="w-[80%] h-[70%] mt-6 md:mt-auto md:w-[50%] md:h-[100%] flex flex-col justify-center cursor-default">
+            <p className="text-md text-center md:text-left uppercase">Who We Are</p>
+            <div className="list-none py-2 md:py-5 text-lg text-center md:text-left md:text-xl uppercase text-c3">
                <Link href='https://github.com/itsamit108' target="_blank" >
                     <li className="py-2 hover:text-white duration-500">Amit Gupta | App Developer</li>
                 </Link>
