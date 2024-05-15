@@ -94,9 +94,9 @@ const Login = () => {
     ) : (
        <>
         <Navbar />
-        <div className="min-h-screen flex justify-center items-center bg-c1">
+        <div className="min-h-[120vh] md:min-h-screen flex justify-center items-center bg-c1">
             <ToastMessage />
-            <div className="flex items-center flex-col">
+            <div className="flex items-center flex-col w-10/12 md:w-auto">
                 <div className="text-center">
                     <div className="text-4xl font-bold">
                         Login to Your Account

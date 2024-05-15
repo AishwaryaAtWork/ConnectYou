@@ -156,10 +156,10 @@ const Register = () => {
     ) : (
         <>
         <Navbar />
-        <div className="min-h-screen flex justify-center items-center bg-c1 mt-12">
+        <div className="md:min-h-screen min-h-[120vh] flex justify-center items-center bg-c1 mt-12">
             <ToastMessage />
 
-            <div className="flex items-center flex-col">
+            <div className="flex items-center flex-col w-10/12 md:w-auto">
                 <div className="text-center">
                     <div className="text-4xl font-bold">Create New Account</div>
                     <div className="mt-3 text-c3">

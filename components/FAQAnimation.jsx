@@ -14,7 +14,7 @@ const FAQAnimation = () => {
         },600)
     },[])
   return (
-    <div className='w-8/12 h-[80vh] overflow-hidden  flex justify-center relative'>
+    <div className='w-10/12 md:w-8/12 h-[150vh] md:h-[80vh] overflow-hidden  flex justify-center relative'>
 
         {/* FAQ heading */}
         <div className={`text-center absolute ${head.top} ${head.opacity} transition-all 
@@ -31,7 +31,7 @@ const FAQAnimation = () => {
             {/* Question 1 */}
             <div className="mb-6">
               <p className="font-semibold">Q: What is ConnectYou?</p>
-              <p>
+              <p className='text-justify'>
                 A: ConnectYou is a social platform designed to help you connect
                 and chat with friends and family in a vibrant community setting.
               </p>
@@ -40,7 +40,7 @@ const FAQAnimation = () => {
             {/* Question 2 */}
             <div className="mb-6">
               <p className="font-semibold">Q: How do I sign up?</p>
-              <p>
+              <p className='text-justify'>
                 A: To sign up, click on the &quot;Sign Up&quot; button on the
                 landing page, fill in the required information, and follow the
                 registration process.
@@ -50,7 +50,7 @@ const FAQAnimation = () => {
             {/* Question 3 */}
             <div className="mb-6">
               <p className="font-semibold">Q: Is ConnectYou free to use?</p>
-              <p>
+              <p className='text-justify'>
                 A: Yes, ConnectYou is free to use for basic features. However,
                 there are optional premium features available for a subscription
                 fee.
@@ -60,7 +60,7 @@ const FAQAnimation = () => {
             {/* Question 4 */}
             <div className="mb-6">
               <p className="font-semibold">Q: How can I connect with others?</p>
-              <p>
+              <p className='text-justify'>
                 A: You can connect with others by sending friend requests,
                 joining communities, and participating in group chats.
               </p>
@@ -69,7 +69,7 @@ const FAQAnimation = () => {
             {/* Question 5 */}
             <div className="mb-6">
               <p className="font-semibold">Q: Can I customize my profile?</p>
-              <p>
+              <p className='text-justify'>
                 A: Yes, you can customize your profile by adding a profile
                 picture, updating your bio, and sharing your interests.
               </p>
@@ -80,7 +80,7 @@ const FAQAnimation = () => {
               <p className="font-semibold">
                 Q: How do I report inappropriate content?
               </p>
-              <p>
+              <p className='text-justify'>
                 A: If you come across inappropriate content, use the reporting
                 feature available on posts or contact our support team for
                 assistance.

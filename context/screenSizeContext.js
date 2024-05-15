@@ -6,6 +6,7 @@ export const ScreenSizeProvider = ({ children }) => {
     const [isSmallScreen, setIsSmallScreen] = useState(false);
     const [openChatBox, setOpenChatBox] = useState(false);
     const [openLeftNav, setOpenLeftNav] = useState(false);
+    const [openMainSidebar, setOpenMainSidebar] = useState(false);
     const [openSearch, setOpenSearch] = useState(false);
     const [showAttachmentMenu, setShowAttachmentMenu] = useState(false);
 
@@ -26,7 +27,7 @@ export const ScreenSizeProvider = ({ children }) => {
 
     return (
         <ScreenSizeContext.Provider value={{ isSmallScreen, openChatBox, setOpenChatBox, showAttachmentMenu, setShowAttachmentMenu, 
-            openLeftNav, setOpenLeftNav, openSearch, setOpenSearch }}>
+            openLeftNav, setOpenLeftNav, openSearch, setOpenSearch, openMainSidebar, setOpenMainSidebar }}>
             {children}
         </ScreenSizeContext.Provider>
     );
