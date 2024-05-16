@@ -26,10 +26,10 @@ const WelcomeAnimation = () => {
   return (
     <div className="h-[100vh] w-full bg-gradient-to-b from-c1 to-c2 flex flex-col-reverse md:flex-row 
     items-center justify-center mt-12">
-      <div className="m-3 md:mr-2 w-10/12 md:w-5/12 lg:w-3/12 h-[56%] overflow-hidden relative">
-       <div className={`absolute top-0 ${textVal.left} ${textVal.opacity} h-full w-full transition-all 
+      <div className="m-3 md:mr-2 w-10/12 md:w-5/12 lg:w-3/12 h-[86%] lg:h-[66%] overflow-hidden relative">
+       <div className={`absolute top-5 ${textVal.left} ${textVal.opacity} h-full w-full transition-all 
             duration-700 ease-in`}>
-       <p className="text-3xl lg:text-5xl font-bold ">
+       <p className="text-3xl lg:text-5xl font-bold py-1 lg:py-4 ">
           Keep in touch with your friends and family
         </p>
 

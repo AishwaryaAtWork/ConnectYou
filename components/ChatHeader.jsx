@@ -43,9 +43,9 @@ const ChatHeader = (props) => {
                 </div>
             )}
             <div className="flex items-center gap-1">
-                <Icon
+                {/* <Icon
                     size="large"
-                    // onClick={() => }
+                    onClick={() => }
                     icon={
                         <GoDeviceCameraVideo
                             size={23}
@@ -56,14 +56,14 @@ const ChatHeader = (props) => {
                 <div className="h-4 w-[1px] bg-c3"></div>
                 <Icon
                     size="large"
-                    // onClick={() => }
+                    onClick={() => }
                     icon={
                         <LuPhone
                             size={19}
                             className="text-white"
                         />
                     }
-                />
+                /> */}
                 <Icon
                     size="large"
                     className={`${showMenu ? "bg-c1" : ""}`}
