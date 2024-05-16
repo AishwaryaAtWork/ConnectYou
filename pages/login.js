@@ -77,7 +77,7 @@ const Login = () => {
                 }
             );
         } catch (error) {
-            // console.error("An error occurred", error);
+            console.error("An error occurred", error);
         }
     };
 
@@ -85,7 +85,7 @@ const Login = () => {
         try {
             await signInWithPopup(auth, gProvider);
         } catch (error) {
-            // console.error("An error occurred", error);
+            console.error("An error occurred", error);
         }
     };
 

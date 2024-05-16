@@ -78,13 +78,13 @@ const ChatFooter = () => {
   const onFileChange = async (e) => {
     let file = e.target.files[0];
     if (!file) {
-      // console.log("No file selected");
+      console.log("No file selected");
       return;
     }
 
     // Print the file size in MB
     let fileSizeInMB = file.size / (1024 * 1024);
-    // console.log(`File size: ${fileSizeInMB.toFixed(2)} MB`);
+    console.log(`File size: ${fileSizeInMB.toFixed(2)} MB`);
     if (fileSizeInMB > 10) {
       toast.error("File size should be less than 10MB");
     }
@@ -94,14 +94,14 @@ const ChatFooter = () => {
       try {
         file = await compressImage(file);
       } catch (error) {
-        // console.error('Failed to compress image', error);
+        console.error('Failed to compress image', error);
       }
     }
 
     setAttachment(file);
     // Print the file size in MB
     fileSizeInMB = file.size / (1024 * 1024);
-    // console.log(`File size: ${fileSizeInMB.toFixed(2)} MB`);
+    console.log(`File size: ${fileSizeInMB.toFixed(2)} MB`);
 
     if (file) {
       setShowAttachmentMenu(false);
@@ -162,12 +162,12 @@ const ChatFooter = () => {
           });
         },
         (error) => {
-          // console.error("Error getting user location:", error.message);
+          console.error("Error getting user location:", error.message);
         }
       );
 
     } else {
-      // console.error("Geolocation is not supported by your browser");
+      console.error("Geolocation is not supported by your browser");
     }
   };
 

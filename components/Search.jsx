@@ -42,7 +42,7 @@ const Search = () => {
                     });
                 }
             } catch (error) {
-                // console.error(error);
+                console.error(error);
                 setErr(error);
             }
         }
@@ -88,7 +88,7 @@ const Search = () => {
             setUsername("");
             dispatch({ type: "CHANGE_USER", payload: user });
         } catch (error) {
-            // console.error(error);
+            console.error(error);
         }
     };
 
