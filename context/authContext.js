@@ -19,7 +19,7 @@ export const UserProvider = ({ children }) => {
             setCurrentUser(null);
             setIsLoading(false);
         } catch (error) {
-            console.error(error);
+            // console.error(error);
         }
     };
 

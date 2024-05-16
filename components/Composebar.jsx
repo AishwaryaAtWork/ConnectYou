@@ -66,7 +66,7 @@ const Composebar = ({ selectedFileType, setSelectedFile, setSelectedGif, selecte
         recognitionRef.current.continuous = true;
       }
     } catch (error) {
-      console.error('Speech recognition error:', error);
+      // console.error('Speech recognition error:', error);
     }
   };
 
@@ -94,7 +94,7 @@ const Composebar = ({ selectedFileType, setSelectedFile, setSelectedGif, selecte
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         },
         (error) => {
-          console.error(error);
+          // console.error(error);
         },
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
@@ -182,7 +182,7 @@ const Composebar = ({ selectedFileType, setSelectedFile, setSelectedGif, selecte
             }
           },
           (error) => {
-            console.error(error);
+            // console.error(error);
           },
           () => {
             getDownloadURL(uploadTask.snapshot.ref).then(
@@ -217,7 +217,7 @@ const Composebar = ({ selectedFileType, setSelectedFile, setSelectedGif, selecte
       setAttachmentPreview(null);
       setEditMsg(null);
     } catch (err) {
-      console.error(err);
+      // console.error(err);
     }
   };
 
