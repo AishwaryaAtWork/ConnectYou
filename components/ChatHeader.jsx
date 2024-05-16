@@ -31,7 +31,7 @@ const ChatHeader = (props) => {
     return (
         <div className="flex justify-between items-center pb-5 border-b border-white/[0.05]">
             {user && (
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3 ml-2">
                     {isSmallScreen && (<IoArrowBack size={22} onClick={onBack} />)}
                     <Avatar size="large" user={user} />
                     <div>
@@ -43,10 +43,9 @@ const ChatHeader = (props) => {
                 </div>
             )}
             <div className="flex items-center gap-1">
-                <Icon
+                {/* <Icon
                     size="large"
-                    className={`${showMenu ? "bg-c1" : ""}`}
-                    // onClick={() => }
+                    onClick={() => }
                     icon={
                         <GoDeviceCameraVideo
                             size={23}
@@ -57,15 +56,14 @@ const ChatHeader = (props) => {
                 <div className="h-4 w-[1px] bg-c3"></div>
                 <Icon
                     size="large"
-                    className={`${showMenu ? "bg-c1" : ""}`}
-                    // onClick={() => }
+                    onClick={() => }
                     icon={
                         <LuPhone
                             size={19}
                             className="text-white"
                         />
                     }
-                />
+                /> */}
                 <Icon
                     size="large"
                     className={`${showMenu ? "bg-c1" : ""}`}

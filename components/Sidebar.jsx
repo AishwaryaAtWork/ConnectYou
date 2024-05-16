@@ -65,8 +65,9 @@ const Sidebar = () => {
         </ClickAwayListener>
       )}
       <div
-        className={`${isSmallScreen ? "w-full h-[98vh] p-1" : "w-[400px] h-[100vh] p-5"
-          }  overflow-auto scrollbar shrink-0 border-r border-white/[0.05]`}
+        className={`${
+          isSmallScreen ? "w-full h-[93vh] p-1" : "w-[400px] h-[100vh] p-5"
+        }  overflow-auto scrollbar shrink-0 border-r border-white/[0.05]`}
       >
         <div className="flex flex-col h-full">
           <Chats />
