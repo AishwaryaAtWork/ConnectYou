@@ -95,7 +95,7 @@ const Register = () => {
                         }
                     },
                     (error) => {
-                        // console.error(error);
+                        console.error(error);
                     },
                     () => {
                         getDownloadURL(uploadTask.snapshot.ref).then(
@@ -139,7 +139,7 @@ const Register = () => {
                 router.push("/");
             }
         } catch (error) {
-            // console.error(error);
+            console.error(error);
         }
     };
 
@@ -147,7 +147,7 @@ const Register = () => {
         try {
             await signInWithPopup(auth, gProvider);
         } catch (error) {
-            // console.error("An error occured", error);
+            console.error("An error occured", error);
         }
     };
 

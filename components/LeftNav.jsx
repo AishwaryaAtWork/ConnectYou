@@ -85,7 +85,7 @@ const LeftNav = () => {
                 }
             );
         } catch (error) {
-            // console.error(error);
+            console.error(error);
         }
     };
 
@@ -98,7 +98,7 @@ const LeftNav = () => {
                     "state_changed",
                     (snapshot) => { },
                     (error) => {
-                        // console.error(error);
+                        console.error(error);
                     },
                     () => {
                         getDownloadURL(uploadTask.snapshot.ref).then(
@@ -113,7 +113,7 @@ const LeftNav = () => {
                 );
             }
         } catch (error) {
-            // console.error(error);
+            console.error(error);
         }
     };
 
