@@ -1,6 +1,7 @@
 'use client'
 import Image from "next/image";
 import img from "@/public/mobileViewImg.png";
+import img2 from "@/public/desktopViewImg.png";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -53,9 +54,11 @@ const WelcomeAnimation = () => {
        </div>
       </div>
 
-      <div className="ml-2 w-8/12 md:w-5/12 lg:w-3/12 relative h-[70vh] md:h-[65vh] overflow-hidden">
+      <div className="ml-2 w-8/12 md:w-5/12 lg:w-5/12 relative h-[70vh] md:h-[65vh] overflow-hidden">
         <Image src={img} alt="ConnectYou" height={260} width={260} className={`absolute top-[8%] md:top-0 ${imgVal.right} ${imgVal.opacity} transition-all 
-            duration-700 ease-in rounded-xl shadow-md shadow-c3 h-[90%] lg:h-[98%] w-auto`}/>
+            duration-700 ease-in rounded-xl shadow-md shadow-c1 h-[90%] lg:h-[98%] w-auto z-20`}/>
+        <Image src={img2} alt="ConnectYou" height={650} width={650} className={`absolute bottom-[12%] ${imgVal.right} ${imgVal.opacity} transition-all 
+            duration-700 ease-in rounded-xl shadow-md shadow-c1 z-10 hidden lg:block`}/>
       </div>
     </div>
   );
